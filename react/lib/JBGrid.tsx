@@ -8,7 +8,7 @@ import { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, 
 import Footer from './Footer.js';
 import Header from './Header.js';
 import Content from './Content.js';
-import { useMobx } from '../../../common/hooks/useMobx.js';
+import { useMobx } from '../../../../common/hooks/useMobx.js';
 export { Row } from './Components/Row.js';
 export { Cell } from './Components/Cell.js';
 export { ExpandRow } from './Components/ExpandRow.js';

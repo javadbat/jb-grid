@@ -9,7 +9,7 @@
   "keywords": [
     "jb",
     "jb-grid",
-    "jb-grid-react",
+    "jb-grid react",
     "grid",
     "table",
     "react table",
@@ -17,7 +17,7 @@
     "mobx"
   ],
   "version": "0.20.2",
-  "bugs": "https://github.com/javadbat/jb-grid-react/issues",
+  "bugs": "https://github.com/javadbat/jb-grid/issues",
   "license": "MIT",
   "files": [
     "LICENSE",
@@ -38,7 +38,7 @@
   "module": "index.js",
   "repository": {
 		"type": "git",
-		"url": "git@github.com:javadbat/jb-grid-react.git"
+		"url": "git@github.com:javadbat/jb-grid.git"
   },
   "dependencies": {
     "mobx":">=6.0.0",
