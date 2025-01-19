@@ -1,0 +1,48 @@
+{
+  "name": "jb-grid-react",
+  "description": "react mobx jb grid table",
+  "type": "module",
+  "author": {
+		"name": "mohammad javad bathaei",
+		"email": "javadbat@gmail.com"
+	},
+  "keywords": [
+    "jb",
+    "jb-grid",
+    "jb-grid-react",
+    "grid",
+    "table",
+    "react table",
+    "react",
+    "mobx"
+  ],
+  "version": "0.20.2",
+  "bugs": "https://github.com/javadbat/jb-grid-react/issues",
+  "license": "MIT",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "lib/",
+    "dist/",
+    "index.js"
+  ],
+  "main": "index.js",
+  "types": "./dist/react-component/jb-grid/lib/JBGrid.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": ["./dist/react-component/jb-grid/lib/JBGrid.d.ts"],
+      "types":["./dist/react-component/jb-grid/lib/Types.d.ts"]
+    }
+  },
+  "jsnext:main":"index.js",
+  "module": "index.js",
+  "repository": {
+		"type": "git",
+		"url": "git@github.com:javadbat/jb-grid-react.git"
+  },
+  "dependencies": {
+    "mobx":">=6.0.0",
+    "mobx-react":">=7.0.0",
+    "jb-searchbar":">=2.3.1"
+  }
+}

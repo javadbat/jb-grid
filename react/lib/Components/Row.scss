@@ -1,0 +1,25 @@
+@use '../constants' as *;
+
+.jb-grid-wrapper .jb-grid-content{
+    .jb-grid-table-row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto;
+        background-color: #fff;
+        box-sizing: border-box;
+        grid-auto-rows: minmax(48px, auto);
+        @include tablet {
+            grid-template-columns: auto !important;
+            grid-template-rows: auto;
+            border-radius: 24px;
+            box-shadow: 0px 0px 1px 0px #d8d8d8;
+        }
+    
+        &:nth-of-type(even) {
+            background: $BaseGridRowColor;
+            @include tablet {
+                background: #fff;
+            }
+        }
+    }
+}
