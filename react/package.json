@@ -27,13 +27,7 @@
     "index.js"
   ],
   "main": "index.js",
-  "types": "./dist/react-component/jb-grid/lib/JBGrid.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": ["./dist/react-component/jb-grid/lib/JBGrid.d.ts"],
-      "types":["./dist/react-component/jb-grid/lib/Types.d.ts"]
-    }
-  },
+  "types": "./dist/web-component/jb-grid/react/lib/JBGrid.d.ts",
   "jsnext:main":"index.js",
   "module": "index.js",
   "repository": {
