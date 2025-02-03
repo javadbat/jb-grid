@@ -14,5 +14,7 @@ export const reactComponentList: ReactComponentBuildConfig[] = [
       "mobx-react": "mobxReact",
       "jb-searchbar": "JBSearchbar"
     },
+    umdName: "JBGridReact",
+    dir: "./react"
   },
 ];
