@@ -10,7 +10,7 @@
     "jb",
     "jb-grid",
     "table",
-    "web component"
+    "web component",
   ],
   "version": "0.0.1",
   "bugs": "https://github.com/javadbat/jb-button/issues",
@@ -28,5 +28,8 @@
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-button.git"
+  },
+  "dependencies": {
+    "jb-core":">=0.2.0"
   }
 }

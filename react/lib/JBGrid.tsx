@@ -8,7 +8,7 @@ import { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, 
 import Footer from './Footer.js';
 import Header from './Header.js';
 import Content from './Content.js';
-import { useMobx } from '../../../../common/hooks/useMobx.js';
+import { useInstance } from 'jb-core/react';
 export { Row } from './Components/Row.js';
 export { Cell } from './Components/Cell.js';
 export { ExpandRow } from './Components/ExpandRow.js';
@@ -29,7 +29,7 @@ export type JBGridProps<T extends AnyObject> = {
 
 }
 function JBGridComponent<T extends AnyObject>(props: JBGridProps<T>) {
-  const vm = useMobx(JBGridViewModel<AnyObject>, [props, props.config, props.bridge]);
+  const vm = useInstance(JBGridViewModel<AnyObject>, [props.onFullscreenChange, props.config, props.bridge]);
   useEffect(() => {
     vm.onComponentDidMount(props.searchbarConfig || null);
   }, []);
