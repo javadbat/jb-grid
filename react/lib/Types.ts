@@ -1,4 +1,4 @@
-import { FilterColumn, JBSearchbarValue } from "jb-searchbar/types.js";
+import { FilterColumn, JBSearchbarValue } from "jb-searchbar";
 
 
 // export type JBGridRowData = {
