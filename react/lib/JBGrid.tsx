@@ -13,7 +13,7 @@ export { Row } from './Components/Row.js';
 export { Cell } from './Components/Cell.js';
 export { ExpandRow } from './Components/ExpandRow.js';
 
-export type JBGridProps<T extends AnyObject> = {
+export type Props<T extends AnyObject> = {
   searchbarConfig?: SearchbarConfig | null | undefined,
   config: JBGridConfig<T>,
   bridge: JBGridBridgeClassInterface,
@@ -28,7 +28,7 @@ export type JBGridProps<T extends AnyObject> = {
   children?: React.ReactNode | React.ReactNode[]
 
 }
-function JBGridComponent<T extends AnyObject>(props: JBGridProps<T>) {
+function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   const vm = useInstance(JBGridViewModel<AnyObject>, [props.onFullscreenChange, props.config, props.bridge]);
   useEffect(() => {
     vm.onComponentDidMount(props.searchbarConfig || null);
