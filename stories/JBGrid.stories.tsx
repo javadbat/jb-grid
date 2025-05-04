@@ -5,7 +5,7 @@ import CustomErrorTest from './samples/custom-error/JBGridTest.jsx';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<Props<any>> = {
-  title: "Example/JBGrid",
+  title: "Components/JBGrid",
   component: JBGrid,
 };
 export default meta;
