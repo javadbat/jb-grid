@@ -12,7 +12,7 @@ import { useInstance } from 'jb-core/react';
 export { Row } from './Components/Row.js';
 export { Cell } from './Components/Cell.js';
 export { ExpandRow } from './Components/ExpandRow.js';
-
+export * from './types.js';
 export type Props<T extends AnyObject> = {
   searchbarConfig?: SearchbarConfig | null | undefined,
   config: JBGridConfig<T>,
