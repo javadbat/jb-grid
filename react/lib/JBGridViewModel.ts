@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import { observable, extendObservable, makeObservable, action, computed } from 'mobx';
-import { ActionDispatchers, AnyObject, JBGridBridgeClassInterface, JBGridBridgeInterface, JBGridCallbacks, JBGridColumnDef, JBGridConfig, JBGridConfigInterface, JBGridFilter, JBGridI18nConfig, JBGridResponseData, JBGridRowData, JBGridRowDetail, JBGridStyles, SearchbarConfig } from './Types1.js';
+import { ActionDispatchers, AnyObject, JBGridBridgeClassInterface, JBGridBridgeInterface, JBGridCallbacks, JBGridColumnDef, JBGridConfig, JBGridConfigInterface, JBGridFilter, JBGridI18nConfig, JBGridResponseData, JBGridRowData, JBGridRowDetail, JBGridStyles, SearchbarConfig } from './types.js';
 import { JBSearchbarWebComponent, type JBSearchbarValue } from 'jb-searchbar';
 import { defaultI18n } from './i18n.js';
 import { assign } from 'lodash';

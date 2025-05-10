@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import './JBGrid.scss';
 export { JBGridData } from './JBGridData.js';
 import 'jb-searchbar';
-import { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, SearchbarConfig } from './Types1.js';
+import { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, SearchbarConfig } from './types.js';
 import Footer from './Footer.js';
 import Header from './Header.js';
 import Content from './Content.js';
