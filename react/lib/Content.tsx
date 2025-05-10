@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { ReactNode } from 'react';
 import JBLoading from './Components/JBLoading.js';
-import { JBGridColumnDef, JBGridConfig, JBGridI18nConfig, JBGridStyles } from './Types.js';
+import { JBGridColumnDef, JBGridConfig, JBGridI18nConfig, JBGridStyles } from './Types1.js';
 import ContentError from './Components/content-error/ContentError.js';
 export type ContentProps = {
     children:React.ReactNode | React.ReactNode[],
