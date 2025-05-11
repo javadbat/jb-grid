@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { type PropsWithChildren } from 'react';
 import './ExpandRow.scss';
-function ExpandRow(props) {
+function ExpandRow(props:Props) {
     return (
         <section className={'jb-grid-expand-row' + (props.show?'':' --hidden')}>
             <div className={'expand-row-content' + (props.show?'':' --hidden')}>
@@ -10,10 +9,8 @@ function ExpandRow(props) {
         </section>
     );
 }
-
-ExpandRow.propTypes = {
-    children: PropTypes.node,
-    show: PropTypes.bool
-};
+type Props= PropsWithChildren< {
+    show:boolean,
+}>
 
 export {ExpandRow};
