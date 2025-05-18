@@ -9,6 +9,7 @@ import Footer from './Footer.js';
 import Header from './Header.js';
 import Content from './Content.js';
 import { useInstance } from 'jb-core/react';
+
 export { Row } from './Components/Row.js';
 export { Cell } from './Components/Cell.js';
 export { ExpandRow } from './Components/ExpandRow.js';
@@ -26,8 +27,8 @@ export type Props<T extends AnyObject> = {
   contentError?: ReactNode,
   headerEndComponents?: ReactNode[] | ReactNode,
   children?: React.ReactNode | React.ReactNode[]
-
 }
+
 function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   const vm = useInstance(JBGridViewModel<AnyObject>, [props.onFullscreenChange, props.config, props.bridge]);
   useEffect(() => {

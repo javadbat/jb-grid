@@ -10,9 +10,10 @@
     "jb",
     "jb-grid",
     "table",
-    "web component"
+    "web component",
+    "react component"
   ],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "bugs": "https://github.com/javadbat/jb-button/issues",
   "license": "MIT",
   "files": [
@@ -24,12 +25,11 @@
     "react/dist/"
   ],
   "main": "index.js",
-  "types": "./dist/jb-button.d.ts",
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-button.git"
   },
   "dependencies": {
-    "jb-core":">=0.4.0"
+    "jb-core":">=0.14.0"
   }
 }

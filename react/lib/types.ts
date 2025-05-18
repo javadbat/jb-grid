@@ -17,9 +17,7 @@ export type JBGridRowDataDetail = {
     isExpanded: boolean
 }
 export type JBGridRowDetail = { jbGridDetail: JBGridRowDataDetail };
-export type AnyObject = {
-    [key: string]: any;
-}
+export type AnyObject = Record<string,any>
 export type JBGridStyles = {
     table: {
         generalCols: {
