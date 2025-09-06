@@ -12,9 +12,11 @@ react mobx table grid with pagination, filtering and sorting functionality.
 ## instructions
 
 ### install the package
-```bash
+
+```sh
 npm i jb-grid
 ```
+
 ### import and use in your component
 ```JSX
 import {Cell, Row, JBGrid} from 'jb-grid/react';
@@ -27,6 +29,7 @@ import {filterConfig} from './my-filter-config';
 
 <JBGrid config={yourConfig} bridge={JBGridBridge} title="user list" searchbarConfig={vm.filterConfig}></JBGrid>
 ```
+
 ### config
 
 config is unique for each data table you want to show and contains information about columns,filters,sort,initData,...    
