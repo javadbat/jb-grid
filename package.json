@@ -30,6 +30,6 @@
 		"url": "git@github.com:javadbat/jb-grid.git"
   },
   "dependencies": {
-    "jb-core":">=0.16.0"
+    "jb-core":">=0.16.1"
   }
 }
