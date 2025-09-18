@@ -1,6 +1,9 @@
 import React from 'react';
-import './Row.scss';
+import CSS from './row.css';
 import { useJBGridVM } from '../JBGridViewModel.js';
+import { injectCss } from 'jb-core';
+
+injectCss(CSS as unknown as string);
 type RowProps = Omit<React.ComponentPropsWithoutRef<'div'>,"style">
 function Row(props:RowProps) {
   const { children, className, ...otherProps} = props;

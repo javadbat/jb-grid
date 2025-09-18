@@ -1,4 +1,5 @@
-@use '../constants' as *;
+@custom-media --tablet-until (max-width: 768px);
+
 .jb-grid-wrapper .jb-grid-content {
     .jb-grid-table-cell {
         padding: 4px 16px;
@@ -7,7 +8,7 @@
         align-self: center;
         display: grid;
         align-items: center;
-        border-left: 1px solid $BaseGridRowColor;
+        border-left: 1px solid var(--base-grid-row-color);
         .cell-label{
             display: none;
         }
@@ -24,7 +25,7 @@
             grid-template-columns: 24px auto;
         }
 
-        @include tablet {
+        @media(--tablet-until) {
             &:first-child {
                 box-shadow: 0px 6px 6px #dadada;
                 border-radius: 1rem;

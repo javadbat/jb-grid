@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import JBGridViewModel, { JBGridContext } from './JBGridViewModel.js';
 import { observer } from 'mobx-react';
-import './JBGrid.scss';
+import CSS from './jb-grid.css';
 export { JBGridData } from './JBGridData.js';
 import 'jb-searchbar';
 import { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, SearchbarConfig } from './types.js';
@@ -9,6 +9,7 @@ import Footer from './Footer.js';
 import Header from './Header.js';
 import Content from './Content.js';
 import { useInstance } from 'jb-core/react';
+import { injectCss } from 'jb-core';
 
 export { Row } from './Components/Row.js';
 export { Cell } from './Components/Cell.js';
@@ -28,6 +29,8 @@ export type Props<T extends AnyObject> = {
   headerEndComponents?: ReactNode[] | ReactNode,
   children?: React.ReactNode | React.ReactNode[]
 }
+
+injectCss(CSS as unknown as string);
 
 function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   const vm = useInstance(JBGridViewModel<AnyObject>, [props.onFullscreenChange, props.config, props.bridge]);
@@ -51,7 +54,7 @@ function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   }
   return (
     <JBGridContext.Provider value={vm} key={"jb-grid-context"}>
-      <div className={"jb-grid-wrapper " + (props.className ?? "")} ref={(dom) => vm.JBGridComponentDom = dom} style={props.style}>
+      <div className={"jb-grid-wrapper " + (props.className ?? "")} ref={vm.JBGridComponentDom} style={props.style}>
         <Header title={props.title} vm={vm} searchbarConfig={props.searchbarConfig} headerEndComponents={props.headerEndComponents}></Header>
         <Content i18n={vm.i18n} config={vm.config} isErrorOccurred={vm.isErrorOccurred} isLoading={vm.isLoading} refreshBtnClick={vm.refreshBtnClick} setSortColumn={vm.setSortColumn} styles={vm.styles} errorComponent={props.contentError}>{props.children}</Content>
         <Footer isFullscreen={props.isFullscreen ?? false} vm={vm}></Footer>

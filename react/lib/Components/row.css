@@ -1,4 +1,4 @@
-@use '../constants' as *;
+@custom-media --tablet-until (max-width: 768px);
 
 .jb-grid-wrapper .jb-grid-content{
     .jb-grid-table-row {
@@ -8,7 +8,7 @@
         background-color: #fff;
         box-sizing: border-box;
         grid-auto-rows: minmax(48px, auto);
-        @include tablet {
+        @media(--tablet-until) {
             grid-template-columns: auto !important;
             grid-template-rows: auto;
             border-radius: 24px;
@@ -16,8 +16,8 @@
         }
     
         &:nth-of-type(even) {
-            background: $BaseGridRowColor;
-            @include tablet {
+            background: var(--base-grid-row-color);
+            @media(--tablet-until) {
                 background: #fff;
             }
         }

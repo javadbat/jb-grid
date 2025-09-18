@@ -14,7 +14,7 @@
     "react component"
   ],
   "version": "0.0.4",
-  "bugs": "https://github.com/javadbat/jb-button/issues",
+  "bugs": "https://github.com/javadbat/jb-grid/issues",
   "license": "MIT",
   "files": [
     "LICENSE",
@@ -27,9 +27,9 @@
   "main": "index.js",
   "repository": {
 		"type": "git",
-		"url": "git@github.com:javadbat/jb-button.git"
+		"url": "git@github.com:javadbat/jb-grid.git"
   },
   "dependencies": {
-    "jb-core":">=0.14.0"
+    "jb-core":">=0.16.1"
   }
 }

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import JBGridViewModel from './JBGridViewModel.js';
 import { JBSearchbarWebComponent } from 'jb-searchbar';
+import 'jb-searchbar/react/lib/module-declaration.js';
 import { observer } from 'mobx-react';
 type HeaderProps = {
     vm: JBGridViewModel<any>,
