@@ -1,11 +1,14 @@
 import React from 'react';
-import './Cell.scss';
+import CSS from './cell.css';
+import { injectCss } from 'jb-core';
+
 type CellProps = {
     children?: React.ReactNode | React.ReactNode[],
     label?: string,
     className?: string,
     flex?:boolean;
 }
+injectCss(CSS as unknown as string);
 function Cell(props: CellProps) {
   const { children, label, className, flex } = props;
   return (

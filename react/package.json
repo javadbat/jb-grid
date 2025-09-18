@@ -35,6 +35,7 @@
 		"url": "git@github.com:javadbat/jb-grid.git"
   },
   "dependencies": {
+    "jb-core":">=0.16.0",
     "mobx":">=6.0.0",
     "mobx-react":">=7.0.0",
     "jb-searchbar":">=2.3.1"

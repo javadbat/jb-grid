@@ -1,5 +1,8 @@
 import React from 'react';
-import './JBLoading.scss';
+import CSS from './blob-loading.css';
+import { injectCss } from 'jb-core';
+
+injectCss(CSS as unknown as string);
 class JBLoading extends React.Component {
     render() {
         const renderDom = (

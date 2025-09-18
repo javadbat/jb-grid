@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, type Ref, type RefObject } from 'react';
 import { observable, extendObservable, makeObservable, action, computed } from 'mobx';
 import { ActionDispatchers, AnyObject, JBGridBridgeClassInterface, JBGridBridgeInterface, JBGridCallbacks, JBGridColumnDef, JBGridConfig, JBGridConfigInterface, JBGridFilter, JBGridI18nConfig, JBGridResponseData, JBGridRowData, JBGridRowDetail, JBGridStyles, SearchbarConfig } from './types.js';
 import { JBSearchbarWebComponent, type JBSearchbarValue } from 'jb-searchbar';
@@ -32,8 +32,8 @@ class JBGridViewModel<T extends AnyObject> {
     searchbar: React.createRef<JBSearchbarWebComponent>()
   }
   //the whole component DOM store(referenced) in this variable
-  JBGridComponentDom: HTMLDivElement | null = null;
-  //keep wrapper DOM element for some pupose like wrapper changing in full screen functionality
+  JBGridComponentDom: RefObject<HTMLDivElement> = React.createRef();
+  //keep wrapper DOM element for some purpose like wrapper changing in full screen functionality
   gridWrapperElement: HTMLElement | null = null;
   //when we start fetch new data from server it get true until load data is finished
   isLoading = false;
@@ -393,15 +393,15 @@ class JBGridViewModel<T extends AnyObject> {
     this.JBGridComponentDom;
     const child = document.createElement('div');
     child.innerHTML = "";
-    this.gridWrapperElement = this.JBGridComponentDom!.parentElement!;
-    container.append(this.JBGridComponentDom as Node);
+    this.gridWrapperElement = this.JBGridComponentDom!.current.parentElement!;
+    container.append(this.JBGridComponentDom.current as Node);
     //TODO:call on full screen call back
   }
   exitFullScreenGrid() {
     const container = document.querySelector('.jb-grid-full-screen-container') as HTMLDivElement;
     if (this.gridWrapperElement) {
       //put grid element back to their orginal place
-      this.gridWrapperElement.append(this.JBGridComponentDom as Node);
+      this.gridWrapperElement.append(this.JBGridComponentDom.current);
       //remove added temp fullscreen container
     }
     container[0].remove();

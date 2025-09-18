@@ -1,5 +1,8 @@
 import React from 'react';
-import './content-error.scss';
+import CSS from './content-error.css';
+import { injectCss } from 'jb-core';
+
+injectCss(CSS as unknown as string);
 type ContentErrorProps = {
     onRefreshBtnClick:()=>unknown,
     message?:string,

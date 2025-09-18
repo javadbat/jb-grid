@@ -1,4 +1,5 @@
-@use '../constants' as *;
+@custom-media --tablet-until (max-width: 768px);
+
 .jb-grid-wrapper .jb-grid-content{
     .jb-grid-expand-row{
         width: 100%;
@@ -10,11 +11,11 @@
         overflow: auto;
         transition: all 500ms 0s linear;
         max-height: 100%;
-        //TODO: change this to nth-child(even of .jb-grid-expand-row) when supported in future. Done:) i just comment it for test
-        // &:nth-of-type(even) {
-        //     background: #f9f9f9;
-        // }
-        @include tablet{
+        /* TODO: change this to nth-child(even of .jb-grid-expand-row) when supported in future. Done:) i just comment it for test
+         &:nth-of-type(even) {
+             background: #f9f9f9;
+         } */
+        @media (--tablet-until){
             border-bottom:none;
         }
         &:nth-child(even of .jb-grid-expand-row){

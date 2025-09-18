@@ -1,9 +1,8 @@
 
 
 .jb-loading{
-    $bolb-color: var(--jb-grid-loading-color, #f74343) ;
-    
-    // Loader
+    --blob-color:var(--jb-grid-loading-color, var(--jb-primary));
+    /* Loader */
     .blobs {
         filter: url(#goo);
         width: 300px;
@@ -13,11 +12,11 @@
         border-radius: 70px;
         transform-style: preserve-3d;
         
-        // Blob center item
+         /* Blob center item */
         .blob-center {
             transform-style: preserve-3d;
             position: absolute;
-            background: $bolb-color;
+            background: var(--blob-color);
             top: 50%;
             left: 50%;
             width: 30px;
@@ -29,17 +28,17 @@
                 3.4s
                 infinite;
             border-radius: 50%;
-            box-shadow: 0 -10px 40px -5px $bolb-color;
+            box-shadow: 0 -10px 40px -5px var(--blob-color);
         }
     }
     .style-svg{
         width: 0;
         height: 0;
     }
-    // Blob item
+    /* Blob item */
     .blob {
         position: absolute;
-        background: $bolb-color;
+        background: var(--blob-color);
         top: 50%;
         left: 50%;
         width: 30px;
@@ -53,23 +52,26 @@
         transform-origin: center top;
         opacity: 0;
         
-        // Set animation delay for each of type
-        @for $i from 1 to 6 {
-            &:nth-child(#{$i}) {
-                animation-delay: $i * 0.2 + s;
-            }
-        }
+        /* Set animation delay for each of type */
+        &:nth-child(1) { animation-delay: 0.2s; }
+        &:nth-child(2) { animation-delay: 0.4s; }
+        &:nth-child(3) { animation-delay: 0.6s; }
+        &:nth-child(4) { animation-delay: 0.8s; }
+        &:nth-child(5) { animation-delay: 1.0s; }
     }
     
-    // Keyframes variables
-    $left: calc(-330px - 50%);
-    $right: calc(330px - 50%);
+    /* Keyframes variables */
+    --left: calc(-330px - 50%);
+    --right: calc(330px - 50%);
     
-    // Keyframes
+
+}
+
+     /* Keyframes */
     @keyframes blobs {
         0% {
             opacity: 0;
-            transform: scale(0) translate($left, -50%);
+            transform: scale(0) translate(var(--left), -50%);
         }
         1% {
             opacity: 1;
@@ -83,7 +85,7 @@
         }
         100% {
             opacity: 0;
-            transform: scale(0) translate($right, -50%);
+            transform: scale(0) translate(var(--right), -50%);
         }
     }
     
@@ -137,4 +139,3 @@
             transform: scale(0) translate(-50%, -50%);
         }
     }
-}
