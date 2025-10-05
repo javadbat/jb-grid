@@ -1,3 +1,4 @@
+import { i18n } from "jb-core/i18n";
 import { JBGridI18nConfig, JBGridI18nMessage } from "./types.js";
 
 const i18nMessages:JBGridI18nMessage = {
@@ -11,5 +12,5 @@ const i18nMessages:JBGridI18nMessage = {
 };
 export const defaultI18n:JBGridI18nConfig = {
   messages: i18nMessages,
-  showPersianNumber:false
+  showPersianNumber:i18n.locale.numberingSystem == "arabext"
 };
