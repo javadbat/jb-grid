@@ -3,22 +3,27 @@ import JBGridViewModel from './JBGridViewModel.js';
 import { JBSearchbarWebComponent } from 'jb-searchbar';
 import 'jb-searchbar/react/lib/module-declaration.js';
 import { observer } from 'mobx-react';
+import CSS from './Header.css';
+import { injectCss } from 'jb-core';
+
+injectCss(CSS as unknown as string);
+
 type HeaderProps = {
-    vm: JBGridViewModel<any>,
-    title: string,
-    searchbarConfig: any,
-    headerEndComponents?: React.ReactNode[] | ReactNode
+  vm: JBGridViewModel<any>,
+  title: string,
+  searchbarConfig: any,
+  headerEndComponents?: React.ReactNode[] | ReactNode
 }
 declare global {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace JSX {
-        interface IntrinsicElements {
-            'jb-searchbar': JBSearchbarType;
-        }
-        interface JBSearchbarType extends React.DetailedHTMLProps<React.HTMLAttributes<JBSearchbarWebComponent>, JBSearchbarWebComponent> {
-            class?: string,
-        }
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      'jb-searchbar': JBSearchbarType;
     }
+    interface JBSearchbarType extends React.DetailedHTMLProps<React.HTMLAttributes<JBSearchbarWebComponent>, JBSearchbarWebComponent> {
+      class?: string,
+    }
+  }
 }
 function Header(props: HeaderProps) {
   const { vm } = props;
@@ -29,13 +34,13 @@ function Header(props: HeaderProps) {
         <section className="button-container">
           {
             Array.isArray(props.headerEndComponents) &&
-                        props.headerEndComponents?.map((component, index) => {
-                          return (<div key={index} className="custom-component-wrapper-header-end">{component}</div>);
-                        })
+            props.headerEndComponents?.map((component, index) => {
+              return (<div key={index} className="custom-component-wrapper-header-end">{component}</div>);
+            })
           }
           {
             !Array.isArray(props.headerEndComponents) &&
-                        <div className="custom-component-wrapper-header-end">{props.headerEndComponents}</div>
+            <div className="custom-component-wrapper-header-end">{props.headerEndComponents}</div>
           }
           {
 
@@ -60,7 +65,7 @@ function Header(props: HeaderProps) {
         </div>
         <div className="search-bar-wrapper">{
           props.searchbarConfig &&
-                    <jb-searchbar ref={vm.elements.searchbar}></jb-searchbar>
+          <jb-searchbar ref={vm.elements.searchbar}></jb-searchbar>
         }
         </div>
       </section>
@@ -68,4 +73,4 @@ function Header(props: HeaderProps) {
   );
 }
 
-export default observer(Header) ;
+export default observer(Header);

@@ -1,14 +1,15 @@
 import Axios from "axios";
+import type {JBGridBridgeInterface } from "jb-grid/react";
 
-class JBGridBridge {
+class JBGridBridge implements JBGridBridgeInterface {
     //public
-    mapServerResponseDataToGridData(data) {
+    mapServerResponseDataToGridData(data:any) {
         //convert server response data to grid standard data
         if (!(data.content.length > -1) || !(data.totalItem !== null || data.totalItem !== undefined) || !(data.pageIndex !== null || data.pageIndex !== undefined) || !data.pageSize) {
             console.error('we cant set meta data');
             return false;
         }
-        var bridgeData = {};
+        var bridgeData:any = {};
         //the content array contain data we want to show
         bridgeData.content = data.content;
         //current list start index to show to user exp:20-35 its 20
@@ -24,16 +25,16 @@ class JBGridBridge {
         return bridgeData;
     }
     //public
-    createRequestBody(pageObj, filterObj, sortColumn) {
+    createRequestBody(pageObj:any, filterObj:any, sortColumn:any) {
         //create body of request to send to the server
-        var requestBody = {};
+        var requestBody:any = {};
         //به خاطر اینکه صفحه بندی سرور از صفر شروع میشده
         requestBody.pageIndex = pageObj.index - 1;
         requestBody.pageSize = pageObj.size;
         requestBody.filter = this._createServerFilterObject(filterObj);
         return requestBody;
     }
-    getData(configData, requestBody) {
+    getData(configData:any, requestBody:any) {
         return new Promise((resolve, reject) => {
             const url = configData.url;
             const method = configData.method;
@@ -50,10 +51,10 @@ class JBGridBridge {
             });
         });
     }
-    _createServerFilterObject(filterObject){
+    _createServerFilterObject(filterObject:any[]){
         // server filter object = sfo
-        const sfo = {};
-        filterObject.forEach((filter)=>{
+        const sfo:any = {};
+        filterObject.forEach((filter:any)=>{
             if(filter.column.maxUsageCount>1){
                 if(sfo[filter.column.key]){
                     sfo[filter.column.key].push(filter.value);

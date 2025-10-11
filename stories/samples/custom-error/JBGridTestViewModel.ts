@@ -1,10 +1,10 @@
 import { action, makeObservable, observable } from "mobx";
 
-import {JBGridData} from 'jb-grid/react';
+import {JBGridData, type SearchbarConfig} from 'jb-grid/react';
 class JBGridTestViewModel{
 
     jbGridConfig = new JBGridData();
-    filterConfig = {
+    filterConfig:SearchbarConfig = {
       columnList: [
         {
           key: 'title',

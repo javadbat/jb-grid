@@ -1,0 +1,85 @@
+ .jb-grid-header {
+   background-color: #fff;
+   grid-column-start: 1;
+   grid-column-end: end;
+   grid-row-start: 1;
+   grid-row-end: span 1;
+   display: block;
+   height: auto;
+   width: 100%;
+   border-top-left-radius: 24px;
+   border-top-right-radius: 24px;
+   grid-area: header;
+
+   .main-section {
+    height: 56px;
+    width: 100%;
+    padding-top: 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+     .jb-grid-title {
+       display: block;
+       padding: 0 8px;
+       font-size: 18px;
+       line-height: 48px;
+     }
+
+     .button-container {
+       display: flex;
+       height: 100%;
+       padding: 0 8px;
+     }
+
+     &.hidden {
+       display: none;
+     }
+   }
+
+   .search-section {
+     height: 100%;
+     width: 100%;
+     display: flex;
+     align-items: center;
+
+     &.hidden {
+       display: none;
+     }
+
+     .close-btn {
+       float: right;
+       width: 45px;
+       height: 45px;
+
+       svg {
+         width: 24px;
+         margin: 11px;
+         cursor: pointer;
+       }
+     }
+
+     .search-bar-wrapper {
+       float: right;
+       width: calc(100% - 48px);
+       height: 100%;
+       display: flex;
+       align-items: center;
+       align-content: stretch;
+
+       jb-searchbar {
+         width: 100%;
+       }
+     }
+   }
+
+   .button-container .btn {
+     height: 100%;
+     width: 48px;
+   }
+
+   .button-container .btn svg {
+     display: block;
+     margin: 8px 8px;
+   }
+ }

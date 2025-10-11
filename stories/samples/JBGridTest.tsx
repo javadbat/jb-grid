@@ -6,17 +6,13 @@ import JBGridBridge from './JBGridBridge';
 import JBGridTestViewModel from './JBGridTestViewModel';
 import { observer } from 'mobx-react';
 import ExpandRowSample from './ExpandRowSample';
-class JBGridTest extends Component {
-  constructor(props) {
-    super(props);
-    this.vm = new JBGridTestViewModel();
-  }
+import {useInstance} from 'jb-core/react';
 
-  render() {
-    const { vm } = this;
-    return (
-      <div className="grid-wrapper">
-        <JBGrid config={vm.jbGridConfig} bridge={JBGridBridge} title="لیست کاربران" searchbarConfig={vm.filterConfig} i18n={this.props.i18n}>
+function JBGridTest (props:any){
+  const vm = useInstance(JBGridTestViewModel,[]);
+  return (
+    <div className="grid-wrapper">
+        <JBGrid config={vm.jbGridConfig} bridge={JBGridBridge} title="لیست کاربران" searchbarConfig={vm.filterConfig} i18n={props.i18n}>
           {
             vm.jbGridConfig.data.data.map(
               (item) => {
@@ -39,6 +35,5 @@ class JBGridTest extends Component {
         </JBGrid>
       </div>
     );
-  }
 }
 export default observer(JBGridTest);

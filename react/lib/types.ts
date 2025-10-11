@@ -53,7 +53,7 @@ export type JBGridFilter = {
 }
 export type SearchbarConfig = {
     columnList: FilterColumn[],
-    searchOnChange: boolean
+    searchOnChange?: boolean
 }
 export interface JBGridBridgeInterface {
     mapServerResponseDataToGridData: (data: any) => JBGridResponseData<any>,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {JBGridData, JBGrid, Props} from 'jb-grid/react';
-import JBGridTest from './samples/JBGridTest.jsx';
-import CustomErrorTest from './samples/custom-error/JBGridTest.jsx';
+import JBGridTest from './samples/JBGridTest.tsx';
+import CustomErrorTest from './samples/custom-error/JBGridTest.tsx';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<Props<any>> = {
