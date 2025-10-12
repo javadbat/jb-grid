@@ -3,7 +3,7 @@ import JBGridViewModel from './JBGridViewModel.js';
 import { JBSearchbarWebComponent } from 'jb-searchbar';
 import 'jb-searchbar/react/lib/module-declaration.js';
 import { observer } from 'mobx-react';
-import CSS from './Header.css';
+import CSS from './header.css';
 import { injectCss } from 'jb-core';
 
 injectCss(CSS as unknown as string);
