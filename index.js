@@ -1,1 +1,1 @@
-console.log("not implemented yet");
+export * from "./web-component/dist/index.js"
