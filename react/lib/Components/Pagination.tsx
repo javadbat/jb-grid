@@ -2,15 +2,19 @@ import React, { type DetailedHTMLProps, type HTMLAttributes } from 'react';
 import  'jb-grid'
 import type {JBPaginationWebComponent} from 'jb-grid'
 export type Props = {
-  index?:number
+  index?:number,
+  max?:number,
+  min?:number
 }
 export function Pagination(props:Props){
-  const {index} = props;
-  return(<jb-pagination pageIndex={index} ></jb-pagination>)
+  const {index, max, min} = props;
+  return(<jb-pagination pageIndex={index} max={max} min={min}></jb-pagination>)
 }
 
 type JBPaginationAttributes = DetailedHTMLProps<HTMLAttributes<JBPaginationWebComponent>, JBPaginationWebComponent> & {
   pageIndex?:number
+  max?:number
+  min?:number
 }
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace

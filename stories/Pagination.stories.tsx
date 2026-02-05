@@ -14,4 +14,9 @@ export const Normal:Story = {
   args:{
   }
 };
+export const Max:Story = {
+  args:{
+    max:10
+  }
+};
 
