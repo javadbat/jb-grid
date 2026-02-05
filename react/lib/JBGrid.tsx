@@ -11,7 +11,7 @@ import Content from './Content.js';
 import { useInstance } from 'jb-core/react';
 import { injectCss } from 'jb-core';
 
-export {Pagination, Props as PaginationProps} from './Components/Pagination.js';
+export {JBPagination, Props as PaginationProps} from './Components/Pagination.js';
 export { Row } from './Components/Row.js';
 export { Cell } from './Components/Cell.js';
 export { ExpandRow } from './Components/ExpandRow.js';

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, type Ref, type RefObject } from 'react';
 import { observable, extendObservable, makeObservable, action, computed } from 'mobx';
-import { ActionDispatchers, AnyObject, JBGridBridgeClassInterface, JBGridBridgeInterface, JBGridCallbacks, JBGridColumnDef, JBGridConfig, JBGridConfigInterface, JBGridFilter, JBGridI18nConfig, JBGridResponseData, JBGridRowData, JBGridRowDetail, JBGridStyles, SearchbarConfig } from './types.js';
-import { JBSearchbarWebComponent, type JBSearchbarValue } from 'jb-searchbar';
+import type { ActionDispatchers, AnyObject, JBGridBridgeClassInterface, JBGridBridgeInterface, JBGridCallbacks, JBGridColumnDef, JBGridConfig, JBGridConfigInterface, JBGridFilter, JBGridI18nConfig, JBGridResponseData, JBGridRowData, JBGridRowDetail, JBGridStyles, SearchbarConfig } from './types.js';
+import type { JBSearchbarWebComponent, JBSearchbarValue } from 'jb-searchbar';
 import { defaultI18n } from './i18n.js';
 import { assign } from 'lodash';
 class JBGridViewModel<T extends AnyObject> {
@@ -60,7 +60,6 @@ class JBGridViewModel<T extends AnyObject> {
       filter: observable,
       exitFullScreenGrid: action,
       fullScreenGrid: action,
-      goToLastPage: action,
       fetchGridData: action,
       initFilter: action.bound,
       InitSize: action.bound,
@@ -263,28 +262,6 @@ class JBGridViewModel<T extends AnyObject> {
     const sortColumn = this.config.table.columns.find(x => x.sort) || null;
     const requestBody = this.dataBridge.createRequestBody(this.config.page, this.filter.value, sortColumn, this.config.data);
     return requestBody;
-  }
-
-  goToNextPage() {
-    const currentPage = this.config.page.index;
-    if (currentPage < this.config.page.totalPages) {
-      this.goToPage(currentPage + 1);
-    }
-
-  }
-  goToPrevPage() {
-    const currentPage = this.config.page.index;
-    if (currentPage > 1) {
-      this.goToPage(currentPage - 1);
-    }
-
-  }
-  goToLastPage() {
-    const currentPage = this.config.page.index;
-    if (currentPage != this.config.page.totalPages) {
-      this.goToPage(this.config.page.totalPages);
-    }
-
   }
   goToFirstPage() {
     const currentPage = this.config.page.index;

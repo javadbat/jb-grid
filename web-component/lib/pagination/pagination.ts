@@ -2,16 +2,26 @@ import { renderHTML } from './render';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBPaginationElements, PageIndexDom } from './types';
+import { i18n } from "jb-core/i18n";
+import {enToFaDigits} from 'jb-core';
 export class JBPaginationWebComponent extends HTMLElement {
   #elements: JBPaginationElements;
-  pageIndex: number = 1;
+  #pageIndex: number = 1;
   #min = 1;
   #max = Infinity;
   //how many number in display
   #DisplayIndexCount = 3;
+  showPersianNumber = i18n.locale.numberingSystem == "arabext";
+
   //how many number item we have in dom
   get #indexButtonCount (){
     return this.#DisplayIndexCount + 2; /* for 2 hidden button in start and end of the list */
+  }
+  get pageIndex(){
+    return this.#pageIndex;
+  }
+  set pageIndex(value:number){
+    this.#goToPage(value,false);
   }
   get max() {
     return this.#max;
@@ -19,7 +29,7 @@ export class JBPaginationWebComponent extends HTMLElement {
   set max(value: number) {
     this.#max = value;
     if (this.pageIndex > value) {
-      this.#updatePageIndex(value);
+      this.#updatePageIndex(value,false);
     }
     this.#elements.nav.last.disabled = this.#max == Infinity;
   }
@@ -28,8 +38,8 @@ export class JBPaginationWebComponent extends HTMLElement {
   }
   set min(value: number) {
     this.#min = value;
-    if (this.pageIndex < value) {
-      this.#updatePageIndex(value);
+    if (this.#pageIndex < value) {
+      this.#updatePageIndex(value, false);
     }
     this.#elements.nav.first.disabled = this.#min == Infinity;
   }
@@ -70,41 +80,45 @@ export class JBPaginationWebComponent extends HTMLElement {
   connectedCallback() {
   }
   #registerEventListener() {
-    this.#elements.nav.next.addEventListener('click', this.goToNextPage.bind(this));
-    this.#elements.nav.prev.addEventListener('click', this.gotoPrevPage.bind(this));
-    this.#elements.nav.last.addEventListener('click', ()=>{this.goToPage(this.#max)});
-    this.#elements.nav.first.addEventListener('click', ()=>{this.goToPage(this.#min)});
+    this.#elements.nav.next.addEventListener('click', this.#goToNextPage.bind(this));
+    this.#elements.nav.prev.addEventListener('click', this.#goToPrevPage.bind(this));
+    this.#elements.nav.last.addEventListener('click', ()=>{this.#goToPage(this.#max,true)});
+    this.#elements.nav.first.addEventListener('click', ()=>{this.#goToPage(this.#min,true)});
   }
-  goToNextPage() {
-    if (this.pageIndex > this.#max - 1) {
+
+  #goToNextPage(shouldDispatch:boolean) {
+    if (this.#pageIndex > this.#max - 1) {
       return;
     }
-    const newIndex = this.pageIndex + 1
+    const newIndex = this.#pageIndex + 1
     const indexDom = this.#createPageIndexElement(newIndex + 2)
     this.#elements.index.list.shift()?.remove();
     this.#elements.index.wrapper.append(indexDom);
     this.#elements.index.list.push(indexDom);
-    this.#updatePageIndex(newIndex)
+    this.#updatePageIndex(newIndex, shouldDispatch)
   }
-  gotoPrevPage() {
-    if (this.pageIndex < this.#min + 1) {
+  #goToPrevPage(shouldDispatch:boolean) {
+    if (this.#pageIndex < this.#min + 1) {
       return;
     }
-    const newIndex = this.pageIndex - 1
+    const newIndex = this.#pageIndex - 1
     const indexDom = this.#createPageIndexElement(newIndex - 2)
     this.#elements.index.list.pop()?.remove();
     this.#elements.index.list.unshift(indexDom);
     this.#elements.index.wrapper.prepend(indexDom);
-    this.#updatePageIndex(newIndex)
+    this.#updatePageIndex(newIndex,shouldDispatch)
   }
-  goToPage(newPageIndex: number) {
-    const diff = newPageIndex - this.pageIndex;
+  #goToPage(newPageIndex: number,shouldDispatch:boolean) {
+    if(this.#pageIndex == newPageIndex){
+      return;
+    }
+    const diff = newPageIndex - this.#pageIndex;
     if(Math.abs(diff)>1){
-      this.#updatePageIndex(newPageIndex);
+      this.#updatePageIndex(newPageIndex,shouldDispatch);
       this.#initPageIndexes();
     }else{
       //play with animation
-      diff>0?this.goToNextPage():this.gotoPrevPage();
+      diff>0?this.#goToNextPage(shouldDispatch):this.#goToPrevPage(shouldDispatch);
     }
   }
   /**
@@ -151,7 +165,7 @@ export class JBPaginationWebComponent extends HTMLElement {
       elem.isEmpty = true;
     } else {
       elem.isEmpty = false;
-      elem.innerHTML = `${newIndex}`;
+      elem.innerHTML = `${this.showPersianNumber?enToFaDigits(newIndex):newIndex}`;
     }
     return elem;
   }
@@ -159,15 +173,15 @@ export class JBPaginationWebComponent extends HTMLElement {
     if (item.isEmpty) {
       return;
     }
-    this.goToPage(item.pageIndex);
+    this.#goToPage(item.pageIndex,true);
   }
   /**
    * this event must call when we update pageindex inside of component by user interaction and not programmer
    */
-  #updatePageIndex(newIndex: number) {
-    this.pageIndex = newIndex;
+  #updatePageIndex(newIndex: number,shouldDispatch:boolean) {
+    this.#pageIndex = newIndex;
     this.#updateActiveIndex(newIndex);
-    this.#dispatchChangeEvent();
+    shouldDispatch && this.#dispatchChangeEvent();
   }
   #updateActiveIndex(newIndex: number) {
     this.#elements.index.wrapper.querySelector(".current")?.classList.remove('current');
@@ -182,12 +196,12 @@ export class JBPaginationWebComponent extends HTMLElement {
     this.dispatchEvent(event);
   }
   #initPageIndexes() {
-    this.#putPageIndexElement(this.#createPageIndexElement(this.pageIndex - 2));
-    this.#putPageIndexElement(this.#createPageIndexElement(this.pageIndex - 1));
-    this.#putPageIndexElement(this.#createPageIndexElement(this.pageIndex));
-    this.#putPageIndexElement(this.#createPageIndexElement(this.pageIndex + 1));
-    this.#putPageIndexElement(this.#createPageIndexElement(this.pageIndex + 2));
-    this.#updateActiveIndex(this.pageIndex);
+    this.#putPageIndexElement(this.#createPageIndexElement(this.#pageIndex - 2));
+    this.#putPageIndexElement(this.#createPageIndexElement(this.#pageIndex - 1));
+    this.#putPageIndexElement(this.#createPageIndexElement(this.#pageIndex));
+    this.#putPageIndexElement(this.#createPageIndexElement(this.#pageIndex + 1));
+    this.#putPageIndexElement(this.#createPageIndexElement(this.#pageIndex + 2));
+    this.#updateActiveIndex(this.#pageIndex);
   }
 }
 

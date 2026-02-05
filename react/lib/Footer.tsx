@@ -1,8 +1,10 @@
 import { observer } from 'mobx-react';
 import React, { type Ref } from 'react';
-import JBGridViewModel from './JBGridViewModel.js';
+import type JBGridViewModel from './JBGridViewModel.js';
 import CSS from './footer.css';
 import { injectCss } from 'jb-core';
+import { JBPagination } from './JBGrid.js';
+import type { JBPaginationWebComponent } from '../../web-component/dist/index.js';
 injectCss(CSS as unknown as string);
 type FooterProps = {
     vm:JBGridViewModel<any>,
@@ -17,6 +19,7 @@ function Footer(props:FooterProps) {
           isFullscreen !== null && isFullscreen !== undefined && (
             <div className="btn full-screen-button" onClick={() => vm.onFullScreenBtnClicked(isFullscreen)}>
               <svg xmlns="http://www.w3.org/2000/svg" version="1.0" x="0px" y="0px" viewBox="0 0 128 128" className={isFullscreen ? 'exit-full-screen-svg' : 'full-screen-svg'}>
+                <title>Full Screen Button</title>
                 <g className="arrow" transform={!isFullscreen ? '' : "translate(0, 0) rotate(180 30 30)"}>
                   <path d="M47.979,41.795L26.466,20.292c-3.995-6.034,6.546-6.069,6.546-6.069h6.385c4.054-0.105,6.282-2.363,6.24-5.229   c-0.041-2.866-1.591-5.216-5.167-5.151H23.679C-0.4,2.575,0.342,20.363,0.755,24.486c0.02,0.208-0.015,0.375,0,0.502v0.025   l0.011,15.21c-0.029,2.556,1.211,5.834,4.501,6.265c3.329,0.434,6.025-2.22,6.06-4.774v-9.788v0.084   c-0.062-7.879,5.311-3.858,5.311-3.858l23.346,22.95c1.842,1.843,6.8,3.308,9.362,0.711C53.583,47.516,49.821,43.637,47.979,41.795   z"></path>
                   <path d="M0.755,26.555c0,0,0.024-0.099,0-0.277v-0.004V26.555z"></path>
@@ -38,6 +41,7 @@ function Footer(props:FooterProps) {
           )}
         <div className="btn refresh-btn" onClick={() => vm.refreshBtnClick()}>
           <svg id="Capa_1" x="0px" y="0px" viewBox="0 0 305.836 305.836" ref={vm.elements.refreshIcon as Ref<SVGSVGElement>}>
+            <title>Refresh Data</title>
             <g>
               <path d="M152.924,300.748c84.319,0,152.912-68.6,152.912-152.918c0-39.476-15.312-77.231-42.346-105.564   c0,0,3.938-8.857,8.814-19.783c4.864-10.926-2.138-18.636-15.648-17.228l-79.125,8.289c-13.511,1.411-17.999,11.467-10.021,22.461   l46.741,64.393c7.986,10.992,17.834,12.31,22.008,2.937l7.56-16.964c12.172,18.012,18.976,39.329,18.976,61.459   c0,60.594-49.288,109.875-109.87,109.875c-60.591,0-109.882-49.287-109.882-109.875c0-19.086,4.96-37.878,14.357-54.337   c5.891-10.325,2.3-23.467-8.025-29.357c-10.328-5.896-23.464-2.3-29.36,8.031C6.923,95.107,0,121.27,0,147.829   C0,232.148,68.602,300.748,152.924,300.748z" />
             </g>
@@ -63,30 +67,7 @@ function Footer(props:FooterProps) {
         </section>
         <section className="navigation-section nav-btn">
           <nav>
-            <div className="last-Page-btn nav-btn" title={vm.config.page.totalPages.toString()} onClick={() => vm.goToLastPage()}>
-              <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M15 6 v12 h2 v-12 h-2z M8 6L6.59 7.41 11.17 12l-4.58 4.59L8 18l6-6z"></path></svg>
-
-            </div>
-            <div className="next-Page-btn nav-btn" onClick={() => vm.goToNextPage()}>
-              <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
-
-            </div>
-            <div className="number-container">
-              <div className="number-wrapper">
-                <div className="number-btn" onClick={() => vm.goToPage(vm.config.page.index + 2)}>{vm.paginationDisplayNumbers.next2Page}</div>
-                <div className="number-btn" onClick={() => vm.goToPage(vm.config.page.index + 1)}>{vm.paginationDisplayNumbers.nextPage}</div>
-                <div className="number-btn current-page" onClick={() => vm.changePageNumberToInput()}>{vm.paginationDisplayNumbers.currentPage}</div>
-                <div className="number-btn" onClick={() => vm.goToPage(vm.config.page.index - 1)}>{vm.paginationDisplayNumbers.prevPage}</div>
-                <div className="number-btn" onClick={() => vm.goToPage(vm.config.page.index - 2)}>{vm.paginationDisplayNumbers.prev2Page}</div>
-              </div>
-            </div>
-            <div className="prev-Page-btn nav-btn" onClick={() => vm.goToPrevPage()}>
-              <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
-            </div>
-            <div className="first-Page-btn nav-btn" onClick={() => vm.goToFirstPage()}>
-              <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M7 6 v12 h2 v-12 h-2z M17.41 7.41L16 6l-6 6 6 6 1.41-1.41L12.83 12z"></path></svg>
-
-            </div>
+            <JBPagination pageIndex={vm.config.page.index} max={vm.config.page.totalPages} min={1} onChange={(e)=>vm.goToPage((e.target as JBPaginationWebComponent).pageIndex)} showPersianNumber={vm.i18n.showPersianNumber}/>
           </nav>
         </section>
       </section>
