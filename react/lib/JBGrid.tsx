@@ -1,10 +1,10 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { type ReactNode, useEffect } from 'react';
 import JBGridViewModel, { JBGridContext } from './JBGridViewModel.js';
 import { observer } from 'mobx-react';
 import CSS from './jb-grid.css';
 export { JBGridData } from './JBGridData.js';
 import 'jb-searchbar';
-import { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, SearchbarConfig } from './types.js';
+import type { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, SearchbarConfig } from './types.js';
 import Footer from './Footer.js';
 import Header from './Header.js';
 import Content from './Content.js';
@@ -55,7 +55,7 @@ function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   }
   return (
     <JBGridContext.Provider value={vm} key={"jb-grid-context"}>
-      <div className={"jb-grid-wrapper " + (props.className ?? "")} ref={vm.JBGridComponentDom} style={props.style}>
+      <div className={`jb-grid-wrapper ${props.className ?? ""}`} ref={vm.JBGridComponentDom} style={props.style}>
         <Header title={props.title} vm={vm} searchbarConfig={props.searchbarConfig} headerEndComponents={props.headerEndComponents}></Header>
         <Content i18n={vm.i18n} config={vm.config} isErrorOccurred={vm.isErrorOccurred} isLoading={vm.isLoading} refreshBtnClick={vm.refreshBtnClick} setSortColumn={vm.setSortColumn} styles={vm.styles} errorComponent={props.contentError}>{props.children}</Content>
         <Footer isFullscreen={props.isFullscreen ?? false} vm={vm}></Footer>
