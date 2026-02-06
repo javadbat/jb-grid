@@ -6,7 +6,7 @@
 .jb-pagination-web-component {
   display: flex;
   gap: 1rem;
-
+  direction:ltr;
   .page-navigator {
     display: grid;
     grid-template-columns: 4rem 4rem max-content 4rem 4rem;
@@ -19,10 +19,6 @@
       cursor: pointer;
       height: 3rem;
       width: 3rem;
-
-      html[dir="ltr"] & {
-        transform: rotate(180deg);
-      }
       fill: var(--jb-neutral-2);
       &:disabled {
         fill: var(--jb-neutral-7);
