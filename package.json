@@ -25,6 +25,7 @@
     "react/dist/"
   ],
   "main": "index.js",
+  "types": "./web-component/dist/index.d.ts",
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-grid.git"
