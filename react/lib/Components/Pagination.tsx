@@ -1,7 +1,8 @@
 import React, { type DetailedHTMLProps, type FormEventHandler, type HTMLAttributes } from 'react';
 import  'jb-grid'
 import type {JBPaginationWebComponent} from 'jb-grid'
-export type Props = {
+import type { JBElementStandardProps } from 'jb-core/react';
+export type Props = JBElementStandardProps & {
   pageIndex?:number,
   max?:number,
   min?:number,
@@ -9,8 +10,8 @@ export type Props = {
   showPersianNumber?:boolean,
 }
 export function JBPagination(props:Props){
-  const {pageIndex, max, min, onChange,showPersianNumber} = props;
-  return(<jb-pagination pageIndex={pageIndex} max={max} min={min} onChange={onChange} showPersianNumber={showPersianNumber}></jb-pagination>)
+  const {pageIndex, max, min, onChange,showPersianNumber, ...otherProps } = props;
+  return(<jb-pagination pageIndex={pageIndex} max={max} min={min} onChange={onChange} showPersianNumber={showPersianNumber} {...otherProps}></jb-pagination>)
 }
 
 type JBPaginationAttributes = DetailedHTMLProps<HTMLAttributes<JBPaginationWebComponent>, JBPaginationWebComponent> & {
