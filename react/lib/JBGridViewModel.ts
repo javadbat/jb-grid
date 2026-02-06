@@ -1,4 +1,4 @@
-import React, { createContext, useContext, type Ref, type RefObject } from 'react';
+import React, { createContext, useContext, type RefObject } from 'react';
 import { observable, extendObservable, makeObservable, action, computed } from 'mobx';
 import type { ActionDispatchers, AnyObject, JBGridBridgeClassInterface, JBGridBridgeInterface, JBGridCallbacks, JBGridColumnDef, JBGridConfig, JBGridConfigInterface, JBGridFilter, JBGridI18nConfig, JBGridResponseData, JBGridRowData, JBGridRowDetail, JBGridStyles, SearchbarConfig } from './types.js';
 import type { JBSearchbarWebComponent, JBSearchbarValue } from 'jb-searchbar';
@@ -155,15 +155,15 @@ class JBGridViewModel<T extends AnyObject> {
   InitSize() {
     //init table width column
     const scrollWidth = this.getScrollbarWidth();
-    this.styles.table.scrollIndent.width = 'calc(100% - ' + scrollWidth + 'px)';
+    this.styles.table.scrollIndent.width = `calc(100% - ${scrollWidth}px)`;
     //config css grid for table layout
     let gridTemplateColumns = "";
-    this.config.table.columns.map((item) => {
+    this.config.table.columns.forEach((item) => {
       if (item.width != null || item.width != undefined) {
         if (typeof (item.width) == "number") {
-          gridTemplateColumns += ' ' + item.width + 'px';
+          gridTemplateColumns += ` ${item.width}px`;
         } else {
-          gridTemplateColumns += ' ' + item.width;
+          gridTemplateColumns += ` ${item.width}`;
         }
 
       } else {

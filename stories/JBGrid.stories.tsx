@@ -1,10 +1,10 @@
 import React from 'react';
-import {JBGridData, JBGrid, Props} from 'jb-grid/react';
+import {JBGridData, JBGrid, type Props} from 'jb-grid/react';
 import JBGridTest from './samples/JBGridTest.tsx';
 import CustomErrorTest from './samples/custom-error/JBGridTest.tsx';
 import type { Meta, StoryObj } from '@storybook/react';
 
-const meta: Meta<Props<any>> = {
+const meta: Meta<Props<Props<any>>> = {
   title: "Components/JBGrid",
   component: JBGrid,
 };
