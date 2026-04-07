@@ -48,7 +48,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     this.#init();
   }
   #init() {
-    this.attachShadow({ mode: 'open', delegatesFocus: true });
+    this.attachShadow({ mode: 'open', delegatesFocus: true, clonable:true, serializable:true });
     registerDefaultVariables();
     this.#render();
     this.#elements = {

@@ -21,5 +21,4 @@ document.querySelector(`jb-pagination`).pageIndex = 5;
 document.querySelector(`jb-pagination`).max = 10;
 //min page number default is 1
 document.querySelector(`jb-pagination`).min = 0;
-
 ```
