@@ -5,7 +5,7 @@ import type { JBPaginationElements, PageIndexDom } from './types';
 import { i18n } from "jb-core/i18n";
 import {enToFaDigits} from 'jb-core';
 export class JBPaginationWebComponent extends HTMLElement {
-  #elements: JBPaginationElements;
+  #elements!: JBPaginationElements;
   #pageIndex: number = 1;
   #min = 1;
   #max = Infinity;
@@ -48,19 +48,19 @@ export class JBPaginationWebComponent extends HTMLElement {
     this.#init();
   }
   #init() {
-    this.attachShadow({ mode: 'open', delegatesFocus: true, clonable:true, serializable:true });
+    const shadowRoot = this.attachShadow({ mode: 'open', delegatesFocus: true, clonable:true, serializable:true });
     registerDefaultVariables();
     this.#render();
     this.#elements = {
       nav: {
-        wrapper: this.shadowRoot.querySelector('.page-navigator') as HTMLDivElement,
-        first: this.shadowRoot.querySelector('.first-page') as HTMLButtonElement,
-        last: this.shadowRoot.querySelector('.last-page') as HTMLButtonElement,
-        next: this.shadowRoot.querySelector('.next-page') as HTMLButtonElement,
-        prev: this.shadowRoot.querySelector('.prev-page') as HTMLButtonElement,
+        wrapper: shadowRoot.querySelector('.page-navigator') as HTMLDivElement,
+        first: shadowRoot.querySelector('.first-page') as HTMLButtonElement,
+        last: shadowRoot.querySelector('.last-page') as HTMLButtonElement,
+        next: shadowRoot.querySelector('.next-page') as HTMLButtonElement,
+        prev: shadowRoot.querySelector('.prev-page') as HTMLButtonElement,
       },
       index: {
-        wrapper: this.shadowRoot.querySelector('.page-index-wrapper') as HTMLDivElement,
+        wrapper: shadowRoot.querySelector('.page-index-wrapper') as HTMLDivElement,
         list: []
       }
     }
@@ -80,8 +80,8 @@ export class JBPaginationWebComponent extends HTMLElement {
   connectedCallback() {
   }
   #registerEventListener() {
-    this.#elements.nav.next.addEventListener('click', this.#goToNextPage.bind(this));
-    this.#elements.nav.prev.addEventListener('click', this.#goToPrevPage.bind(this));
+    this.#elements.nav.next.addEventListener('click', ()=>this.#goToNextPage(true));
+    this.#elements.nav.prev.addEventListener('click', ()=>this.#goToPrevPage(true));
     this.#elements.nav.last.addEventListener('click', ()=>{this.#goToPage(this.#max,true)});
     this.#elements.nav.first.addEventListener('click', ()=>{this.#goToPage(this.#min,true)});
   }
@@ -148,14 +148,14 @@ export class JBPaginationWebComponent extends HTMLElement {
     }
     if(this.#elements.index.list.length>this.#indexButtonCount){
       //remove redundant elements 
-      removePosition == 'end'?this.#elements.index.list.pop().remove():this.#elements.index.list.shift().remove();
+      removePosition == 'end'?this.#elements.index.list.pop()?.remove():this.#elements.index.list.shift()?.remove();
     }
   }
   #createPageIndexElement(newIndex: number): PageIndexDom {
     //when we are out of bound we create empty page index
     const isEmpty = this.#min > newIndex || this.#max < newIndex;
     const elem = document.createElement('div') as PageIndexDom;
-    elem.classList.add('page-index', isEmpty ? 'empty' : undefined);
+    elem.classList.add('page-index', isEmpty ? 'empty' : "");
     elem.dataset.index = `${newIndex}`;
     elem.pageIndex = newIndex;
     elem.addEventListener("click", (e) => {
