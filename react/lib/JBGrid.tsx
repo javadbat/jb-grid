@@ -2,6 +2,7 @@ import React, { type ReactNode, useEffect } from 'react';
 import JBGridViewModel, { JBGridContext } from './JBGridViewModel.js';
 import { observer } from 'mobx-react';
 import CSS from './jb-grid.css';
+import BlobCSS from './Components/blob-loading.css';
 export { JBGridData } from './JBGridData.js';
 import 'jb-searchbar';
 import type { AnyObject, JBGridBridgeClassInterface, JBGridConfig, JBGridI18nConfig, SearchbarConfig } from './types.js';
@@ -12,9 +13,10 @@ import { useInstance } from 'jb-core/react';
 import { injectCss } from 'jb-core';
 
 export {JBPagination, type Props as PaginationProps} from './Components/Pagination.js';
-export { Row } from './Components/Row.js';
-export { Cell } from './Components/Cell.js';
+export { JBRow } from './Components/Row.js';
+export { JBCell } from './Components/Cell.js';
 export { ExpandRow } from './Components/ExpandRow.js';
+export { JBExpandToggle } from './Components/ExpandToggle.js';
 export * from './types.js';
 export type Props<T extends AnyObject> = {
   searchbarConfig?: SearchbarConfig | null | undefined,
@@ -32,6 +34,7 @@ export type Props<T extends AnyObject> = {
 }
 
 injectCss(CSS as unknown as string);
+injectCss(BlobCSS as unknown as string);
 
 function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   const vm = useInstance(JBGridViewModel<AnyObject>, [props.onFullscreenChange, props.config, props.bridge]);

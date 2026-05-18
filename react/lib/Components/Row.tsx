@@ -1,21 +1,15 @@
-import React from 'react';
-import CSS from './row.css';
-import { useJBGridVM } from '../JBGridViewModel.js';
-import { injectCss } from 'jb-core';
+import React, { type ForwardedRef } from 'react';
+import type {JBRowAttributes} from './module-declaration.js';
+import type { JBCellWebComponent, RowTemplate } from 'jb-grid';
 
-injectCss(CSS as unknown as string);
-type RowProps = Omit<React.ComponentPropsWithoutRef<'div'>,"style">
-function Row(props:RowProps) {
-  const { children, className, ...otherProps} = props;
-  const vm = useJBGridVM();
-  if(!vm){
-    return <React.Fragment></React.Fragment>;
-  }
+type RowProps = JBRowAttributes & {
+  ref?:ForwardedRef<JBCellWebComponent | null>,
+  rowTemplate:RowTemplate,
+  isOpen?:boolean
+}
+export function JBRow(props:RowProps) {
+  const { children, ...otherProps} = props;
   return (
-    <div className={`jb-grid-table-row ${className??''}`} style={{gridTemplateColumns:vm.styles.table.generalCols.gridTemplateColumns}} {...otherProps}>
-      {children}
-    </div>
+    <jb-row {...otherProps}>{children}</jb-row>
   );
 }
-
-export {Row};

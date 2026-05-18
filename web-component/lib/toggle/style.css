@@ -1,0 +1,25 @@
+:host {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+  cursor: pointer;
+}
+
+:host([open]) {
+  .arrow-icon {
+    rotate: -90deg;
+    &:dir(ltr) {
+     rotate: 90deg;
+    }
+  }
+}
+
+.arrow-icon {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s 0s ease;
+
+  &:dir(ltr) {
+    transform: rotateY(180deg)
+  }
+}

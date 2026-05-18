@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+//@ts-ignore
 import './JBGridTest.css';
-import { Cell, Row, JBGrid, ExpandRow } from 'jb-grid/react';
+import { JBCell, JBRow, JBGrid, ExpandRow } from 'jb-grid/react';
 import {JBButton} from 'jb-button/react'
 import JBGridBridge from './JBGridBridge';
 import JBGridTestViewModel from './JBGridTestViewModel';
@@ -17,15 +18,15 @@ function JBGridTest (props:any){
             vm.jbGridConfig.data.data.map(
               (item) => {
                 return (
-                  <React.Fragment key={item.id}>
-                    <Row>
-                      <Cell label="نام:">{item.name}</Cell>
-                      <Cell label={"سن:"}>{item.age}</Cell>
-                      <Cell label="عملیات:"><JBButton onClick={()=>{item.jbGridDetail.isExpanded = !item.jbGridDetail.isExpanded;}}>detail</JBButton></Cell>
-                    </Row>
-                    <ExpandRow show={item.jbGridDetail.isExpanded}>
-                      <ExpandRowSample></ExpandRowSample>
-                    </ExpandRow>
+                  <React.Fragment key={item.id} >
+                    <JBRow rowTemplate={[{name:"name"},{name:"age"},{name:"operation"}]} isOpen={item.jbGridDetail.isExpanded}>
+                      <JBCell name="name" label="نام:">{item.name}</JBCell>
+                      <JBCell name="age" label={"سن:"}>{item.age}</JBCell>
+                      <JBCell name="operation" label="عملیات:"><JBButton onClick={()=>{item.jbGridDetail.isExpanded = !item.jbGridDetail.isExpanded;}}>detail</JBButton></JBCell>
+                      <div slot='expand'>
+                        <ExpandRowSample></ExpandRowSample>
+                      </div>
+                    </JBRow>
                   </React.Fragment>
 
                 );

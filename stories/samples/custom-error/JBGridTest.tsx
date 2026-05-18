@@ -1,6 +1,7 @@
 import React from 'react';
+//@ts-ignore
 import './JBGridTest.css';
-import { Cell, Row, JBGrid, ExpandRow } from 'jb-grid/react';
+import { JBCell, JBRow, JBGrid, ExpandRow } from 'jb-grid/react';
 import JBGridBridge from '../JBGridBridge';
 import JBGridTestViewModel from './JBGridTestViewModel';
 import { observer } from 'mobx-react';
@@ -18,10 +19,10 @@ function JBGridTest() {
               (item) => {
                 return (
                   <React.Fragment key={item.id}>
-                    <Row>
-                      <Cell>{item.name}</Cell>
-                      <Cell>{item.age}</Cell>
-                    </Row>
+                    <JBRow rowTemplate={[{name:"name"},{name:"age"}]}>
+                      <JBCell name="name">{item.name}</JBCell>
+                      <JBCell name="age">{item.age}</JBCell>
+                    </JBRow>
                 
                   </React.Fragment>
 

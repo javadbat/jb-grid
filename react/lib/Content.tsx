@@ -16,7 +16,7 @@ export type ContentProps = {
 }
 function Content(props:ContentProps) {
   const {refreshBtnClick,config,isErrorOccurred,styles,isLoading,setSortColumn,i18n} = props;
-  const ErrorComponent = props.errorComponent || <ContentError onRefreshBtnClick={refreshBtnClick} message={i18n.messages?.serverErrorText} title={i18n.messages?.serverErrorTitle} refreshButtonTitle={i18n.messages.serverErrorRefreshButtonTitle}></ContentError>;
+  const ErrorComponent = props.errorComponent || <ContentError onRefreshBtnClick={refreshBtnClick} message={i18n.messages?.serverErrorText} title={i18n.messages?.serverErrorTitle} refreshButtonTitle={i18n.messages!.serverErrorRefreshButtonTitle}></ContentError>;
 
   return (
     <section key={'jb-grid-content'} className="jb-grid-content">

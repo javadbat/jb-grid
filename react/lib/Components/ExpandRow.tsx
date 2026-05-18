@@ -1,19 +1,10 @@
-import React, { type PropsWithChildren } from 'react';
-import CSS from './expand-row.css';
-import { injectCss } from 'jb-core';
+import React, { type HTMLAttributes, type PropsWithChildren } from 'react';
 
-injectCss(CSS as unknown as string);
-function ExpandRow(props:Props) {
+export function ExpandRow(props:Props) {
+    const {children,...otherProps} = props;
     return (
-        <section className={'jb-grid-expand-row' + (props.show?'':' --hidden')}>
-            <div className={'expand-row-content' + (props.show?'':' --hidden')}>
-                {props.children}
-            </div>
-        </section>
+       <div slot="expand" {...otherProps}>{children}</div>
     );
 }
-type Props= PropsWithChildren< {
-    show:boolean,
-}>
+type Props= PropsWithChildren<React.DetailedHTMLProps<HTMLAttributes<HTMLDivElement>,HTMLDivElement>>
 
-export {ExpandRow};

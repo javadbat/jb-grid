@@ -65,7 +65,7 @@ class JBGridTestViewModel{
           sortable: false,
         }
       ];
-      this.jbGridConfig.data.requestParams.url = "http://localhost:3200/grid/user-listtttt",
+      this.jbGridConfig.data.requestParams.url = "http://localhost:3200/grid/user-list";
       this.jbGridConfig.data.requestParams.method = "POST";
     }
 }

@@ -1,0 +1,55 @@
+@custom-media --tablet-until (max-width: 768px);
+
+:host {
+  width: 100%;
+  background-color: var(--jb-white);
+  display: block;
+}
+
+:host(:nth-of-type(even)) {
+  background: var(--jb-neutral-10);
+
+  @media(--tablet-until) {
+    background: var(--jb-white);
+  }
+}
+
+.jb-row-web-component {
+  .grid-row {
+    width: 100%;
+    box-sizing: border-box;
+    grid-auto-rows: minmax(3rem, auto);
+
+    @media(--tablet-until) {
+      grid-template-columns: auto !important;
+      grid-template-rows: auto;
+      border-radius: var(--jb-radius);
+      box-shadow: 0px 0px 1px 0px #d8d8d8;
+    }
+  }
+
+  .expand-wrapper {
+    interpolate-size: allow-keywords;
+    transition: all 0.3s 0s ease;
+    height: auto;
+    overflow: clip;
+    opacity: 1;
+    &.--hidden {
+      height: 0;
+      min-height: 0;
+      padding-block: 0;
+      opacity: 0;
+    }
+
+    slot[name="expand"]::slotted(*) {
+      width: 100%;
+      min-height: 4rem;
+      padding-block: 1rem;
+      padding-inline: 2rem;
+      border-bottom: 1px solid #ebebeb;
+      box-sizing: border-box;
+      overflow: auto;
+    }
+  }
+
+}

@@ -1,4 +1,4 @@
-import { FilterColumn, JBSearchbarValue } from "jb-searchbar";
+import type { FilterItem, JBSearchbarValue } from "jb-searchbar";
 
 
 // export type JBGridRowData = {
@@ -52,7 +52,7 @@ export type JBGridFilter = {
     value: JBSearchbarValue
 }
 export type SearchbarConfig = {
-    columnList: FilterColumn[],
+    columnList: FilterItem[],
     searchOnChange?: boolean
 }
 export interface JBGridBridgeInterface {

@@ -49,7 +49,7 @@ function Footer(props:FooterProps) {
         </div>
       </section>
       <section className="page-section">
-        <section className="page-size-section" title={vm.i18n.messages.pageItemCount}>
+        <section className="page-size-section" title={vm.i18n.messages!.pageItemCount}>
           <select value={vm.config.page.size} className="page-size-select" onChange={(e) => vm.onPageSizeChange(e)}>
             <option value={20}>{vm.paginationDisplayNumbers.pageSizes[0]}</option>
             <option value={30}>{vm.paginationDisplayNumbers.pageSizes[1]}</option>
@@ -61,8 +61,8 @@ function Footer(props:FooterProps) {
           <span>{vm.paginationDisplayNumbers.startItemIndex}</span>
           <span>-</span>
           <span> {vm.paginationDisplayNumbers.endItemIndex} </span>
-          <span> &nbsp;{vm.i18n.messages.from}</span>
-          <span title={vm.i18n.messages.currentAvailableItem}>&nbsp; {vm.paginationDisplayNumbers.totalItemsCount} &nbsp;</span>
+          <span> &nbsp;{vm.i18n.messages!.from}</span>
+          <span title={vm.i18n.messages!.currentAvailableItem}>&nbsp; {vm.paginationDisplayNumbers.totalItemsCount} &nbsp;</span>
 
         </section>
         <section className="navigation-section nav-btn">

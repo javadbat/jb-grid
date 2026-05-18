@@ -1,22 +1,15 @@
-import React from 'react';
-import CSS from './cell.css';
-import { injectCss } from 'jb-core';
+import React, { type ForwardedRef } from 'react';
+import type {JBCellAttributes} from './module-declaration.js';
+import type { JBCellWebComponent } from 'jb-grid';
 
-type CellProps = {
-    children?: React.ReactNode | React.ReactNode[],
-    label?: string,
-    className?: string,
-    flex?:boolean;
+type RowProps = JBCellAttributes & {
+  ref?:ForwardedRef<JBCellWebComponent | null>,
+  name:string,
+  label?:string,
 }
-injectCss(CSS as unknown as string);
-function Cell(props: CellProps) {
-  const { children, label, className, flex } = props;
+export function JBCell(props:RowProps) {
+  const { children, ...otherProps} = props;
   return (
-    <div className={"jb-grid-table-cell " + (className ? className : '')} title={label}>
-      <div className="cell-label">{label}</div>
-      <div className={"cell-value " + (flex?'flex-cell':'')}>{children}</div>
-    </div>
+    <jb-cell slot="cell" {...otherProps}>{children}</jb-cell>
   );
 }
-
-export { Cell };

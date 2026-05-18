@@ -1,7 +1,7 @@
 import { renderHTML } from './render';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
-import type { JBPaginationElements, PageIndexDom } from './types';
+import type { JBPaginationElements, PageIndexDom } from './types.js';
 import { i18n } from "jb-core/i18n";
 import {enToFaDigits} from 'jb-core';
 export class JBPaginationWebComponent extends HTMLElement {
@@ -155,7 +155,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     //when we are out of bound we create empty page index
     const isEmpty = this.#min > newIndex || this.#max < newIndex;
     const elem = document.createElement('div') as PageIndexDom;
-    elem.classList.add('page-index', isEmpty ? 'empty' : "");
+    elem.classList.add('page-index', isEmpty?'empty':'not-empty');
     elem.dataset.index = `${newIndex}`;
     elem.pageIndex = newIndex;
     elem.addEventListener("click", (e) => {

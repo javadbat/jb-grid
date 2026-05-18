@@ -32,7 +32,7 @@ class JBGridViewModel<T extends AnyObject> {
     searchbar: React.createRef<JBSearchbarWebComponent>()
   }
   //the whole component DOM store(referenced) in this variable
-  JBGridComponentDom: RefObject<HTMLDivElement> = React.createRef();
+  JBGridComponentDom: RefObject<HTMLDivElement | null> = React.createRef();
   //keep wrapper DOM element for some purpose like wrapper changing in full screen functionality
   gridWrapperElement: HTMLElement | null = null;
   //when we start fetch new data from server it get true until load data is finished
@@ -51,8 +51,8 @@ class JBGridViewModel<T extends AnyObject> {
     onFullscreenChange: () => { console.error('you must set onFullscreenChange callback to jb-grid component if you want it to work'); }
   }
   config: JBGridConfig<T>;
-  i18n: JBGridI18nConfig;
-  constructor(onFullscreenChange: (isFullScreen: boolean) => void, config: JBGridConfigInterface<T>, bridge: JBGridBridgeClassInterface) {
+  i18n!: JBGridI18nConfig;
+  constructor(onFullscreenChange: ((isFullScreen: boolean) => void) | undefined, config: JBGridConfigInterface<T>, bridge: JBGridBridgeClassInterface) {
     makeObservable(this, {
       styles: observable,
       isLoading: observable,
@@ -138,7 +138,7 @@ class JBGridViewModel<T extends AnyObject> {
   }
   initFilter(searchbarConfig: SearchbarConfig | null) {
     if (searchbarConfig && this.elements.searchbar.current) {
-      this.elements.searchbar.current.columnList = searchbarConfig.columnList;
+      this.elements.searchbar.current.filterList = searchbarConfig.columnList;
       this.elements.searchbar.current.searchOnChange = searchbarConfig.searchOnChange === true ? searchbarConfig.searchOnChange : false;
       this.elements.searchbar.current.addEventListener('search', (e) => {
         this.elements.searchbar.current!.isLoading = true;
@@ -171,7 +171,7 @@ class JBGridViewModel<T extends AnyObject> {
       }
     });
     this.styles.table.generalCols.gridTemplateColumns = gridTemplateColumns;
-    this.styles.table.fullWidthCol.gridColumn = "1 / " + (this.config.table.columns.length + 1);
+    this.styles.table.fullWidthCol.gridColumn = `1 / ${this.config.table.columns.length + 1}`;
   }
   getScrollbarWidth() {
     const outer = document.createElement("div");
@@ -370,7 +370,7 @@ class JBGridViewModel<T extends AnyObject> {
     this.JBGridComponentDom;
     const child = document.createElement('div');
     child.innerHTML = "";
-    this.gridWrapperElement = this.JBGridComponentDom!.current.parentElement!;
+    this.gridWrapperElement = this.JBGridComponentDom!.current!.parentElement!;
     container.append(this.JBGridComponentDom.current as Node);
     //TODO:call on full screen call back
   }
@@ -378,7 +378,7 @@ class JBGridViewModel<T extends AnyObject> {
     const container = document.querySelector('.jb-grid-full-screen-container') as HTMLDivElement;
     if (this.gridWrapperElement) {
       //put grid element back to their orginal place
-      this.gridWrapperElement.append(this.JBGridComponentDom.current);
+      this.gridWrapperElement.append(this.JBGridComponentDom.current!);
       //remove added temp fullscreen container
     }
     container[0].remove();
@@ -402,9 +402,9 @@ class JBGridViewModel<T extends AnyObject> {
   changePageNumberToInput() {
     //when user click on page number
     //TODO: change page Input method to text input
-    const pageNumber: string | null = prompt(this.i18n.messages.EnterPageNumberMessage, this.config.page.totalPages.toString());
-    if (pageNumber && parseInt(pageNumber) > 0 && parseInt(pageNumber) < this.config.page.totalPages) {
-      this.goToPage(parseInt(pageNumber));
+    const pageNumber: string | null = prompt(this.i18n.messages?.EnterPageNumberMessage, this.config.page.totalPages.toString());
+    if (pageNumber && Number(pageNumber) > 0 && Number(pageNumber) < this.config.page.totalPages) {
+      this.goToPage(Number(pageNumber));
     }
   }
   openSearchHeaderSection() {
@@ -438,7 +438,7 @@ class JBGridViewModel<T extends AnyObject> {
     if (this.i18n.showPersianNumber) {
       const inputString = input.toString();
       const correctedString = inputString.replace(/[0-9]/g, function (word) {
-        return String.fromCharCode(1776 + parseInt(word));
+        return String.fromCharCode(1776 + Number(word));
       });
       return correctedString;
     }
