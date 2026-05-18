@@ -4,7 +4,7 @@ import type JBGridViewModel from './JBGridViewModel.js';
 import CSS from './footer.css';
 import { injectCss } from 'jb-core';
 import { JBPagination } from './JBGrid.js';
-import type { JBPaginationWebComponent } from '../../web-component/dist/index.js';
+import type { JBPaginationWebComponent } from 'jb-grid';
 injectCss(CSS as unknown as string);
 type FooterProps = {
     vm:JBGridViewModel<any>,
