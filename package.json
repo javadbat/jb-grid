@@ -14,7 +14,7 @@
     "web component",
     "react component"
   ],
-  "version": "0.3.1",
+  "version": "0.3.4",
   "bugs": "https://github.com/javadbat/jb-grid/issues",
   "license": "MIT",
   "files": [
@@ -23,6 +23,8 @@
     "lib/",
     "dist/",
     "react/",
+    "web-component/",
+    "web-component/dist",
     "react/dist/"
   ],
   "main": "index.js",
