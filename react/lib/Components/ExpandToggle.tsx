@@ -1,7 +1,7 @@
-import React, { type PropsWithChildren }  from 'react';
+import React  from 'react';
 import type {JBExpandToggleAttributes} from './module-declaration.js';
 
-type ToggleProps = JBExpandToggleAttributes 
+export type ToggleProps = JBExpandToggleAttributes 
 export function JBExpandToggle(props:ToggleProps) {
   const { children, ...otherProps} = props;
   return (

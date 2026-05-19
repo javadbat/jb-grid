@@ -13,10 +13,10 @@ import { useInstance } from 'jb-core/react';
 import { injectCss } from 'jb-core';
 
 export {JBPagination, type Props as PaginationProps} from './Components/Pagination.js';
-export { JBRow } from './Components/Row.js';
-export { JBCell } from './Components/Cell.js';
-export { ExpandRow } from './Components/ExpandRow.js';
-export { JBExpandToggle } from './Components/ExpandToggle.js';
+export * from './Components/Row.js';
+export * from './Components/Cell.js';
+export * from './Components/ExpandRow.js';
+export * from './Components/ExpandToggle.js';
 export * from './types.js';
 export type Props<T extends AnyObject> = {
   searchbarConfig?: SearchbarConfig | null | undefined,
