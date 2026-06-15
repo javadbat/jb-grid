@@ -9,7 +9,7 @@
 
 ## using with JS frameworks
 
-to use this component in **react** see [`jb-grid/react`](https://github.com/javadbat/jb-grid/tree/main/react);
+- [<img src="https://img.shields.io/badge/React.js-jb--grid%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-grid/tree/main/react)
 
 ## Pagination
 for pagination we use `jb-pagination` web-component
