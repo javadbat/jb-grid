@@ -38,7 +38,7 @@ import {filterConfig} from './my-filter-config';
 ### config
 
 config is unique for each data table you want to show and contains information about columns,filters,sort,initData,...    
-you can create your own config from scratch using Mobx class Stores that implements `JBGridConfigInterface` or just create instance of `JBGridData` and start to config it's fields base on your need.
+you can create your own config from scratch using Mobx class Stores that implements `JBGridConfigInterface` or just create instance of `JBGridData` and start to config it's fields based on your need.
 
 ```js
 import { JBGridData } from "jb-grid/react";
@@ -73,7 +73,7 @@ yourConfig.table.columns = [
                 name: 'age',
                 title: 'سن',
                 sortable: false,
-                //if you dont set width , it will be '1fr' mean it get 1 share of width from free space
+                //if you don't set width , it will be '1fr' mean it get 1 share of width from free space
                 width: '1fr'
             },
             {
@@ -196,8 +196,12 @@ jb-grid by default is mobile friendly but when it turns to mobile view it show r
             </Row>
 ```
 
-## styling
-| css variable name                          | description                                                            |
+## Styling
+| CSS variable name                          | description                                                            |
 | -------------                              | -------------                                                          |
 | --jb-grid-loading-color                    | list loading color                                                     |
 | --jb-grid-page-active-color                | color of active page                                                   |
+
+## Shared Documentation
+
+For web-component behavior, events, slots, and CSS variables, see [`jb-grid`](https://github.com/javadbat/jb-grid).

@@ -5,14 +5,22 @@
 [![NPM Version](https://img.shields.io/npm/v/jb-grid)](https://www.npmjs.com/package/jb-grid)
 ![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-grid)
 
-> currently this component only available in react in full mode and web-component is only support parts of the data grid like pagination adn Row, Cell.
+> currently this component only available in react in full mode and web-component is only support parts of the data grid like pagination and Row, Cell.
 
-## using with JS frameworks
-
+## Using With JS Frameworks
 - [<img src="https://img.shields.io/badge/React.js-jb--grid%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-grid/tree/main/react)
 
 ## Pagination
 for pagination we use `jb-pagination` web-component
+
+### jb-pagination API
+
+| name | type | description |
+| --- | --- | --- |
+| `pageIndex` | property | Current page index. |
+| `min` | property | Minimum page index. |
+| `max` | property | Maximum page index. |
+
 ```html
 <jb-pagination />
 ```
@@ -28,8 +36,16 @@ document.querySelector(`jb-pagination`).max = 10;
 document.querySelector(`jb-pagination`).min = 0;
 ```
 
+For the standalone pagination API and CSS variables, see [jb-pagination README](https://javadbat.github.io/design-system/?path=/docs/components-jbgrid-jbpagination-readme--docs).
+
+### jb-pagination CSS variables
+
+| CSS variable name | description |
+| --- | --- |
+| --jb-pagination-index-width | Width of each page index button. |
+
 ## Row & Cells
-`jb-row` is a row web-component that imply a grid template base on given config to below cells. it also accept expand row that you can open and close it.
+`jb-row` is a row web-component that imply a grid template based on given config to below cells. it also accept expand row that you can open and close it.
 
 here is a code overview:
 ```html
