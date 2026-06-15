@@ -1,5 +1,10 @@
 # jb-grid
 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-grid)
+[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-grid/main/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/jb-grid)](https://www.npmjs.com/package/jb-grid)
+![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-grid)
+
 > currently this component only available in react in full mode and web-component is only support parts of the data grid like pagination adn Row, Cell.
 
 ## using with JS frameworks
