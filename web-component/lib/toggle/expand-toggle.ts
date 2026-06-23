@@ -37,7 +37,7 @@ export class JBExpandToggleWebComponent extends HTMLElement {
     }
   }
   #registerEventListener() {
-    this.addEventListener('click', ()=>this.toggle());
+    this.addEventListener('click', ()=>this.toggle(), {passive:true});
   }
   toggle(){
     if(this.#parentRow){

@@ -25,6 +25,38 @@ export const Normal:Story = {
   </Fragment>
   }
 };
+export const OverflowCellSingleLine:Story = {
+  args:{
+   rowTemplate:[
+    {name:"id",size:"1fr"},
+    {name:"bio",size:"1fr"},
+    {name:"name",size:"1fr"},
+    {name:"jobTitle",size:'100px'},
+  ],
+  children:<Fragment>
+    <JBCell name="id">{faker.number.int({min:1000,max:9999})}</JBCell>
+    <JBCell name="bio" max-line="1">{faker.lorem.sentence(200)}</JBCell>
+    <JBCell name="name">{faker.person.fullName()}</JBCell>
+    <JBCell name="jobTitle">{faker.person.jobTitle()}</JBCell>
+  </Fragment>
+  }
+};
+export const OverflowCellMultiLine:Story = {
+  args:{
+   rowTemplate:[
+    {name:"id",size:"1fr"},
+    {name:"bio",size:"1fr"},
+    {name:"name",size:"1fr"},
+    {name:"jobTitle",size:'100px'},
+  ],
+  children:<Fragment>
+    <JBCell name="id">{faker.number.int({min:1000,max:9999})}</JBCell>
+    <JBCell name="bio" max-line="2">{faker.lorem.sentence(200)}</JBCell>
+    <JBCell name="name">{faker.person.fullName()}</JBCell>
+    <JBCell name="jobTitle">{faker.person.jobTitle()}</JBCell>
+  </Fragment>
+  }
+};
 export const WithExpand:Story = {
   args:{
    isOpen:true,

@@ -57,6 +57,7 @@ here is a code overview:
   <div slot="expand">expand window content</div>
 </jb-row>
 ```
+
 ### Set Column Size
 
 to set column size of the row you can pass a config that tell each column size. remember size is optional(default is `1fr`) but name is mandatory.
@@ -88,4 +89,13 @@ if you want to close and open by js you can use js mode:
 document.querySelector(`jb-row`).isOpen = true;
 // to close it
 document.querySelector(`jb-row`).isOpen = false;
+```
+
+### Ellipses Cell
+
+if your cell content is a long text need to get ellipses on overflow add `ellipsis` attribute to the `jb-cell` and `ellipsis="max line"` for multiline
+```html
+<jb-cell ellipsis>Put Long Text Here</jb-cell>
+<!-- Limited Browser Support for Multiline -->
+<jb-cell ellipsis="3">Put Long Text Here</jb-cell>
 ```

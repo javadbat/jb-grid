@@ -4,7 +4,9 @@ import type { JBPaginationDirectAttributeProps } from "./types";
 import type {JBCellWebComponent, JBRowWebComponent, JBExpandToggleWebComponent} from 'jb-grid'
 type JBPaginationAttributes = DetailedHTMLProps<HTMLAttributes<JBPaginationWebComponent>, JBPaginationWebComponent> & JBPaginationDirectAttributeProps
 export type JBRowAttributes = DetailedHTMLProps<HTMLAttributes<JBRowWebComponent>, JBRowWebComponent>
-export type JBCellAttributes = DetailedHTMLProps<HTMLAttributes<JBCellWebComponent>, JBCellWebComponent>
+export type JBCellAttributes = DetailedHTMLProps<HTMLAttributes<JBCellWebComponent>, JBCellWebComponent> & {
+  ellipsis: boolean | number
+}
 export type JBExpandToggleAttributes = DetailedHTMLProps<HTMLAttributes<JBExpandToggleWebComponent>, JBExpandToggleWebComponent>
 
 declare module "react" {

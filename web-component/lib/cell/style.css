@@ -2,15 +2,36 @@
 
 :host {
   width: 100%;
+  max-width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: auto;
+  grid-template-rows: minmax(0,auto);
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   padding: 0.25rem 1rem;
   box-sizing: border-box;
   align-items: center;
   justify-content: start;
-  gap:0.5rem;
+  gap: 0.5rem;
+}
+
+:host([ellipsis]:not([ellipsis="1"]):not([ellipsis=""])) {
+  height: fit-content;
+  display: -webkit-box;
+  -webkit-line-clamp: attr(max-line type(<integer>), 1);
+  -webkit-box-orient: vertical;
+  /* Number of lines to show */
+  line-clamp: attr(max-line type(<integer>), 1);
+  /* Number of lines to show */
+  box-orient: vertical;
+  overflow:hidden;
+  align-content: center;
+}
+:host(:where([ellipsis=""], [ellipsis="1"])){
+  display:block;
+  text-overflow: ellipsis;
+  white-space: nowrap;  
+  overflow:hidden;
+  align-content: center;
 }
