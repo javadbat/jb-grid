@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
-import {JBCell, JBExpandToggle, JBRow, type PaginationProps} from 'jb-grid/react';
+import {JBCell, JBExpandToggle, JBRow} from 'jb-grid/react';
 import type { Meta, StoryObj } from '@storybook/react';
 import {faker} from '@faker-js/faker'
-const meta: Meta<PaginationProps> = {
+const meta = {
   title: "Components/JBGrid/Row",
   component: JBRow,
-};
+} satisfies Meta<typeof JBRow>;
 
 export default meta;
-type Story = StoryObj<typeof JBRow>;
+type Story = StoryObj<typeof meta>;
 
 export const Normal:Story = {
   args:{
