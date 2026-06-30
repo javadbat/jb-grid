@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import JBGridViewModel from './JBGridViewModel.js';
-import { JBSearchbarWebComponent } from 'jb-searchbar';
 import 'jb-searchbar/react/lib/module-declaration.js';
 import { observer } from 'mobx-react';
 import CSS from './header.css';
@@ -13,17 +12,6 @@ type HeaderProps = {
   title: string,
   searchbarConfig: any,
   headerEndComponents?: React.ReactNode[] | ReactNode
-}
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      'jb-searchbar': JBSearchbarType;
-    }
-    interface JBSearchbarType extends React.DetailedHTMLProps<React.HTMLAttributes<JBSearchbarWebComponent>, JBSearchbarWebComponent> {
-      class?: string,
-    }
-  }
 }
 function Header(props: HeaderProps) {
   const { vm } = props;
