@@ -1,7 +1,6 @@
 import React from 'react';
-//@ts-ignore
 import './JBGridTest.css';
-import { JBCell, JBRow, JBGrid, ExpandRow } from 'jb-grid/react';
+import { JBCell, JBRow, JBGrid } from 'jb-grid/react';
 import JBGridBridge from '../JBGridBridge';
 import JBGridTestViewModel from './JBGridTestViewModel';
 import { observer } from 'mobx-react';
@@ -13,7 +12,7 @@ function JBGridTest() {
 
     return (
       <div className="grid-wrapper">
-        <JBGrid contentError={<CustomError />} config={vm.jbGridConfig} bridge={JBGridBridge} title="لیست کاربران" searchbarConfig={vm.filterConfig}>
+        <JBGrid contentError={<CustomError />} config={vm.jbGridConfig} bridge={JBGridBridge} title="لیست کاربران" >
           {
             vm.jbGridConfig.data.data.map(
               (item) => {

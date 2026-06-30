@@ -4,39 +4,8 @@ import {JBGridData, type SearchbarConfig} from 'jb-grid/react';
 class JBGridTestViewModel{
 
     jbGridConfig = new JBGridData();
-    filterConfig:SearchbarConfig = {
-      columnList: [
-        {
-          key: 'title',
-          label: 'تیتر',
-          type: 'TEXT'
-        },
-        {
-          key: 'name',
-          label: 'نام',
-          type: 'TEXT',
-          maxUsageCount:3
-        },
-        {
-          key:'age',
-          label: 'سن',
-          type: 'NUMBER',
-        },
-        {
-          key: 'fromDate',
-          label: 'از تاریخ',
-          type: 'DATE'
-        },
-        {
-          key: 'toDate',
-          label: 'تا تاریخ',
-          type: 'DATE'
-        }
-      ]
-    }
     constructor(){
       makeObservable(this,{
-        filterConfig:observable,
         jbGridConfig:observable,
         initGrid:action.bound
       });

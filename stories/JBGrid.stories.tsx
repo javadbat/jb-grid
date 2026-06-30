@@ -1,4 +1,3 @@
-import React from 'react';
 import {JBGridData, JBGrid} from 'jb-grid/react';
 import JBGridTest from './samples/JBGridTest.tsx';
 import CustomErrorTest from './samples/custom-error/JBGridTest.tsx';
@@ -14,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Normal:Story = {
   render:(args) => <JBGridTest {...args}></JBGridTest>,
   args:{
-    config: new JBGridData()
+
   }
 };
 
