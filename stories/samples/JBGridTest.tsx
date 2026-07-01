@@ -9,7 +9,7 @@ import {useInstance} from 'jb-core/react';
 import { Fragment } from 'react/jsx-runtime';
 
 type Props = {
-  i18n: JBGridI18nConfig | null | undefined
+  i18n?: JBGridI18nConfig | null
 }
 function JBGridTest (props:Props){
   const vm = useInstance(JBGridTestViewModel,[]);
