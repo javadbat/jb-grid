@@ -5,3 +5,62 @@ html, body, #root, #storybook-root{
     width: 100%;
     height: calc(100% - 64px);
 }
+.expanded-row-sample {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+    padding: 16px;
+    color: #24313f;
+}
+.rtl-grid-wrapper .expanded-row-sample {
+    direction: rtl;
+}
+.expanded-row-image {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.expanded-row-content {
+    min-width: 0;
+}
+.expanded-row-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.expanded-row-subtitle {
+    color: #667085;
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+}
+.expanded-row-bio {
+    margin: 0 0 12px;
+    line-height: 1.8;
+    color: #344054;
+}
+.expanded-row-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px 16px;
+    margin: 0;
+}
+.expanded-row-info div {
+    min-width: 0;
+}
+.expanded-row-info dt {
+    color: #667085;
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+}
+.expanded-row-info dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+    .expanded-row-sample {
+        grid-template-columns: 1fr;
+    }
+}

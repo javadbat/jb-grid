@@ -12,7 +12,7 @@ react table grid with pagination, filtering and sorting functionality.
 - easy filter implementation (customizable)
 - customizable column templates
 - flexible column size
-- support for server side data fetching
+- stateless data, pagination, loading, and error handling
 
 ## instructions
 
@@ -24,79 +24,71 @@ npm i jb-grid
 
 ### import and use in your component
 ```JSX
-import {Cell, Row, JBGrid} from 'jb-grid/react';
-//this file is a class that implement `JBGridBridgeClassInterface` interface to translate your server data to jb-grid data interface see Bridge section for more detail
-import {JBGridBridge} from './my-bridge';
-// grid config that impl JBGridConfig type see config section for more detail
-import {yourConfig} from './your-grid-config-file';
-//jb-search-bar config so you can filter your data
-import {filterConfig} from './my-filter-config';
+import {JBCell, JBRow, JBGrid} from 'jb-grid/react';
+import {Searchbar} from './Searchbar';
 
-<JBGrid config={yourConfig} bridge={JBGridBridge} title="user list" searchbarConfig={vm.filterConfig}></JBGrid>
+<JBGrid
+  data={data}
+  pageIndex={pageIndex}
+  pageSize={pageSize}
+  totalItemsCount={totalItemsCount}
+  title="user list"
+  searchbarComponent={<Searchbar />}
+  onPageIndexChange={setPageIndex}
+  onPageSizeChange={setPageSize}
+  onRefresh={refreshData}
+></JBGrid>
 ```
 
-### config
+### state
 
-config is unique for each data table you want to show and contains information about columns,filters,sort,initData,...    
-you can create your own config from scratch using a class or object that implements `JBGridConfigInterface` or just create instance of `JBGridData` and start to config it's fields based on your need.
+`JBGrid` is stateless. Keep data, pagination, loading, error, filtering, sorting, columns, and row expansion in your own component/store and pass the current values to the grid.
 
-```js
-import { JBGridData } from "jb-grid/react";
-
-const yourConfig = new JBGridData();
+```tsx
+<JBGrid
+  data={data}
+  pageIndex={pageIndex}
+  pageSize={pageSize}
+  totalItemsCount={totalItemsCount}
+  totalPages={totalPages}
+  isLoading={isLoading}
+  isErrorOccurred={isErrorOccurred}
+  onPageIndexChange={(newPageIndex) => setPageIndex(newPageIndex)}
+  onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+  onRefresh={() => loadData()}
+  title="user list"
+/>
 ```
-or in typescript: (in javascript you don't need to implements from `JBGridConfigInterface` but you have to check every detail manually to avoid errors)
-```ts
-import {JBGridConfigInterface}  from "jb-grid/types"
 
-class yourConfigClass implements JBGridConfigInterface{
-    //put your config here. for sample code see /lib/JBGridData in package files
-}
-export const yourConfig = new yourConfigClass();
-```
-you can config columns of table like this:    
+### table header and rows
 
-```js
-yourConfig.table.columns = [
-            {
-                //uniq identifier of column
-                id: 1,
-                //will be used as a key in sort  object when sorting by column
-                name: 'name',
-                //showed in column header
-                title: 'نام',
-                //let us sort column default is false
-                sortable: true,
-            },
-            {
-                id: 2,                
-                name: 'age',
-                title: 'سن',
-                sortable: false,
-                //if you don't set width , it will be '1fr' mean it get 1 share of width from free space
-                width: '1fr'
-            },
-            {
-                id: 3,
-                name: 'expand',
-                title: 'باز کردن',
-                sortable: false,
-                //you can set px,em, auto, fr , % , ... in here 
-                width: '200px'
-            }
-        ];
+The grid does not own column definitions. If you need a table header, render it yourself with `tableHeader`. Pass row layout directly to `JBRow`.
 
+```tsx
+const rowTemplate = [
+  { name: "name", size: "1fr" },
+  { name: "age", size: "100px" },
+  { name: "operation", size: "160px" }
+];
+
+<JBGrid
+  tableHeader={<YourTableHeader />}
+  data={data}
+  pageIndex={pageIndex}
+  pageSize={pageSize}
+  totalItemsCount={totalItemsCount}
+  title="user list"
+>
+  {(data) => data.map((item) => (
+    <JBRow key={item.id} rowTemplate={rowTemplate}>
+      <JBCell name="name" label="name:">{item.name}</JBCell>
+      <JBCell name="age" label="age:">{item.age}</JBCell>
+      <JBCell name="operation" label="operations:"><button>detail</button></JBCell>
+    </JBRow>
+  ))}
+</JBGrid>
 ```
-to config backend service call config you can set `` like this:
-```js
-        // your api endpoint
-        yourConfig.data.requestParams.url = "http://localhost:3000/grid/user-list",
-        //endpoint http method
-        yourConfig.data.requestParams.method = "POST";
-        // you can set any custom parameter your backend needs here. for example if you using grpc or graphql you can set any config they need
-        yourConfig.data.requestParams.custom1 = {aa:""};
-        yourConfig.data.requestParams.foo = "x";
-```
+
 ### i18n
 you can pass a i18n config to set a text, number display and other localization config to jb-grid
 ```tsx
@@ -113,29 +105,9 @@ export const i18n:JBGridI18nConfig = {
   messages: i18nMessages,
   showPersianNumber:false
 };
-<JBGrid i18n={i18n}></JBGrid>
+<JBGrid i18n={i18n} data={data} pageIndex={pageIndex} pageSize={pageSize} totalItemsCount={totalItemsCount}></JBGrid>
 
 ```
-### actions
-
-there is some actions you may want to call inside a grid for example you need to refresh data by code after some entity insert/update or fullscreen grid by code. for doing so you just have to call `actionDispatchers` methods in your grid config after initialization process (after render of jb-grid finish grid will automatically extend your config and add this methods).
-```typescript
-//action dispatcher type in typescript:
-type ActionDispatchers = Readonly<{
-    refreshData: () => Promise<void>,
-    fullScreenGrid: () => void,
-    exitFullScreenGrid: () => void
-}>
-// the call function:
-    yourConfig.actionDispatchers.refreshData();
-// 
-```
-
-### bridge
-
-bridge is a js/ts class, responsible for converting jb-grid standard data to your back-end standard data and reverse.
-jb-grid doesn't send request by it self, instead it ask bridge to send request & and receive data. so you have freedom to use whatever standard and technology you may see fit.
-the reason that we separate config & bridge is most of the time all tables of your project use  same request and response data structure so you don't need to repeat yourself. you code 1 bridge for all of project and config each list for endpoints url ,...
 
 ### filter
 
@@ -145,7 +117,7 @@ the reason that we separate config & bridge is most of the time all tables of yo
 
 if you want to show customized error page instead of default one use `contentError` prop
 ```jsx
-<JBGrid contentError={<CustomErrorComponent />}></JBGrid>
+<JBGrid {...gridProps} contentError={<CustomErrorComponent />} isErrorOccurred={isErrorOccurred}></JBGrid>
 ```
 
 ### full-screen grid
@@ -154,27 +126,27 @@ jb-grid has a fullscreenable feature and you can activate that by set `isFullscr
 
 ```jsx
     const [isFullscreen,setIsFullscreen] = useState(false);
-    <JBGrid isFullscreen={isFullscreen} onFullscreenChange={(newValue)=>setIsFullscreen(newValue)}></JBGrid>
+    <JBGrid {...gridProps} isFullscreen={isFullscreen} onFullscreen={()=>setIsFullscreen(true)} onExitFullscreen={()=>setIsFullscreen(false)}></JBGrid>
 
 ```
 ### expandable row
 you can add expandable row so user can expand row to see more info about a row in detail
 
 ```jsx
-<JBGrid config={jbGridConfig} bridge={JBGridBridge} title="general list" searchbarConfig={filterConfig}>
+<JBGrid data={data} pageIndex={pageIndex} pageSize={pageSize} totalItemsCount={totalItemsCount} title="general list" searchbarComponent={<Searchbar />}>
     {
-        (data, {refreshView}) => data.map(
+        (data) => data.map(
             (item) => {
                 return (
                     <React.Fragment key={item.id}>
-                        <Row>
-                            <Cell>{item.name}</Cell>
-                            <Cell>{item.age}</Cell>
-                            <Cell><button onClick={()=>{item.jbGridDetail.isExpanded = !item.jbGridDetail.isExpanded; refreshView();}}>detail</button></Cell>
-                        </Row>
-                        <ExpandRow show={item.jbGridDetail.isExpanded}>
+                        <JBRow isOpen={expandedRowIds.has(item.id)}>
+                            <JBCell name="name">{item.name}</JBCell>
+                            <JBCell name="age">{item.age}</JBCell>
+                            <JBCell name="operation"><button onClick={()=>toggleRowExpanded(item.id)}>detail</button></JBCell>
+                            <div slot="expand">
                             <YourExpandedData></YourExpandedData>
-                        </ExpandRow>
+                            </div>
+                        </JBRow>
                     </React.Fragment>
 
                 );
@@ -189,16 +161,16 @@ you can add expandable row so user can expand row to see more info about a row i
 
 jb-grid by default is mobile friendly but when it turns to mobile view it show row as cards. this cards show the table fields in themselves but without any label. to show label of columns beside the cell in mobile just add `label` property to each cell like this:
 ```jsx
-            <Row>
-                <Cell label="name:">{item.name}</Cell>
-                <Cell label="age:">{item.age}</Cell>
-                <Cell label="operations:"><button onClick={()=>{item.jbGridDetail.isExpanded = !item.jbGridDetail.isExpanded;}}>detail</button></Cell>
-            </Row>
+            <JBRow>
+                <JBCell name="name" label="name:">{item.name}</JBCell>
+                <JBCell name="age" label="age:">{item.age}</JBCell>
+                <JBCell name="operation" label="operations:"><button onClick={()=>toggleRowExpanded(item.id)}>detail</button></JBCell>
+            </JBRow>
 ```
 
 ## Pagination
 
-The full React grid manages pagination through its config and bridge. If you need the standalone web-component pagination primitive, import and use `jb-pagination` from the web-component package directly.
+The full React grid shows pagination from `pageIndex`, `pageSize`, `totalItemsCount`, and `totalPages`, and reports changes with `onPageIndexChange` and `onPageSizeChange`. If you need the standalone web-component pagination primitive, import and use `jb-pagination` from the web-component package directly.
 
 ```jsx
 import 'jb-grid/web-component/lib/pagination';

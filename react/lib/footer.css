@@ -15,36 +15,6 @@
             align-items: center;
             justify-content: flex-start;
 
-            .page-size-section {
-                padding: 0 16px;
-                float: left;
-                align-items: center;
-                height: 100%;
-                color: #7b7b7b;
-                font-size: 16px;
-                display: flex;
-                @container (max-width: 580px) {
-                    display:none;
-                }
-                .page-size-select {
-                    background-color: transparent;
-                    font-family: inherit;
-                    color: #7b7b7b;
-                    font-size: 16px;
-                    border: none;
-                }
-            }
-            .items-information-section {
-                float: left;
-                display: flex;
-                align-items: center;
-                height: 100%;
-                color: #7b7b7b;
-                font-size: 16px;
-                @container (max-width: 500px) {
-                    display:none;
-                }
-            }
             .navigation-section {
                 float: left;
                 display: flex;

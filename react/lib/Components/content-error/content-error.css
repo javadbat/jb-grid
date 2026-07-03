@@ -14,13 +14,7 @@
         padding: 16px 0;
         color: #333;
     }
-    .error-button button {
-        padding: 8px 16px;
-        background: green;
-        color: #fff;
-        border: none;
-        border-radius: 150px;
-        cursor: pointer;
-        font-family: inherit;
+    .error-button {
+        margin-top: 8px;
     }
 }

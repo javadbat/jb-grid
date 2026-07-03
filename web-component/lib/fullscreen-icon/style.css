@@ -1,0 +1,44 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #7b7b7b;
+}
+
+:host(:hover) {
+  color: #2e3139;
+}
+
+.fullscreen-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+.arrow {
+  transition: transform 0.2s ease-out;
+  transform-box: view-box;
+}
+
+:host([state="exit"]) .arrow-top-start {
+  transform: rotate(180deg);
+  transform-origin: 30px 30px;
+}
+
+:host([state="exit"]) .arrow-top-end {
+  transform: rotate(180deg);
+  transform-origin: 100px 30px;
+}
+
+:host([state="exit"]) .arrow-bottom-end {
+  transform: rotate(180deg);
+  transform-origin: 100px 100px;
+}
+
+:host([state="exit"]) .arrow-bottom-start {
+  transform: rotate(180deg);
+  transform-origin: 30px 100px;
+}

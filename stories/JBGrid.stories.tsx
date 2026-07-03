@@ -12,14 +12,14 @@ type Story = StoryObj<typeof meta>;
 export const Normal:Story = {
   render:(args) => <JBGridTest {...args}></JBGridTest>,
   args:{
-
+    locale: "en"
   }
 };
 
-export const WithPersianNumber:Story = {
+export const RTL:Story = {
   render:(args) => <JBGridTest {...args}></JBGridTest>,
   args:{
-    i18n:{showPersianNumber:true}
+    locale: "fa"
   }
 };
 

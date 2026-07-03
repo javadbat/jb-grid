@@ -1,8 +1,7 @@
+import type { GridTemplate, GridTemplateItem } from "../types.js";
+
 export type JBRowElements = {
   expandWrapper: HTMLDivElement
 }
-export type RowTemplateItem = {
-  name:string,
-  size?:string|number
-}
-export type RowTemplate = RowTemplateItem[];
+export type RowTemplateItem = GridTemplateItem;
+export type RowTemplate = GridTemplate;

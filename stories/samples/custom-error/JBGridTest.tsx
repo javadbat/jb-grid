@@ -1,17 +1,39 @@
-import React from 'react';
 import './JBGridTest.css';
-import { JBCell, JBRow, JBGrid } from 'jb-grid/react';
-import JBGridBridge from '../JBGridBridge';
-import JBGridTestViewModel from './JBGridTestViewModel';
+import React, { useState } from 'react';
+import { JBCell, JBRow, JBGrid } from '../../../react/lib/JBGrid.tsx';
 import CustomError from './CustomError';
-import { useInstance } from 'jb-core/react';
+
+type Row = {
+  id: number,
+  name: string,
+  age: number
+}
 
 function JBGridTest() {
-  const vm = useInstance(JBGridTestViewModel,[]);
+  const [pageIndex, setPageIndex] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [data] = useState<Row[]>(() => [
+    { id: 1, name: "علی", age: 28 },
+    { id: 2, name: "زهرا", age: 31 }
+  ]);
 
     return (
       <div className="grid-wrapper">
-        <JBGrid contentError={<CustomError />} config={vm.jbGridConfig} bridge={JBGridBridge} title="لیست کاربران" >
+        <JBGrid
+          contentError={<CustomError onRetry={() => console.log("retry grid data")} />}
+          data={data}
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+          totalItemsCount={data.length}
+          isErrorOccurred
+          title="لیست کاربران"
+          onPageIndexChange={setPageIndex}
+          onPageSizeChange={(newPageSize) => {
+            setPageSize(newPageSize);
+            setPageIndex(1);
+          }}
+          onRefresh={() => console.log("retry grid data")}
+        >
           {
             (data) => data.map(
               (item) => {

@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  height: 100%;
+  color: #7b7b7b;
+  font-size: 16px;
+  container-type: inline-size;
+}
+
+.jb-pagination-info-web-component {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.page-size-section {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.page-size-select {
+  background-color: transparent;
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  border: none;
+}
+
+.items-information-section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  white-space: nowrap;
+}
+
+@container (max-width: 260px) {
+  .page-size-section {
+    display: none;
+  }
+}
+
+@container (max-width: 160px) {
+  .items-information-section {
+    display: none;
+  }
+}

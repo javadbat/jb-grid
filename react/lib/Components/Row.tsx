@@ -1,15 +1,17 @@
-import React, { type ForwardedRef } from 'react';
+import React from 'react';
+import 'jb-grid';
 import type {JBRowAttributes} from './module-declaration.js';
-import type { JBCellWebComponent, RowTemplate } from 'jb-grid';
+import type { JBRowWebComponent, RowTemplate } from 'jb-grid';
 
-export type RowProps = JBRowAttributes & {
-  ref?:ForwardedRef<JBCellWebComponent | null>,
+export type RowProps = Omit<JBRowAttributes, "ref" | "rowTemplate" | "isOpen"> & {
   rowTemplate?:RowTemplate,
   isOpen?:boolean
 }
-export function JBRow(props:RowProps) {
+export const JBRow = React.forwardRef<JBRowWebComponent | null, RowProps>((props, ref) => {
   const { children, ...otherProps} = props;
   return (
-    <jb-row {...otherProps}>{children}</jb-row>
+    <jb-row ref={ref} {...otherProps}>{children}</jb-row>
   );
-}
+});
+
+JBRow.displayName = "JBRow";

@@ -26,7 +26,10 @@ export class JBRowWebComponent extends HTMLElement {
   }
   set rowTemplate(value:RowTemplate){
     this.#RowTemplate = value;
-    createTemplateStylesheet(this.#templateSheet,value);
+    createTemplateStylesheet(this.#templateSheet, value, {
+      selector: ".grid-row",
+      autoModeVariableName: "--jb-row-grid-mode"
+    });
   }
   constructor() {
     super();
@@ -40,7 +43,10 @@ export class JBRowWebComponent extends HTMLElement {
     this.#elements = {
       expandWrapper: shadowRoot.querySelector(".expand-wrapper")!
     }
-    createTemplateStylesheet(this.#templateSheet,null);
+    createTemplateStylesheet(this.#templateSheet, null, {
+      selector: ".grid-row",
+      autoModeVariableName: "--jb-row-grid-mode"
+    });
     this.#registerEventListener();
   }
   #render() {
