@@ -99,3 +99,113 @@ if your cell content is a long text need to get ellipses on overflow add `ellips
 <!-- Limited Browser Support for Multiline -->
 <jb-cell ellipsis="3">Put Long Text Here</jb-cell>
 ```
+
+## Table Header
+
+`jb-table-header` is a grid header wrapper for `jb-col-header` cells. Set `headerTemplate` to the same column template shape used by `jb-row`.
+
+```html
+<jb-table-header>
+  <jb-col-header name="id">
+    <span slot="title">ID</span>
+  </jb-col-header>
+  <jb-col-header name="name" sortable>
+    <span slot="title">Name</span>
+  </jb-col-header>
+</jb-table-header>
+```
+
+```js
+import 'jb-grid';
+
+document.querySelector('jb-table-header').headerTemplate = [
+  { name: 'id', size: '80px' },
+  { name: 'name', size: '1fr' },
+];
+```
+
+### jb-table-header API
+
+| name | type | description |
+| --- | --- | --- |
+| `headerTemplate` | property | Column template config for the header grid. |
+
+### jb-col-header API
+
+| name | type | description |
+| --- | --- | --- |
+| `name` | attribute/property | Column name. It is used as the grid-area name. |
+| `sortable` | attribute/property | Enables click sorting for this column. |
+| `sort` | attribute/property | Current sort direction. Accepts `asc`, `desc`, or no value. |
+| `sort` | event | Fired when a sortable header is clicked. Event detail is `{ name, sort }`. |
+| `title` | slot | Header caption content. |
+
+```js
+document.querySelector('jb-col-header').addEventListener('sort', (event) => {
+  console.log(event.detail.name, event.detail.sort);
+});
+```
+
+## Pagination Info
+
+`jb-pagination-info` shows page-size selection and the current item range.
+
+```html
+<jb-pagination-info></jb-pagination-info>
+```
+
+```js
+const paginationInfo = document.querySelector('jb-pagination-info');
+
+paginationInfo.pageSize = 20;
+paginationInfo.pageSizes = [10, 20, 50, 100];
+paginationInfo.startItemIndex = 1;
+paginationInfo.endItemIndex = 20;
+paginationInfo.totalItemsCount = 124;
+paginationInfo.pageItemCountTitle = 'Items per page';
+paginationInfo.fromLabel = 'of';
+paginationInfo.currentAvailableItemTitle = 'Available items';
+paginationInfo.showPersianNumber = false;
+
+paginationInfo.addEventListener('page-size-change', (event) => {
+  console.log(event.detail.pageSize);
+});
+```
+
+### jb-pagination-info API
+
+| name | type | description |
+| --- | --- | --- |
+| `pageSize` | property | Current selected page size. |
+| `pageSizes` | property | Available page-size options. Default is `[20, 30, 50, 100]`. |
+| `startItemIndex` | property | First visible item index. |
+| `endItemIndex` | property | Last visible item index. |
+| `totalItemsCount` | property | Total item count. |
+| `pageItemCountTitle` | property | Tooltip text for the page-size section. |
+| `fromLabel` | property | Label rendered before the total count. |
+| `currentAvailableItemTitle` | property | Tooltip text for the total count. |
+| `showPersianNumber` | property | Converts displayed numbers to Persian digits when `true`. |
+| `page-size-change` | event | Fired when the selected page size changes. Event detail is `{ pageSize }`. |
+
+## Utility Icons
+
+`jb-refresh-icon` and `jb-fullscreen-icon` are standalone icons used by the grid controls.
+
+```html
+<jb-refresh-icon></jb-refresh-icon>
+<jb-fullscreen-icon state="enter"></jb-fullscreen-icon>
+```
+
+### jb-refresh-icon API
+
+| name | type | description |
+| --- | --- | --- |
+| `play()` | method | Starts the refresh rotation animation. |
+| `pause()` | method | Pauses the refresh rotation animation. |
+| `stop()` | method | Stops the animation after the current rotation finishes. |
+
+### jb-fullscreen-icon API
+
+| name | type | description |
+| --- | --- | --- |
+| `state` | attribute/property | Icon state. Accepts `enter` or `exit`. |

@@ -6,12 +6,13 @@ export const webComponentList: WebComponentBuildConfig[] = [
     path: "./web-component/lib/index.ts",
     outputPath: "./web-component/dist/index.js",
     umdName: "JBGrid",
-    external: ["jb-core", "jb-core/theme", "jb-core/i18n"],
+    external: ["jb-core", "jb-core/theme", "jb-core/i18n", "jb-button"],
     tsConfigPath:"./web-component/tsconfig.json",
     globals: {
       "jb-core":"JBCore",
       "jb-core/theme":"JBCoreTheme",
       "jb-core/i18n":"JBCoreI18N",
+      "jb-button":"JBButton",
     },
   },
 ];
