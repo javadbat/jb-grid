@@ -3,7 +3,6 @@ import './JBGridTest.css';
 import { JBCell, JBRow, JBGrid } from 'jb-grid/react';
 import JBGridBridge from '../JBGridBridge';
 import JBGridTestViewModel from './JBGridTestViewModel';
-import { observer } from 'mobx-react';
 import CustomError from './CustomError';
 import { useInstance } from 'jb-core/react';
 
@@ -14,7 +13,7 @@ function JBGridTest() {
       <div className="grid-wrapper">
         <JBGrid contentError={<CustomError />} config={vm.jbGridConfig} bridge={JBGridBridge} title="لیست کاربران" >
           {
-            vm.jbGridConfig.data.data.map(
+            (data) => data.map(
               (item) => {
                 return (
                   <React.Fragment key={item.id}>
@@ -33,4 +32,4 @@ function JBGridTest() {
       </div>
     );
   }
-export default observer(JBGridTest);
+export default JBGridTest;

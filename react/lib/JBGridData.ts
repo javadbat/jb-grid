@@ -1,15 +1,6 @@
-import { makeObservable, observable } from 'mobx';
-import { JBGridConfigStates, JBGridDataPage, JBGridTableConfig,JBGridCallbackConfig, JBGridI18nConfig, JBGridDataConfig, JBGridConfigInterface, AnyObject } from './types.js';
+import { JBGridConfigStates, JBGridDataPage, JBGridTableConfig,JBGridCallbackConfig, JBGridDataConfig, JBGridConfigInterface, AnyObject } from './types.js';
 
 class JBGridData<T extends AnyObject> implements JBGridConfigInterface<T> {
-  constructor(){
-    makeObservable(this,{
-      table:observable,
-      data:observable,
-      page:observable,
-      states:observable
-    });
-  }
     table:JBGridTableConfig = {
       columns: []
     }

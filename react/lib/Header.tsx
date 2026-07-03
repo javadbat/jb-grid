@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import JBGridViewModel from './JBGridViewModel.js';
 import 'jb-searchbar/react/lib/module-declaration.js';
-import { observer } from 'mobx-react';
 import CSS from './header.css';
 import { injectCss } from 'jb-core';
 
@@ -61,4 +60,4 @@ function Header(props: HeaderProps) {
   );
 }
 
-export default observer(Header);
+export default Header;

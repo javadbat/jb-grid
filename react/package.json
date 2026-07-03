@@ -1,6 +1,6 @@
 {
   "name": "jb-grid-react",
-  "description": "react mobx jb grid table",
+  "description": "react jb grid table",
   "type": "module",
   "author": {
 		"name": "mohammad javad bathaei",
@@ -13,8 +13,7 @@
     "grid",
     "table",
     "react table",
-    "react",
-    "mobx"
+    "react"
   ],
   "version": "0.25.0",
   "bugs": "https://github.com/javadbat/jb-grid/issues",

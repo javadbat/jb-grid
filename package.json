@@ -35,8 +35,6 @@
   },
   "dependencies": {
     "jb-core":">=0.28.0",
-    "mobx":">=6.0.0",
-    "mobx-react":">=7.0.0",
     "jb-searchbar":">=3.0.2"
   }
 }

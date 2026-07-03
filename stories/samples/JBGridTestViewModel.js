@@ -1,5 +1,3 @@
-import { action, makeObservable, observable } from "mobx";
-
 import {JBGridData} from 'jb-grid/react';
 class JBGridTestViewModel{
 
@@ -35,11 +33,6 @@ class JBGridTestViewModel{
       ]
     }
     constructor(){
-      makeObservable(this,{
-        filterConfig:observable,
-        jbGridConfig:observable,
-        initGrid:action.bound
-      });
       this.initGrid();
     }
     initGrid(){

@@ -1,10 +1,13 @@
 import React, { createContext, useContext, type RefObject } from 'react';
-import { observable, extendObservable, makeObservable, action, computed } from 'mobx';
 import type { ActionDispatchers, AnyObject, JBGridBridgeClassInterface, JBGridBridgeInterface, JBGridCallbacks, JBGridColumnDef, JBGridConfig, JBGridConfigInterface, JBGridFilter, JBGridI18nConfig, JBGridResponseData, JBGridRowData, JBGridRowDetail, JBGridStyles, SearchbarConfig } from './types.js';
 import type { JBSearchbarWebComponent, JBSearchbarValue } from 'jb-searchbar';
 import { defaultI18n } from './i18n.js';
 import { assign } from 'lodash';
+
+type StateChangeCallback = (() => void) | undefined;
+
 class JBGridViewModel<T extends AnyObject> {
+  #onStateChange: StateChangeCallback;
   //we write computed style of grid here
   styles: JBGridStyles = {
     table: {
@@ -52,47 +55,24 @@ class JBGridViewModel<T extends AnyObject> {
   }
   config: JBGridConfig<T>;
   i18n!: JBGridI18nConfig;
-  constructor(onFullscreenChange: ((isFullScreen: boolean) => void) | undefined, config: JBGridConfigInterface<T>, bridge: JBGridBridgeClassInterface) {
-    makeObservable(this, {
-      styles: observable,
-      isLoading: observable,
-      isErrorOccurred: observable,
-      filter: observable,
-      exitFullScreenGrid: action,
-      fullScreenGrid: action,
-      fetchGridData: action,
-      initFilter: action.bound,
-      InitSize: action.bound,
-      onFetchSuccess: action.bound,
-      mergeObject: action,
-      sendFirstRequest: action,
-      refreshBtnClick: action.bound,
-      setSortColumn: action.bound,
-      goToPage: action.bound,
-      openMainHeaderSection: action.bound,
-      openSearchHeaderSection: action.bound,
-      onPageSizeChange: action.bound,
-      InitGrid: action.bound,
-      refreshData: action.bound,
-      showErrorPanel: action.bound,
-      hideErrorPanel: action.bound,
-      paginationDisplayNumbers: computed
-    });
+  constructor(onFullscreenChange: ((isFullScreen: boolean) => void) | undefined, config: JBGridConfigInterface<T>, bridge: JBGridBridgeClassInterface, onStateChange?: () => void) {
+    this.#onStateChange = onStateChange;
+    this.bindMethods();
     if (config == undefined || config == null) {
       //when user dont pass config prop
       console.error("JBGrid need you to pass config as a prop to it \n and currently its null or undefined");
     }
-    const observableConfig = observable(config);
-    this.setI18n({});
+    this.setI18n({}, false);
     this.paginationDebounce = this.debounce(this.refreshData, 300);
 
     //TODO:add trigger function so user can call grid functions outside of grid js file
     const actionDispatchers: ActionDispatchers = Object.freeze({
       refreshData: () => this.refreshData(),
       fullScreenGrid: () => this.fullScreenGrid(),
-      exitFullScreenGrid: () => this.exitFullScreenGrid()
+      exitFullScreenGrid: () => this.exitFullScreenGrid(),
+      refreshView: () => this.notifyStateChange()
     });
-    this.config = observableConfig;
+    this.config = config;
     this.config.actionDispatchers = actionDispatchers;
     if (typeof bridge != 'function') {
       //no bridge provided
@@ -103,9 +83,38 @@ class JBGridViewModel<T extends AnyObject> {
     }
     this.InitGrid();
   }
-  setI18n(newValue: JBGridI18nConfig) {
+  bindMethods() {
+    this.exitFullScreenGrid = this.exitFullScreenGrid.bind(this);
+    this.fullScreenGrid = this.fullScreenGrid.bind(this);
+    this.fetchGridData = this.fetchGridData.bind(this);
+    this.initFilter = this.initFilter.bind(this);
+    this.InitSize = this.InitSize.bind(this);
+    this.onFetchSuccess = this.onFetchSuccess.bind(this);
+    this.mergeObject = this.mergeObject.bind(this);
+    this.sendFirstRequest = this.sendFirstRequest.bind(this);
+    this.refreshBtnClick = this.refreshBtnClick.bind(this);
+    this.setSortColumn = this.setSortColumn.bind(this);
+    this.goToPage = this.goToPage.bind(this);
+    this.openMainHeaderSection = this.openMainHeaderSection.bind(this);
+    this.openSearchHeaderSection = this.openSearchHeaderSection.bind(this);
+    this.onPageSizeChange = this.onPageSizeChange.bind(this);
+    this.InitGrid = this.InitGrid.bind(this);
+    this.refreshData = this.refreshData.bind(this);
+    this.showErrorPanel = this.showErrorPanel.bind(this);
+    this.hideErrorPanel = this.hideErrorPanel.bind(this);
+  }
+  setStateChangeCallback(callback: StateChangeCallback) {
+    this.#onStateChange = callback;
+  }
+  notifyStateChange() {
+    this.#onStateChange?.();
+  }
+  setI18n(newValue: JBGridI18nConfig, notifyStateChange = true) {
     //loadash assign work from left to right so  newValue has top priority
     this.i18n = assign({}, defaultI18n, newValue);
+    if (notifyStateChange) {
+      this.notifyStateChange();
+    }
   }
   InitGrid() {
     //init grid config on load or change
@@ -123,18 +132,20 @@ class JBGridViewModel<T extends AnyObject> {
         addedProperty[prop] = defaultConfig[prop];
       }
     }
-    extendObservable(inputConfig, addedProperty);
+    Object.assign(inputConfig, addedProperty);
+    this.notifyStateChange();
     return inputConfig;
   }
   sendFirstRequest() {
     this.isLoading = true;
-    this.fetchGridData().then(action(() => {
+    this.notifyStateChange();
+    this.fetchGridData().then(() => {
       this.isLoading = false;
       this.hideErrorPanel();
-    })).catch(action((e: any) => {
+    }).catch((e: any) => {
       this.isLoading = false;
       this.showErrorPanel();
-    }));
+    });
   }
   initFilter(searchbarConfig: SearchbarConfig | null) {
     if (searchbarConfig && this.elements.searchbar.current) {
@@ -149,6 +160,7 @@ class JBGridViewModel<T extends AnyObject> {
       });
       //this.elements.searchbar.current.addEventListener('');
       this.filter.config = searchbarConfig;
+      this.notifyStateChange();
 
     }
   }
@@ -198,10 +210,11 @@ class JBGridViewModel<T extends AnyObject> {
   fetchGridData() {
     const fetchGridDataPromise = new Promise((resolve, reject) => {
       const requestBody = this.CreateRequestBody();
-      this.dataBridge.getData(this.config.data.requestParams, requestBody).then(action((data) => {
+      this.dataBridge.getData(this.config.data.requestParams, requestBody).then((data) => {
         const bridgeData = this.dataBridge.mapServerResponseDataToGridData(data);
         if (bridgeData.pageIndex == this.config.page.index) {
           this.config.data.data = [];
+          this.notifyStateChange();
           //check user don't change page during loading time if he do we wait for latest response
           this.standardData(bridgeData.content).then((content: JBGridRowData<T>[]) => {
             const data = { ...bridgeData, content };
@@ -211,7 +224,7 @@ class JBGridViewModel<T extends AnyObject> {
         } else {
           console.error('jb-grid requested page index is different from response page index it maybe a bridge problem or server data problem');
         }
-      })).catch((err) => {
+      }).catch((err) => {
         reject(err);
       });
     });
@@ -223,6 +236,7 @@ class JBGridViewModel<T extends AnyObject> {
     this.config.data.metaData.endItemIndex = data.endItemIndex;
     this.config.data.metaData.totalItemsCount = data.totalItemsCount;
     this.config.page.totalPages = data.totalPages;
+    this.notifyStateChange();
   }
   standardData(data: AnyObject[]) {
     return new Promise<JBGridRowData<T>[]>((resolve) => {
@@ -290,6 +304,7 @@ class JBGridViewModel<T extends AnyObject> {
     return new Promise((resolve, reject) => {
       //for navigate in pages you must call this function and every other way is forbidden
       this.config.page.index = destinationPageIndex;
+      this.notifyStateChange();
       this.paginationDebounce()
         .then(() => {
           resolve(null);
@@ -322,21 +337,23 @@ class JBGridViewModel<T extends AnyObject> {
   refreshData(): Promise<void> {
     const refreshDataPromise = new Promise<void>((resolve, reject) => {
       this.isLoading = true;
-      this.fetchGridData().then(action(() => {
+      this.notifyStateChange();
+      this.fetchGridData().then(() => {
         this.isLoading = false;
         this.hideErrorPanel();
         resolve();
-      })).catch(action((e) => {
+      }).catch((e) => {
         this.isLoading = false;
         this.showErrorPanel();
         reject(e);
-      }));
+      });
     });
     //every time we need to change showing data we must call this func
     return refreshDataPromise;
   }
   onSearch(filterList: JBSearchbarValue) {
     this.filter.value = filterList;
+    this.notifyStateChange();
     const onSearchPromise = new Promise((resolve, reject) => {
       //reset pagination when filter change
       this.goToPage(1).then(() => {
@@ -349,6 +366,7 @@ class JBGridViewModel<T extends AnyObject> {
   }
   onPageSizeChange(e) {
     this.config.page.size = parseInt(e.target.value);
+    this.notifyStateChange();
     this.goToPage(1);
   }
   onFullScreenBtnClicked(currentValue: boolean) {
@@ -381,7 +399,7 @@ class JBGridViewModel<T extends AnyObject> {
       this.gridWrapperElement.append(this.JBGridComponentDom.current!);
       //remove added temp fullscreen container
     }
-    container[0].remove();
+    container?.remove();
   }
   setSortColumn(column: JBGridColumnDef) {
     if (column.sortable) {
@@ -396,6 +414,7 @@ class JBGridViewModel<T extends AnyObject> {
         }
         column.sort = "ASC";
       }
+      this.notifyStateChange();
       this.refreshData();
     }
   }
@@ -410,16 +429,20 @@ class JBGridViewModel<T extends AnyObject> {
   openSearchHeaderSection() {
     this.elements.searchbar.current?.focus();
     this.config.states.headerSection = "SEARCH";
+    this.notifyStateChange();
   }
   openMainHeaderSection() {
     this.config.states.headerSection = "MAIN";
+    this.notifyStateChange();
   }
   showErrorPanel() {
     //when we couldn't connect to server or get error from server for our request we show error panel to user
     this.isErrorOccurred = true;
+    this.notifyStateChange();
   }
   hideErrorPanel() {
     this.isErrorOccurred = false;
+    this.notifyStateChange();
   }
   get paginationDisplayNumbers() {
     return {

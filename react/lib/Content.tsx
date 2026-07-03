@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react';
 import React, { ReactNode } from 'react';
 import JBLoading from './Components/JBLoading.js';
 import { JBGridColumnDef, JBGridConfig, JBGridI18nConfig, JBGridStyles } from './types.js';
@@ -73,4 +72,4 @@ function Content(props:ContentProps) {
   );
 }
 
-export default observer(Content);
+export default Content;

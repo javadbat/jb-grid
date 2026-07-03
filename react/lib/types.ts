@@ -123,7 +123,11 @@ export type JBGridI18nConfig = {
 export type ActionDispatchers = Readonly<{
     refreshData: () => Promise<void>,
     fullScreenGrid: () => void,
-    exitFullScreenGrid: () => void
+    exitFullScreenGrid: () => void,
+    refreshView: () => void
+}>
+export type JBGridRenderContext = Readonly<{
+    refreshView: () => void
 }>
 export interface JBGridConfigInterface<T extends AnyObject> {
 

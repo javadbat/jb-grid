@@ -5,10 +5,10 @@
 [![NPM Version](https://img.shields.io/npm/v/jb-grid-react)](https://www.npmjs.com/package/jb-grid-react)
 ![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-grid)
 
-react mobx table grid with pagination, filtering and sorting functionality.
+react table grid with pagination, filtering and sorting functionality.
 
 - responsive
-- mobx ready
+- React state ready
 - easy filter implementation (customizable)
 - customizable column templates
 - flexible column size
@@ -38,7 +38,7 @@ import {filterConfig} from './my-filter-config';
 ### config
 
 config is unique for each data table you want to show and contains information about columns,filters,sort,initData,...    
-you can create your own config from scratch using Mobx class Stores that implements `JBGridConfigInterface` or just create instance of `JBGridData` and start to config it's fields based on your need.
+you can create your own config from scratch using a class or object that implements `JBGridConfigInterface` or just create instance of `JBGridData` and start to config it's fields based on your need.
 
 ```js
 import { JBGridData } from "jb-grid/react";
@@ -163,14 +163,14 @@ you can add expandable row so user can expand row to see more info about a row i
 ```jsx
 <JBGrid config={jbGridConfig} bridge={JBGridBridge} title="general list" searchbarConfig={filterConfig}>
     {
-        jbGridConfig.data.data.map(
+        (data, {refreshView}) => data.map(
             (item) => {
                 return (
                     <React.Fragment key={item.id}>
                         <Row>
                             <Cell>{item.name}</Cell>
                             <Cell>{item.age}</Cell>
-                            <Cell><button onClick={()=>{item.jbGridDetail.isExpanded = !item.jbGridDetail.isExpanded;}}>detail</button></Cell>
+                            <Cell><button onClick={()=>{item.jbGridDetail.isExpanded = !item.jbGridDetail.isExpanded; refreshView();}}>detail</button></Cell>
                         </Row>
                         <ExpandRow show={item.jbGridDetail.isExpanded}>
                             <YourExpandedData></YourExpandedData>
@@ -195,6 +195,29 @@ jb-grid by default is mobile friendly but when it turns to mobile view it show r
                 <Cell label="operations:"><button onClick={()=>{item.jbGridDetail.isExpanded = !item.jbGridDetail.isExpanded;}}>detail</button></Cell>
             </Row>
 ```
+
+## Pagination
+
+The full React grid manages pagination through its config and bridge. If you need the standalone web-component pagination primitive, import and use `jb-pagination` from the web-component package directly.
+
+```jsx
+import 'jb-grid/web-component/lib/pagination';
+```
+
+See the web-component README for the standalone `pageIndex`, `min`, and `max` API.
+
+## Row & Cells
+
+The React package exports `Row`, `Cell`, and `ExpandRow` wrappers for the underlying row/cell primitives.
+
+```jsx
+<Row>
+  <Cell label="Name">Sara</Cell>
+  <Cell label="Age">32</Cell>
+</Row>
+```
+
+Use `Cell` for normal content, `ExpandRow` for expandable detail panels, and `label` on cells for the mobile card view.
 
 ## Styling
 | CSS variable name                          | description                                                            |

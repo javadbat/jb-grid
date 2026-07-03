@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react';
 import React, { type Ref } from 'react';
 import type JBGridViewModel from './JBGridViewModel.js';
 import CSS from './footer.css';
@@ -76,4 +75,4 @@ function Footer(props:FooterProps) {
   );
 }
 
-export default observer(Footer) ;
+export default Footer;
