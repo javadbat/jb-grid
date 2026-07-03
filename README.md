@@ -64,7 +64,7 @@ to set column size of the row you can pass a config that tell each column size. 
 ```js
 document.querySelector(""jb-row).rowTemplate = [
   {name:"id",size:"1fr"},
-  {name:"name",size:"400px"},
+  {name:"name",size:"25rem"},
   {name:"age",size:200},
   {name:"operation",size:20%},
 ]
@@ -119,7 +119,7 @@ if your cell content is a long text need to get ellipses on overflow add `ellips
 import 'jb-grid';
 
 document.querySelector('jb-table-header').headerTemplate = [
-  { name: 'id', size: '80px' },
+  { name: 'id', size: '5rem' },
   { name: 'name', size: '1fr' },
 ];
 ```

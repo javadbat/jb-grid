@@ -1,4 +1,4 @@
-@custom-media --tablet-until (max-width: 768px);
+@custom-media --tablet-until (max-width: 48rem);
 
 :host {
   width: 100%;

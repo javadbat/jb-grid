@@ -2,8 +2,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   color: #7b7b7b;
 }
 
@@ -25,20 +25,20 @@
 
 :host([state="exit"]) .arrow-top-start {
   transform: rotate(180deg);
-  transform-origin: 30px 30px;
+  transform-origin: 1.875rem 1.875rem;
 }
 
 :host([state="exit"]) .arrow-top-end {
   transform: rotate(180deg);
-  transform-origin: 100px 30px;
+  transform-origin: 6.25rem 1.875rem;
 }
 
 :host([state="exit"]) .arrow-bottom-end {
   transform: rotate(180deg);
-  transform-origin: 100px 100px;
+  transform-origin: 6.25rem 6.25rem;
 }
 
 :host([state="exit"]) .arrow-bottom-start {
   transform: rotate(180deg);
-  transform-origin: 30px 100px;
+  transform-origin: 1.875rem 6.25rem;
 }

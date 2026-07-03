@@ -67,8 +67,8 @@ The grid does not own column definitions. If you need a table header, render it 
 ```tsx
 const rowTemplate = [
   { name: "name", size: "1fr" },
-  { name: "age", size: "100px" },
-  { name: "operation", size: "160px" }
+  { name: "age", size: "6.25rem" },
+  { name: "operation", size: "10rem" }
 ];
 
 <JBGrid

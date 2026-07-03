@@ -2,7 +2,7 @@
   display: block;
   height: 100%;
   color: #7b7b7b;
-  font-size: 16px;
+  font-size: 1rem;
   container-type: inline-size;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .page-size-section {
-  padding: 0 16px;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
   height: 100%;
@@ -34,13 +34,13 @@
   white-space: nowrap;
 }
 
-@container (max-width: 260px) {
+@container (max-width: 16.25rem) {
   .page-size-section {
     display: none;
   }
 }
 
-@container (max-width: 160px) {
+@container (max-width: 10rem) {
   .items-information-section {
     display: none;
   }

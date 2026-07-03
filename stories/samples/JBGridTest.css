@@ -3,24 +3,24 @@ html, body, #root, #storybook-root{
 }
 .grid-wrapper{
     width: 100%;
-    height: calc(100% - 64px);
+    height: calc(100% - 4rem);
 }
 .expanded-row-sample {
     display: grid;
-    grid-template-columns: 160px minmax(0, 1fr);
-    gap: 16px;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 1rem;
     align-items: start;
-    padding: 16px;
+    padding: 1rem;
     color: #24313f;
 }
 .rtl-grid-wrapper .expanded-row-sample {
     direction: rtl;
 }
 .expanded-row-image {
-    width: 160px;
-    height: 160px;
+    width: 10rem;
+    height: 10rem;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 .expanded-row-content {
     min-width: 0;
@@ -33,17 +33,17 @@ html, body, #root, #storybook-root{
 .expanded-row-subtitle {
     color: #667085;
     font-size: 0.875rem;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 .expanded-row-bio {
-    margin: 0 0 12px;
+    margin: 0 0 0.75rem;
     line-height: 1.8;
     color: #344054;
 }
 .expanded-row-info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 10px 16px;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.625rem 1rem;
     margin: 0;
 }
 .expanded-row-info div {
@@ -59,7 +59,7 @@ html, body, #root, #storybook-root{
     overflow-wrap: anywhere;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 32.5rem) {
     .expanded-row-sample {
         grid-template-columns: 1fr;
     }

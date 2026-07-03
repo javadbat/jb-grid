@@ -1,12 +1,12 @@
 .jb-grid-footer {
         grid-area: footer;
         background-color: transparent;
-        height: 56px;
+        height: 3.5rem;
         width: 100%;
         display: flex;
         align-items: center;
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
         justify-content: space-between;
         container-type: size;
         overflow: hidden;
@@ -23,10 +23,10 @@
                 nav {
                     display: flex;
                     align-items: center;
-                    height: 48px;
+                    height: 3rem;
                     .nav-btn {
-                        height: 48px;
-                        width: 48px;
+                        height: 3rem;
+                        width: 3rem;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -37,7 +37,7 @@
                             }
                         }
                         svg {
-                            height: 40px;
+                            height: 2.5rem;
                             display: block;
                             margin: 0px 4px;
                             html[dir="ltr"] & {
@@ -46,8 +46,8 @@
                         }
                     }
                     .number-container {
-                        font-size: 16px;
-                        max-width: 160px;
+                        font-size: 1rem;
+                        max-width: 10rem;
                         overflow: hidden;
                         text-align: center;
                         padding: 0;
@@ -61,17 +61,17 @@
                         }
                         .number-btn {
                             color: rgb(180, 180, 180);
-                            padding: 0 8px;
+                            padding: 0 0.5rem;
                             font-size: 0.8em;
                             cursor: pointer;
-                            width: 48px;
+                            width: 3rem;
                             display: inline-block;
                             &.current-page {
                                 color: var(--jb-grid-page-active-color, var(--jb-primary));
                                 font-size: 1em;
                             }
-                            /* If the jb-grid-footer is smaller than 560px */
-                            @container (max-width: 620px) {
+                            /* If the jb-grid-footer is smaller than 35rem */
+                            @container (max-width: 38.75rem) {
                                 &:not(.current-page){
                                     display:none;
                                 }

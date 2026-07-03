@@ -16,7 +16,7 @@ export const Normal:Story = {
     {name:"id",size:"1fr"},
     {name:"name",size:"1fr"},
     {name:"family",size:"1fr"},
-    {name:"age",size:'100px'},
+    {name:"age",size:'6.25rem'},
   ],
   children:<Fragment>
     <JBCell name="id">id cell</JBCell>
@@ -31,7 +31,7 @@ export const OverflowCellSingleLine:Story = {
     {name:"id",size:"1fr"},
     {name:"bio",size:"1fr"},
     {name:"name",size:"1fr"},
-    {name:"jobTitle",size:'100px'},
+    {name:"jobTitle",size:'6.25rem'},
   ],
   children:<Fragment>
     <JBCell name="id">{faker.number.int({min:1000,max:9999})}</JBCell>
@@ -47,7 +47,7 @@ export const OverflowCellMultiLine:Story = {
     {name:"id",size:"1fr"},
     {name:"bio",size:"1fr"},
     {name:"name",size:"1fr"},
-    {name:"jobTitle",size:'100px'},
+    {name:"jobTitle",size:'6.25rem'},
   ],
   children:<Fragment>
     <JBCell name="id">{faker.number.int({min:1000,max:9999})}</JBCell>

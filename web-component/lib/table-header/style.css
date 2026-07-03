@@ -1,4 +1,4 @@
-@custom-media --tablet-until (max-width: 768px);
+@custom-media --tablet-until (max-width: 48rem);
 
 :host {
   display: block;
@@ -15,7 +15,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    line-height: 32px;
+    line-height: 2rem;
 
     @media(--tablet-until) {
       display: none;

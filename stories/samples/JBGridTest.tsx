@@ -123,7 +123,7 @@ function createColumns(locale: SampleLocale): Column[] {
       name: 'age',
       title: text.columns.age,
       sortable: false,
-      width: '72px'
+      width: '4.5rem'
     },
     {
       id: 4,
@@ -144,14 +144,14 @@ function createColumns(locale: SampleLocale): Column[] {
       name: 'status',
       title: text.columns.status,
       sortable: false,
-      width: '112px'
+      width: '7rem'
     },
     {
       id: 7,
       name: 'operation',
       title: text.columns.operation,
       sortable: false,
-      width: '120px'
+      width: '7.5rem'
     }
   ];
 }

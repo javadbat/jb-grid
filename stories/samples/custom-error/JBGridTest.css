@@ -3,18 +3,18 @@ html, body, #root{
 }
 .grid-wrapper{
     width: 100%;
-    height: calc(100% - 64px);
+    height: calc(100% - 4rem);
 }
 .custom-error-modal {
-    width: min(460px, calc(100% - 32px));
+    width: min(28.75rem, calc(100% - 2rem));
     margin: auto;
-    padding: 32px;
+    padding: 2rem;
     border: 1px solid #f1d4d1;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     background:
         linear-gradient(180deg, #fffafa 0%, #ffffff 58%),
         #ffffff;
-    box-shadow: 0 18px 48px rgb(16 24 40 / 16%);
+    box-shadow: 0 1.125rem 3rem rgb(16 24 40 / 16%);
     text-align: center;
     color: #1d2939;
     position: relative;
@@ -28,10 +28,10 @@ html, body, #root{
     background: linear-gradient(90deg, #d92d20, #f79009, #d92d20);
 }
 .custom-error-visual {
-    width: 220px;
+    width: 13.75rem;
     max-width: 100%;
     aspect-ratio: 220 / 164;
-    margin: 0 auto 14px;
+    margin: 0 auto 0.875rem;
     color: #b42318;
 }
 .custom-error-visual svg {
@@ -46,7 +46,7 @@ html, body, #root{
     fill: #ffffff;
     stroke: #fecdca;
     stroke-width: 2;
-    filter: drop-shadow(0 12px 20px rgb(180 35 24 / 14%));
+    filter: drop-shadow(0 0.75rem 1.25rem rgb(180 35 24 / 14%));
 }
 .custom-error-window-top,
 .custom-error-line {
@@ -76,10 +76,10 @@ html, body, #root{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 24px;
-    padding: 0 10px;
-    margin-bottom: 12px;
-    border-radius: 999px;
+    min-height: 1.5rem;
+    padding: 0 0.625rem;
+    margin-bottom: 0.75rem;
+    border-radius: 62.4375rem;
     background: #fff1f0;
     color: #b42318;
     font-size: 0.75rem;
@@ -88,12 +88,12 @@ html, body, #root{
 .custom-error-title {
     font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
     color: #101828;
 }
 .custom-error-message {
-    max-width: 330px;
-    margin: 0 auto 22px;
+    max-width: 20.625rem;
+    margin: 0 auto 1.375rem;
     line-height: 1.6;
     color: #667085;
 }
@@ -102,11 +102,11 @@ html, body, #root{
     justify-content: center;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 32.5rem) {
     .custom-error-modal {
-        padding: 24px 20px;
+        padding: 1.5rem 1.25rem;
     }
     .custom-error-visual {
-        width: 184px;
+        width: 11.5rem;
     }
 }

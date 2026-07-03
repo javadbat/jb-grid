@@ -11,10 +11,10 @@
     .error-text {
         font-weight: 100;
         font-size: 1.5em;
-        padding: 16px 0;
+        padding: 1rem 0;
         color: #333;
     }
     .error-button {
-        margin-top: 8px;
+        margin-top: 0.5rem;
     }
 }
