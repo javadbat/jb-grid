@@ -1,8 +1,3 @@
-:host {
-  /*width of each page index number button*/
-  --jb-pagination-index-width: 3rem;
-}
-
 .jb-pagination-web-component {
   display: flex;
   gap: 1rem;
@@ -27,7 +22,7 @@
 
     .page-index-wrapper {
       position: relative;
-      width: calc(var(--jb-pagination-index-width) * 3);
+      width: calc(var(--index-width) * 3);
       overflow: hidden;
       height: 100%;
 
@@ -35,7 +30,7 @@
         font-size: 1rem;
         color: var(--jb-neutral-6);
         position: absolute;
-        width: var(--jb-pagination-index-width);
+        width: var(--index-width);
         height: 3rem;
         display: flex;
         justify-content: center;
@@ -57,7 +52,7 @@
 
       .page-index:nth-child(1) {
         top: 0;
-        left: calc(var(--jb-pagination-index-width) * -1);
+        left: calc(var(--index-width) * -1);
         transform: scale(10%);
       }
 
@@ -68,17 +63,17 @@
 
       .page-index:nth-child(3) {
         top: 0;
-        left: calc(var(--jb-pagination-index-width));
+        left: calc(var(--index-width));
       }
 
       .page-index:nth-child(4) {
         top: 0;
-        left: calc(var(--jb-pagination-index-width) * 2);
+        left: calc(var(--index-width) * 2);
       }
 
       .page-index:nth-child(5) {
         top: 0;
-        left: calc(var(--jb-pagination-index-width) * 3);
+        left: calc(var(--index-width) * 3);
         transform: scale(10%);
       }
     }

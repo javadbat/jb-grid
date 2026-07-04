@@ -1,0 +1,4 @@
+:host {
+  /* Size */
+  --index-width: var(--jb-pagination-index-width, 3rem);
+}
