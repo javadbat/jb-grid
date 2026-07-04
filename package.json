@@ -20,11 +20,9 @@
   "files": [
     "LICENSE",
     "README.md",
-    "lib/",
-    "dist/",
     "react/",
-    "web-component/",
-    "web-component/dist",
+    "web-component/lib/",
+    "web-component/dist/",
     "react/dist/"
   ],
   "main": "index.js",
