@@ -1,4 +1,10 @@
 :host {
+  /* Theme/Color */
+  --arrow-button-fill-color: var(--jb-pagination-arrow-button-fill-color, var(--jb-neutral-2));
+  --arrow-button-fill-color-disabled: var(--jb-pagination-arrow-button-fill-color-disabled, var(--jb-neutral-7));
+  --page-index-color: var(--jb-pagination-page-index-color, var(--jb-neutral-6));
+  --page-index-color-current: var(--jb-pagination-page-index-color-current, var(--jb-primary));
+
   /* Size */
   --index-width: var(--jb-pagination-index-width, 3rem);
 }

@@ -19,4 +19,8 @@ pagination.max = 10;
 ## CSS Variables
 | CSS variable name | description |
 | --- | --- |
+| --jb-pagination-arrow-button-fill-color | Fill color of pagination arrow buttons. |
+| --jb-pagination-arrow-button-fill-color-disabled | Fill color of disabled pagination arrow buttons. |
 | --jb-pagination-index-width | Width of each page index button. |
+| --jb-pagination-page-index-color | Color of page index buttons. |
+| --jb-pagination-page-index-color-current | Color of the current page index button. |

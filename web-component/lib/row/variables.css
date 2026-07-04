@@ -1,0 +1,13 @@
+:host {
+  /* Theme/Color */
+  --bg-color: var(--jb-row-bg-color, var(--jb-white));
+  --bg-color-even: var(--jb-row-bg-color-even, var(--jb-neutral-10));
+  --bg-color-even-tablet: var(--jb-row-bg-color-even-tablet, var(--bg-color));
+  --expand-border-color: var(--jb-row-expand-border-color, #ebebeb);
+  --shadow-color: var(--jb-row-shadow-color, #d8d8d8);
+
+  /* Size */
+  --border-radius: var(--jb-row-border-radius, var(--jb-radius));
+  --expand-padding-block: var(--jb-row-expand-padding-block, 1rem);
+  --expand-padding-inline: var(--jb-row-expand-padding-inline, 2rem);
+}

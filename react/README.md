@@ -194,8 +194,9 @@ Use `Cell` for normal content, `ExpandRow` for expandable detail panels, and `la
 ## Styling
 | CSS variable name                          | description                                                            |
 | -------------                              | -------------                                                          |
+| --jb-grid-footer-icon-fill-color-hover     | footer icon hover fill color                                           |
 | --jb-grid-loading-color                    | list loading color                                                     |
-| --jb-grid-page-active-color                | color of active page                                                   |
+| --jb-grid-page-color-active                | color of active page                                                   |
 
 ## Shared Documentation
 

@@ -2,15 +2,15 @@
 
 :host {
   width: 100%;
-  background-color: var(--jb-white);
+  background-color: var(--bg-color);
   display: block;
 }
 
 :host(:nth-of-type(even)) {
-  background: var(--jb-neutral-10);
+  background: var(--bg-color-even);
 
   @media(--tablet-until) {
-    background: var(--jb-white);
+    background: var(--bg-color-even-tablet);
   }
 }
 
@@ -23,8 +23,8 @@
     @media(--tablet-until) {
       grid-template-columns: auto !important;
       grid-template-rows: auto;
-      border-radius: var(--jb-radius);
-      box-shadow: 0px 0px 1px 0px #d8d8d8;
+      border-radius: var(--border-radius);
+      box-shadow: 0px 0px 1px 0px var(--shadow-color);
     }
   }
 
@@ -44,9 +44,9 @@
     slot[name="expand"]::slotted(*) {
       width: 100%;
       min-height: 4rem;
-      padding-block: 1rem;
-      padding-inline: 2rem;
-      border-bottom: 1px solid #ebebeb;
+      padding-block: var(--expand-padding-block);
+      padding-inline: var(--expand-padding-inline);
+      border-bottom: 1px solid var(--expand-border-color);
       box-sizing: border-box;
       overflow: auto;
     }

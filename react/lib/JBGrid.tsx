@@ -1,6 +1,7 @@
 import React, { type ReactNode, useEffect, useReducer } from 'react';
 import JBGridViewModel, { JBGridContext } from './JBGridViewModel.js';
 import CSS from './jb-grid.css?inline';
+import VariablesCSS from './variables.css?inline';
 import BlobCSS from './Components/blob-loading.css?inline';
 import type { AnyObject, JBGridCallbacks, JBGridI18nConfig, JBGridRenderContext, JBGridRowData } from './types.js';
 import Footer from './Footer.js';
@@ -51,6 +52,7 @@ export type Props<T extends AnyObject> = {
   children?: React.ReactNode | React.ReactNode[] | ((data: JBGridRowData<T>[], context: JBGridRenderContext) => React.ReactNode | React.ReactNode[])
 }
 
+injectCss(VariablesCSS as unknown as string);
 injectCss(CSS as unknown as string);
 injectCss(BlobCSS as unknown as string);
 

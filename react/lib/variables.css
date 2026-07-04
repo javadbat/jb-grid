@@ -1,0 +1,6 @@
+.jb-grid-wrapper {
+    /* Theme/Color */
+    --loading-color: var(--jb-grid-loading-color, var(--jb-primary));
+    --footer-icon-fill-color-hover: var(--jb-grid-footer-icon-fill-color-hover, var(--jb-neutral-2));
+    --page-color-active: var(--jb-grid-page-color-active, var(--jb-primary));
+}

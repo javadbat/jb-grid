@@ -42,7 +42,24 @@ For the standalone pagination API and CSS variables, see [jb-pagination README](
 
 | CSS variable name | description |
 | --- | --- |
+| --jb-pagination-arrow-button-fill-color | Fill color of pagination arrow buttons. |
+| --jb-pagination-arrow-button-fill-color-disabled | Fill color of disabled pagination arrow buttons. |
 | --jb-pagination-index-width | Width of each page index button. |
+| --jb-pagination-page-index-color | Color of page index buttons. |
+| --jb-pagination-page-index-color-current | Color of the current page index button. |
+
+### jb-row CSS variables
+
+| CSS variable name | description |
+| --- | --- |
+| --jb-row-bg-color | Row background color. |
+| --jb-row-bg-color-even | Even row background color. |
+| --jb-row-bg-color-even-tablet | Even row background color in tablet layout. |
+| --jb-row-border-radius | Row border radius in tablet layout. |
+| --jb-row-expand-border-color | Expand panel bottom border color. |
+| --jb-row-expand-padding-block | Expand panel block padding. |
+| --jb-row-expand-padding-inline | Expand panel inline padding. |
+| --jb-row-shadow-color | Row shadow color in tablet layout. |
 
 ## Row & Cells
 `jb-row` is a row web-component that imply a grid template based on given config to below cells. it also accept expand row that you can open and close it.

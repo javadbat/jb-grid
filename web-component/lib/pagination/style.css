@@ -14,9 +14,9 @@
       cursor: pointer;
       height: 3rem;
       width: 3rem;
-      fill: var(--jb-neutral-2);
+      fill: var(--arrow-button-fill-color);
       &:disabled {
-        fill: var(--jb-neutral-7);
+        fill: var(--arrow-button-fill-color-disabled);
       }
     }
 
@@ -28,7 +28,7 @@
 
       .page-index {
         font-size: 1rem;
-        color: var(--jb-neutral-6);
+        color: var(--page-index-color);
         position: absolute;
         width: var(--index-width);
         height: 3rem;
@@ -41,7 +41,7 @@
         cursor: pointer;
 
         &.current {
-          color: var(--jb-primary);
+          color: var(--page-index-color-current);
           transform: scale(120%);
         }
 

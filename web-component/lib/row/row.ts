@@ -1,5 +1,6 @@
 import { renderHTML } from './render.js';
 import CSS from './style.css';
+import VariablesCSS from './variables.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBRowElements, RowTemplate} from './types.js';
 import { createTemplateStylesheet } from './utils.js';
@@ -50,7 +51,7 @@ export class JBRowWebComponent extends HTMLElement {
     this.#registerEventListener();
   }
   #render() {
-    const html = `<style>${CSS}</style>\n${renderHTML()}`;
+    const html = `<style>${VariablesCSS} ${CSS}</style>\n${renderHTML()}`;
     const element = document.createElement("template");
     element.innerHTML = html;
     this.shadowRoot!.appendChild(element.content.cloneNode(true));

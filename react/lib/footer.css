@@ -30,10 +30,10 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        &:hover {
-                            cursor: pointer;
-                            svg {
-                                fill: var(--jb-neutral-2);
+                            &:hover {
+                                cursor: pointer;
+                                svg {
+                                fill: var(--footer-icon-fill-color-hover);
                             }
                         }
                         svg {
@@ -67,7 +67,7 @@
                             width: 3rem;
                             display: inline-block;
                             &.current-page {
-                                color: var(--jb-grid-page-active-color, var(--jb-primary));
+                                color: var(--page-color-active);
                                 font-size: 1em;
                             }
                             /* If the jb-grid-footer is smaller than 35rem */
