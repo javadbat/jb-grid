@@ -1,6 +1,6 @@
 import JBGridTest from './samples/JBGridTest.tsx';
 import CustomErrorTest from './samples/custom-error/JBGridTest.tsx';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: "Components/JBGrid",

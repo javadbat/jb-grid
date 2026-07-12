@@ -1,6 +1,6 @@
 import React from 'react';
 import {JBPagination} from 'jb-grid/react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: "Components/JBGrid/Pagination",

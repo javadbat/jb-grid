@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {JBCell, JBExpandToggle, JBRow} from 'jb-grid/react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import {faker} from '@faker-js/faker'
 const meta = {
   title: "Components/JBGrid/Row",
