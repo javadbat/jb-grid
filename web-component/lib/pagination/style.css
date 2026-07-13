@@ -15,6 +15,10 @@
       height: 3rem;
       width: 3rem;
       fill: var(--arrow-button-fill-color);
+      &:focus-visible {
+        outline: 2px solid var(--jb-grid-focus-ring-color, Highlight);
+        outline-offset: 2px;
+      }
       &:disabled {
         fill: var(--arrow-button-fill-color-disabled);
       }

@@ -1,14 +1,23 @@
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
+import { i18n } from "jb-core/i18n";
+import { dictionary } from "../i18n";
 
 export class JBRefreshIconWebComponent extends HTMLElement {
+  #internals?: ElementInternals;
   #icon!: SVGSVGElement;
   #animation: Animation | null = null;
   #animationDuration = 400;
 
   constructor() {
     super();
+    if (typeof this.attachInternals === "function") {
+      this.#internals = this.attachInternals();
+      this.#internals.role = "img";
+      this.#internals.ariaLabel = dictionary.get(i18n, "refreshData");
+      this.#internals.ariaBusy = "false";
+    }
     this.#init();
   }
 
@@ -27,6 +36,7 @@ export class JBRefreshIconWebComponent extends HTMLElement {
   }
 
   play() {
+    if (this.#internals) this.#internals.ariaBusy = "true";
     if (!this.#animation) {
       this.#animation = this.#icon.animate(
         [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
@@ -56,6 +66,7 @@ export class JBRefreshIconWebComponent extends HTMLElement {
       if (this.#animation === animation) {
         animation.cancel();
         this.#animation = null;
+        if (this.#internals) this.#internals.ariaBusy = "false";
       }
     };
     animation.play();

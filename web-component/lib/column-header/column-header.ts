@@ -6,6 +6,7 @@ import type { JBColumnHeaderElements, JBColumnHeaderSort, JBColumnHeaderSortEven
 export * from "./types.js";
 
 export class JBColumnHeaderWebComponent extends HTMLElement {
+  #internals?: ElementInternals;
   #elements!: JBColumnHeaderElements;
   #templateSheet = new CSSStyleSheet();
 
@@ -37,8 +38,10 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
   set sort(value: JBColumnHeaderSort | null | undefined) {
     if (value) {
       this.setAttribute("sort", value);
+      if (this.#internals) this.#internals.ariaSort = value === "asc" ? "ascending" : "descending";
     } else {
       this.removeAttribute("sort");
+      if (this.#internals) this.#internals.ariaSort = "none";
     }
   }
 
@@ -48,6 +51,11 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
 
   constructor() {
     super();
+    if (typeof this.attachInternals === "function") {
+      this.#internals = this.attachInternals();
+      this.#internals.role = "columnheader";
+      this.#internals.ariaSort = "none";
+    }
     this.#init();
   }
 

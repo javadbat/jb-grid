@@ -2,9 +2,18 @@ import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import { JBRowWebComponent } from '../row/row.js';
+import { i18n } from "jb-core/i18n";
+import { dictionary } from "../i18n";
 export class JBExpandToggleWebComponent extends HTMLElement {
+  #internals?: ElementInternals;
   constructor() {
     super();
+    if (typeof this.attachInternals === "function") {
+      this.#internals = this.attachInternals();
+      this.#internals.role = "button";
+      this.#internals.ariaLabel = dictionary.get(i18n, "toggleRowDetails");
+      this.#internals.ariaExpanded = "false";
+    }
     this.#init();
   }
   #init() {
@@ -24,6 +33,7 @@ export class JBExpandToggleWebComponent extends HTMLElement {
     this.#parentRow = this.#findParentRow(this);
     if(this.#parentRow?.isOpen){
       this.setAttribute('open','');
+      if (this.#internals) this.#internals.ariaExpanded = "true";
     }
   }
   #findParentRow(element:Element|null):JBRowWebComponent|null{
@@ -44,6 +54,7 @@ export class JBExpandToggleWebComponent extends HTMLElement {
       const value = !this.#parentRow?.isOpen;
       this.#parentRow.isOpen = value
       value?this.setAttribute('open',''):this.removeAttribute('open');
+      if (this.#internals) this.#internals.ariaExpanded = value ? "true" : "false";
     }
   }
 }

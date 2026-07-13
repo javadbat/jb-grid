@@ -5,6 +5,7 @@ import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBPaginationElements, PageIndexDom } from './types.js';
 import { i18n } from "jb-core/i18n";
 import {enToFaDigits} from 'jb-core';
+import { dictionary } from "../i18n";
 export class JBPaginationWebComponent extends HTMLElement {
   #elements!: JBPaginationElements;
   #pageIndex: number = 1;
@@ -156,6 +157,8 @@ export class JBPaginationWebComponent extends HTMLElement {
     //when we are out of bound we create empty page index
     const isEmpty = this.#min > newIndex || this.#max < newIndex;
     const elem = document.createElement('div') as PageIndexDom;
+    elem.setAttribute("role", "button");
+    elem.setAttribute("aria-label", dictionary.get(i18n, "page")(newIndex));
     elem.classList.add('page-index', isEmpty?'empty':'not-empty');
     elem.dataset.index = `${newIndex}`;
     elem.pageIndex = newIndex;
@@ -185,10 +188,13 @@ export class JBPaginationWebComponent extends HTMLElement {
     shouldDispatch && this.#dispatchChangeEvent();
   }
   #updateActiveIndex(newIndex: number) {
-    this.#elements.index.wrapper.querySelector(".current")?.classList.remove('current');
+    const previousCurrent = this.#elements.index.wrapper.querySelector(".current");
+    previousCurrent?.classList.remove('current');
+    previousCurrent?.removeAttribute("aria-current");
     this.#elements.index.list.forEach(x => {
       if (x.pageIndex == newIndex) {
         x.classList.add('current')
+        x.setAttribute("aria-current", "page");
       }
     })
   }

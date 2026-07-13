@@ -4,7 +4,7 @@ export function renderHTML(): string {
     <div class="grid-row" part="row">
       <slot name="cell"></slot>
     </div>
-    <div class="expand-wrapper --hidden">
+    <div class="expand-wrapper --hidden" role="region" aria-hidden="true">
       <slot name="expand"></slot>
     </div>
   </div>

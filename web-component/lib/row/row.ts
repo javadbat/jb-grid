@@ -7,6 +7,7 @@ import { createTemplateStylesheet } from './utils.js';
 
 export * from "./types.js"; 
 export class JBRowWebComponent extends HTMLElement {
+  #internals?: ElementInternals;
   #elements!: JBRowElements;
   #templateSheet = new CSSStyleSheet();
   #RowTemplate:RowTemplate = []
@@ -16,6 +17,8 @@ export class JBRowWebComponent extends HTMLElement {
   }
   set isOpen(value:boolean){
     this.#isOpen = value;
+    if (this.#internals) this.#internals.ariaExpanded = value ? "true" : "false";
+    this.#elements.expandWrapper.setAttribute("aria-hidden", value ? "false" : "true");
     if(value){
       this.#elements.expandWrapper.classList.remove('--hidden');
     }else{
@@ -34,6 +37,10 @@ export class JBRowWebComponent extends HTMLElement {
   }
   constructor() {
     super();
+    if (typeof this.attachInternals === "function") {
+      this.#internals = this.attachInternals();
+      this.#internals.role = "row";
+    }
     this.#init();
   }
   #init() {

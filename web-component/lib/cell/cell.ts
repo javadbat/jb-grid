@@ -5,6 +5,7 @@ import type {JBCellElements} from './types.js';
 
 export * from "./types.js"; 
 export class JBCellWebComponent extends HTMLElement {
+  #internals?: ElementInternals;
   #elements!: JBCellElements;
   #templateSheet = new CSSStyleSheet();
   get name(){
@@ -21,6 +22,10 @@ export class JBCellWebComponent extends HTMLElement {
   }
   constructor() {
     super();
+    if (typeof this.attachInternals === "function") {
+      this.#internals = this.attachInternals();
+      this.#internals.role = "cell";
+    }
     this.#init();
   }
   #init() {
