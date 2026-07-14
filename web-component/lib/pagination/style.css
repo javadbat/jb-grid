@@ -11,6 +11,7 @@
 
     .arrow-btn {
       all: unset;
+      box-sizing: border-box;
       cursor: pointer;
       height: 3rem;
       width: 3rem;
@@ -21,6 +22,7 @@
       }
       &:disabled {
         fill: var(--arrow-button-fill-color-disabled);
+        cursor: default;
       }
     }
 
@@ -31,6 +33,8 @@
       height: 100%;
 
       .page-index {
+        all: unset;
+        box-sizing: border-box;
         font-size: 1rem;
         color: var(--page-index-color);
         position: absolute;
@@ -43,6 +47,15 @@
         text-box-edge: ex alphabetic;
         transition: all 0.3s 0s ease;
         cursor: pointer;
+
+        &:disabled {
+          cursor: default;
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--jb-grid-focus-ring-color, Highlight);
+          outline-offset: -2px;
+        }
 
         &.current {
           color: var(--page-index-color-current);

@@ -2,7 +2,20 @@
   width: 1.5rem;
   height: 1.5rem;
   display: block;
+}
+
+.toggle-button {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--jb-grid-focus-ring-color, Highlight);
+    outline-offset: 2px;
+  }
 }
 
 :host([open]) {

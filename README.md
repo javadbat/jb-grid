@@ -110,7 +110,7 @@ document.querySelector(`jb-row`).isOpen = false;
 
 ### Ellipses Cell
 
-if your cell content is a long text need to get ellipses on overflow add `ellipsis` attribute to the `jb-cell` and `ellipsis="max line"` for multiline
+Cells clip horizontal overflow to stay inside their grid column. If long text should show an ellipsis, add the `ellipsis` attribute to `jb-cell`; use `ellipsis="max line"` for multiline truncation.
 ```html
 <jb-cell ellipsis>Put Long Text Here</jb-cell>
 <!-- Limited Browser Support for Multiline -->

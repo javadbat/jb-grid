@@ -12,4 +12,4 @@ export type JBPaginationElements = {
    }
 }
 
-export type PageIndexDom = HTMLDivElement & {pageIndex:number,isEmpty:boolean};
+export type PageIndexDom = HTMLButtonElement & {pageIndex:number,isEmpty:boolean};

@@ -156,8 +156,8 @@ export class JBPaginationWebComponent extends HTMLElement {
   #createPageIndexElement(newIndex: number): PageIndexDom {
     //when we are out of bound we create empty page index
     const isEmpty = this.#min > newIndex || this.#max < newIndex;
-    const elem = document.createElement('div') as PageIndexDom;
-    elem.setAttribute("role", "button");
+    const elem = document.createElement('button') as PageIndexDom;
+    elem.type = "button";
     elem.setAttribute("aria-label", dictionary.get(i18n, "page")(newIndex));
     elem.classList.add('page-index', isEmpty?'empty':'not-empty');
     elem.dataset.index = `${newIndex}`;
@@ -167,8 +167,10 @@ export class JBPaginationWebComponent extends HTMLElement {
     });
     if (isEmpty) {
       elem.isEmpty = true;
+      elem.disabled = true;
     } else {
       elem.isEmpty = false;
+      elem.disabled = false;
       elem.innerHTML = `${this.showPersianNumber?enToFaDigits(newIndex):newIndex}`;
     }
     return elem;
@@ -192,6 +194,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     previousCurrent?.classList.remove('current');
     previousCurrent?.removeAttribute("aria-current");
     this.#elements.index.list.forEach(x => {
+      x.tabIndex = x.pageIndex === newIndex ? 0 : -1;
       if (x.pageIndex == newIndex) {
         x.classList.add('current')
         x.setAttribute("aria-current", "page");
