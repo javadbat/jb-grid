@@ -64,13 +64,22 @@ import {Searchbar} from './Searchbar';
 
 The grid does not own column definitions. If you need a table header, render it yourself with `tableHeader`. Pass row layout directly to `JBRow`.
 
-```tsx
+```ts
 const rowTemplate = [
   { name: "name", size: "1fr" },
   { name: "age", size: "6.25rem" },
   { name: "operation", size: "10rem" }
 ];
-
+```
+```tsx
+  <JBTableHeader headerTemplate={rowTemplate}>
+    <JBColumnHeader name="id">ID</JBColumnHeader>
+    <JBColumnHeader name="name" sortable>Name</JBColumnHeader>
+    <JBColumnHeader name="family" sortable>Family</JBColumnHeader>
+    <JBColumnHeader name="age">Age</JBColumnHeader>
+  </JBTableHeader>
+```
+```tsx
 <JBGrid
   tableHeader={<YourTableHeader />}
   data={data}

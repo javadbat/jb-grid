@@ -25,6 +25,22 @@ export const Normal:Story = {
   </Fragment>
   }
 };
+export const OverflowCellUnhandled:Story = {
+  args:{
+   rowTemplate:[
+    {name:"id",size:"1fr"},
+    {name:"bio",size:"1fr"},
+    {name:"name",size:"1fr"},
+    {name:"jobTitle",size:'6.25rem'},
+  ],
+  children:<Fragment>
+    <JBCell name="id">{faker.number.int({min:1000,max:9999})}</JBCell>
+    <JBCell name="bio" >{faker.lorem.sentence(200)}</JBCell>
+    <JBCell name="name">{faker.person.fullName()}</JBCell>
+    <JBCell name="jobTitle">{faker.person.jobTitle()}</JBCell>
+  </Fragment>
+  }
+};
 export const OverflowCellSingleLine:Story = {
   args:{
    rowTemplate:[
@@ -35,7 +51,7 @@ export const OverflowCellSingleLine:Story = {
   ],
   children:<Fragment>
     <JBCell name="id">{faker.number.int({min:1000,max:9999})}</JBCell>
-    <JBCell name="bio" max-line="1">{faker.lorem.sentence(200)}</JBCell>
+    <JBCell name="bio" ellipsis>{faker.lorem.sentence(200)}</JBCell>
     <JBCell name="name">{faker.person.fullName()}</JBCell>
     <JBCell name="jobTitle">{faker.person.jobTitle()}</JBCell>
   </Fragment>
@@ -51,7 +67,7 @@ export const OverflowCellMultiLine:Story = {
   ],
   children:<Fragment>
     <JBCell name="id">{faker.number.int({min:1000,max:9999})}</JBCell>
-    <JBCell name="bio" max-line="2">{faker.lorem.sentence(200)}</JBCell>
+    <JBCell name="bio" ellipsis={2}>{faker.lorem.sentence(200)}</JBCell>
     <JBCell name="name">{faker.person.fullName()}</JBCell>
     <JBCell name="jobTitle">{faker.person.jobTitle()}</JBCell>
   </Fragment>
