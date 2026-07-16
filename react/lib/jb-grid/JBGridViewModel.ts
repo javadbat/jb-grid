@@ -72,9 +72,13 @@ class JBGridViewModel {
   }
 
   refreshBtnClick() {
-    this.elements.refreshIcon.current?.play();
+    if (this.elements.refreshIcon.current) {
+      this.elements.refreshIcon.current.isLoading = true;
+    }
     Promise.resolve(this.callBacks.onRefresh?.()).finally(() => {
-      this.elements.refreshIcon.current?.stop();
+      if (this.elements.refreshIcon.current) {
+        this.elements.refreshIcon.current.isLoading = false;
+      }
     });
   }
 

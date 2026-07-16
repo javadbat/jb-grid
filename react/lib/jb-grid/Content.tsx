@@ -39,8 +39,8 @@ function Content(props:ContentProps) {
     <>
       {!isErrorOccurred && tableHeader}
       {!isErrorOccurred && <div slot="body-content" className="table-content-wrapper">{props.children}</div>}
-      {isErrorOccurred && <div slot="body-error">{ErrorComponent}</div>}
-      {isLoading && <jb-grid-loading slot="body-loading"></jb-grid-loading>}
+      {isErrorOccurred && <div slot="body-error" {...{ show: "" }}>{ErrorComponent}</div>}
+      {isLoading && <jb-grid-loading slot="body-loading" show=""></jb-grid-loading>}
     </>
   );
 }

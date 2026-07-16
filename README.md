@@ -38,6 +38,48 @@ document.querySelector(`jb-pagination`).min = 0;
 
 For the standalone pagination API and CSS variables, see [jb-pagination README](https://javadbat.github.io/design-system/?path=/docs/components-jbgrid-jbpagination-readme--docs).
 
+## Grid Layout and Body States
+
+`jb-grid-layout` provides named slots for assembling a grid. Its default body
+layout supports these slots:
+
+| Slot | Description |
+| --- | --- |
+| `table-header` | Header row shown above the scrollable content. |
+| `body-content` | Normal grid rows or other main content. |
+| `body-error` | Error view positioned over the body. |
+| `body-loading` | Loading view positioned above all other body views. |
+
+Loading and error slot elements are hidden by default. Add the boolean `show`
+attribute to the root slotted element to display that state. Removing `show`
+hides it again without removing the element from the DOM.
+
+```html
+<jb-grid-layout>
+  <jb-table-header slot="table-header"></jb-table-header>
+  <div slot="body-content" class="table-content-wrapper">
+    <!-- grid rows -->
+  </div>
+
+  <div slot="body-error" show>
+    Could not load the grid data.
+  </div>
+
+  <jb-grid-loading slot="body-loading"></jb-grid-loading>
+</jb-grid-layout>
+```
+
+Toggle a state with JavaScript:
+
+```js
+const loading = document.querySelector('[slot="body-loading"]');
+loading.toggleAttribute("show", isLoading);
+```
+
+If loading and error both have `show`, loading appears above error. The React
+`JBGrid` component manages these attributes from its `isLoading` and
+`isErrorOccurred` props.
+
 ### jb-pagination CSS variables
 
 | CSS variable name | description |
@@ -206,20 +248,25 @@ paginationInfo.addEventListener('page-size-change', (event) => {
 
 ## Utility Icons
 
-`jb-refresh-icon` and `jb-fullscreen-icon` are standalone icons used by the grid controls.
+The grid uses `jb-icon/refresh` for its refresh control. `jb-fullscreen-icon`
+remains a grid-owned standalone icon.
 
 ```html
-<jb-refresh-icon></jb-refresh-icon>
+<jb-icon-refresh></jb-icon-refresh>
 <jb-fullscreen-icon state="enter"></jb-fullscreen-icon>
 ```
 
-### jb-refresh-icon API
+### jb-icon-refresh API
 
 | name | type | description |
 | --- | --- | --- |
-| `play()` | method | Starts the refresh rotation animation. |
-| `pause()` | method | Pauses the refresh rotation animation. |
-| `stop()` | method | Stops the animation after the current rotation finishes. |
+| `isLoading` | property | Starts rotation when `true`. When changed to `false`, the active rotation finishes before repetition stops. |
+
+Import it directly from the icon package when using it outside the grid:
+
+```js
+import "jb-icon/refresh";
+```
 
 ### jb-fullscreen-icon API
 

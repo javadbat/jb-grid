@@ -87,26 +87,27 @@ slot[name="body-content"]::slotted(.table-content-wrapper) {
   box-sizing: border-box;
 }
 
-slot[name="body-error"],
-slot[name="body-loading"] {
+slot[name="body-error"]::slotted(*),
+slot[name="body-loading"]::slotted(*) {
+  display: none;
+}
+
+slot[name="body-error"]::slotted([show]),
+slot[name="body-loading"]::slotted([show]) {
   display: block;
   position: absolute;
   inset: 0;
-}
-
-slot[name="body-error"] {
-  z-index: 1;
-}
-
-slot[name="body-loading"] {
-  z-index: 2;
-}
-
-slot[name="body-error"]::slotted(*),
-slot[name="body-loading"]::slotted(*) {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+}
+
+slot[name="body-error"]::slotted([show]) {
+  z-index: 1;
+}
+
+slot[name="body-loading"]::slotted([show]) {
+  z-index: 2;
 }
 
 @media (max-width: 48rem) {

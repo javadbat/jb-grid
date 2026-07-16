@@ -27,6 +27,17 @@
   ],
   "main": "index.js",
   "types": "./web-component/dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./web-component/dist/index.d.ts",
+      "default": "./index.js"
+    },
+    "./react": {
+      "types": "./react/dist/index.d.ts",
+      "default": "./react/index.js"
+    },
+    "./*": "./*"
+  },
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-grid.git"
@@ -34,6 +45,7 @@
   "dependencies": {
     "jb-button":">=3.10.0",
     "jb-core":">=0.30.0",
+    "jb-icon": ">=0.1.0",
     "jb-searchbar":">=3.0.2"
   }
 }

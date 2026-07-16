@@ -2,6 +2,7 @@ import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import type { JBPaginationWebComponent } from "jb-grid";
 import type { JBPaginationDirectAttributeProps } from "./types";
 import type {JBCellWebComponent, JBRowWebComponent, JBExpandToggleWebComponent} from 'jb-grid'
+import type { JBIconRefreshWebComponent } from "jb-icon/refresh";
 export type JBGridLayoutWebComponent = HTMLElement
 type JBGridLoadingWebComponent = HTMLElement
 type JBGridErrorWebComponent = HTMLElement
@@ -29,11 +30,7 @@ type JBPaginationInfoWebComponent = HTMLElement & {
   currentAvailableItemTitle: string,
   showPersianNumber: boolean | undefined
 }
-export type JBRefreshIconWebComponent = HTMLElement & {
-  play: () => void,
-  pause: () => void,
-  stop: () => void
-}
+export type JBRefreshIconWebComponent = JBIconRefreshWebComponent;
 type JBFullscreenIconState = "enter" | "exit";
 type JBFullscreenIconWebComponent = HTMLElement & {
   state: JBFullscreenIconState
@@ -58,7 +55,9 @@ export type JBCellAttributes = DetailedHTMLProps<HTMLAttributes<JBCellWebCompone
 }
 export type JBExpandToggleAttributes = DetailedHTMLProps<HTMLAttributes<JBExpandToggleWebComponent>, JBExpandToggleWebComponent>
 export type JBGridLayoutAttributes = DetailedHTMLProps<HTMLAttributes<JBGridLayoutWebComponent>, JBGridLayoutWebComponent>
-export type JBGridLoadingAttributes = DetailedHTMLProps<HTMLAttributes<JBGridLoadingWebComponent>, JBGridLoadingWebComponent>
+export type JBGridLoadingAttributes = DetailedHTMLProps<HTMLAttributes<JBGridLoadingWebComponent>, JBGridLoadingWebComponent> & {
+  show?: string
+}
 export type JBGridErrorAttributes = DetailedHTMLProps<HTMLAttributes<JBGridErrorWebComponent>, JBGridErrorWebComponent> & {
   message?: string,
   "refresh-button-title"?: string
@@ -73,7 +72,7 @@ declare module "react" {
     interface IntrinsicElements {
       'jb-pagination': JBPaginationAttributes;
       'jb-pagination-info': JBPaginationInfoAttributes;
-      'jb-refresh-icon': JBRefreshIconAttributes;
+      'jb-icon-refresh': JBRefreshIconAttributes;
       'jb-fullscreen-icon': JBFullscreenIconAttributes;
       'jb-row': JBRowAttributes;
       'jb-table-header': JBTableHeaderAttributes;
