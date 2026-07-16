@@ -5,7 +5,7 @@
 [![NPM Version](https://img.shields.io/npm/v/jb-grid)](https://www.npmjs.com/package/jb-grid)
 ![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-grid)
 
-> currently this component only available in react in full mode and web-component is only support parts of the data grid like pagination and Row, Cell.
+> currently jb-grid web-component is a separated web-components related to the grid layout data table that you can combine them together to create your own grid data table. 
 
 ## Using With JS Frameworks
 - [<img src="https://img.shields.io/badge/React.js-jb--grid%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-grid/tree/main/react)

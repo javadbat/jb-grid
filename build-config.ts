@@ -19,7 +19,7 @@ export const webComponentList: WebComponentBuildConfig[] = [
 export const reactComponentList: ReactComponentBuildConfig[] = [
   {
     name: "jb-grid-react",
-    path: "./react/lib/JBGrid.tsx",
+    path: "./react/lib/index.ts",
     outputPath: "./react/dist/JBGrid.js",
     external: ["react", "jb-grid", "jb-searchbar","jb-core", "jb-core/react", "jb-core/theme", "jb-core/i18n"],
     globals: {

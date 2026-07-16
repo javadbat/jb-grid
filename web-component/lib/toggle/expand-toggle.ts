@@ -2,6 +2,7 @@ import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import { JBRowWebComponent } from '../row/row.js';
+export { expandToggleDictionary, type JBExpandToggleDictionary } from "./i18n.js";
 export class JBExpandToggleWebComponent extends HTMLElement {
   #button!: HTMLButtonElement;
   constructor() {

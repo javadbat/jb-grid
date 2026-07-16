@@ -1,6 +1,6 @@
 import './JBGridTest.css';
 import React, { useState } from 'react';
-import { JBCell, JBRow, JBGrid } from '../../../react/lib/JBGrid.tsx';
+import { JBCell, JBRow, JBGrid } from '../../../react/lib/index.ts';
 import CustomError from './CustomError';
 
 type Row = {

@@ -3,8 +3,11 @@ import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import { enToFaDigits } from 'jb-core';
 import type { JBPaginationInfoElements, JBPaginationInfoPageSizeChangeEventDetail } from './types.js';
+import { i18n } from "jb-core/i18n";
+import { paginationInfoDictionary } from "./i18n.js";
 
 export * from "./types.js";
+export { paginationInfoDictionary, type JBPaginationInfoDictionary } from "./i18n.js";
 
 export class JBPaginationInfoWebComponent extends HTMLElement {
   #elements!: JBPaginationInfoElements;
@@ -13,10 +16,10 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
   #startItemIndex = 0;
   #endItemIndex = 0;
   #totalItemsCount = 0;
-  #pageItemCountTitle = "";
-  #fromLabel = "";
-  #currentAvailableItemTitle = "";
-  #showPersianNumber = false;
+  #pageItemCountTitle: string | null = null;
+  #fromLabel: string | null = null;
+  #currentAvailableItemTitle: string | null = null;
+  #showPersianNumber = i18n.locale.numberingSystem == "arabext";
 
   get pageSize() {
     return this.#pageSize;
@@ -64,29 +67,29 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
   }
 
   get pageItemCountTitle() {
-    return this.#pageItemCountTitle;
+    return this.#pageItemCountTitle ?? paginationInfoDictionary.get(i18n, "pageItemCount");
   }
 
   set pageItemCountTitle(value: string) {
-    this.#pageItemCountTitle = value;
+    this.#pageItemCountTitle = value || null;
     this.#renderLabels();
   }
 
   get fromLabel() {
-    return this.#fromLabel;
+    return this.#fromLabel ?? paginationInfoDictionary.get(i18n, "from");
   }
 
   set fromLabel(value: string) {
-    this.#fromLabel = value;
+    this.#fromLabel = value || null;
     this.#renderLabels();
   }
 
   get currentAvailableItemTitle() {
-    return this.#currentAvailableItemTitle;
+    return this.#currentAvailableItemTitle ?? paginationInfoDictionary.get(i18n, "currentAvailableItem");
   }
 
   set currentAvailableItemTitle(value: string) {
-    this.#currentAvailableItemTitle = value;
+    this.#currentAvailableItemTitle = value || null;
     this.#renderLabels();
   }
 
@@ -94,8 +97,8 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
     return this.#showPersianNumber;
   }
 
-  set showPersianNumber(value: boolean) {
-    this.#showPersianNumber = value;
+  set showPersianNumber(value: boolean | undefined) {
+    this.#showPersianNumber = value ?? i18n.locale.numberingSystem == "arabext";
     this.#renderPageSizeOptions();
     this.#renderMetaData();
   }
@@ -166,9 +169,10 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
     if (!this.#elements) {
       return;
     }
-    this.#elements.pageSizeSection.title = this.#pageItemCountTitle;
-    this.#elements.fromLabel.textContent = ` ${this.#fromLabel}`;
-    this.#elements.totalItemsCount.title = this.#currentAvailableItemTitle;
+    this.#elements.pageSizeSection.title = this.pageItemCountTitle;
+    this.#elements.pageSizeSelect.ariaLabel = this.pageItemCountTitle;
+    this.#elements.fromLabel.textContent = ` ${this.fromLabel}`;
+    this.#elements.totalItemsCount.title = this.currentAvailableItemTitle;
   }
 
   #renderMetaData() {

@@ -1,6 +1,6 @@
 import './JBGridTest.css';
 import { useCallback, useEffect, useMemo, useRef, useState, Fragment } from 'react';
-import { JBCell, JBColumnHeader, JBRow, JBGrid, JBTableHeader, type JBGridI18nConfig } from '../../react/lib/JBGrid.tsx';
+import { JBCell, JBColumnHeader, JBRow, JBGrid, JBTableHeader, type JBGridI18nConfig } from '../../react/lib/index.ts';
 import {JBButton} from 'jb-button/react'
 import ExpandRowSample from './ExpandRowSample';
 import type { SampleLocale } from './ExpandRowSample';
@@ -54,7 +54,6 @@ const storyText = {
     i18n: {
       showPersianNumber: false,
       messages: {
-        EnterPageNumberMessage: "Enter the page number you want to open",
         serverErrorText: "Something went wrong while loading data.",
         serverErrorTitle: "Sorry",
         serverErrorRefreshButtonTitle: "Try again",
@@ -89,7 +88,6 @@ const storyText = {
     i18n: {
       showPersianNumber: true,
       messages: {
-        EnterPageNumberMessage: "شماره صفحه ای که میخواهید وارد آن شوید را وارد کنید",
         serverErrorText: "متاسفانه در هنگام بارگذاری اطلاعات خطایی رخ داده است",
         serverErrorTitle: "خطا",
         serverErrorRefreshButtonTitle: "تلاش مجدد",

@@ -1,5 +1,6 @@
 import JBGridTest from './samples/JBGridTest.tsx';
 import CustomErrorTest from './samples/custom-error/JBGridTest.tsx';
+import SearchFilterDemo from './samples/SearchFilterDemo.tsx';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
@@ -26,4 +27,9 @@ export const RTL:Story = {
 export const WithCustomError:Story = {
   render:() => <CustomErrorTest></CustomErrorTest>,
   args:{}
+};
+
+export const WithSearchAndFilters: Story = {
+  render: () => <SearchFilterDemo />,
+  args: {},
 };

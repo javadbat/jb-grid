@@ -2,6 +2,12 @@ import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import type { JBPaginationWebComponent } from "jb-grid";
 import type { JBPaginationDirectAttributeProps } from "./types";
 import type {JBCellWebComponent, JBRowWebComponent, JBExpandToggleWebComponent} from 'jb-grid'
+export type JBGridLayoutWebComponent = HTMLElement
+type JBGridLoadingWebComponent = HTMLElement
+type JBGridErrorWebComponent = HTMLElement
+export type JBViewportWebComponent = HTMLElement & {
+  fullscreen: boolean
+}
 type TableHeaderTemplate = Array<{name: string, size?: string | number}>
 type JBTableHeaderWebComponent = HTMLElement & {
   headerTemplate: TableHeaderTemplate
@@ -21,7 +27,7 @@ type JBPaginationInfoWebComponent = HTMLElement & {
   pageItemCountTitle: string,
   fromLabel: string,
   currentAvailableItemTitle: string,
-  showPersianNumber: boolean
+  showPersianNumber: boolean | undefined
 }
 export type JBRefreshIconWebComponent = HTMLElement & {
   play: () => void,
@@ -51,6 +57,15 @@ export type JBCellAttributes = DetailedHTMLProps<HTMLAttributes<JBCellWebCompone
   ellipsis?: boolean | number
 }
 export type JBExpandToggleAttributes = DetailedHTMLProps<HTMLAttributes<JBExpandToggleWebComponent>, JBExpandToggleWebComponent>
+export type JBGridLayoutAttributes = DetailedHTMLProps<HTMLAttributes<JBGridLayoutWebComponent>, JBGridLayoutWebComponent>
+export type JBGridLoadingAttributes = DetailedHTMLProps<HTMLAttributes<JBGridLoadingWebComponent>, JBGridLoadingWebComponent>
+export type JBGridErrorAttributes = DetailedHTMLProps<HTMLAttributes<JBGridErrorWebComponent>, JBGridErrorWebComponent> & {
+  message?: string,
+  "refresh-button-title"?: string
+}
+export type JBViewportAttributes = DetailedHTMLProps<HTMLAttributes<JBViewportWebComponent>, JBViewportWebComponent> & {
+  fullscreen?: boolean
+}
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -65,6 +80,10 @@ declare module "react" {
       'jb-col-header': JBColumnHeaderAttributes;
       'jb-cell': JBCellAttributes;
       'jb-expand-toggle': JBExpandToggleAttributes;
+      'jb-grid-layout': JBGridLayoutAttributes;
+      'jb-grid-loading': JBGridLoadingAttributes;
+      'jb-grid-error': JBGridErrorAttributes;
+      'jb-viewport': JBViewportAttributes;
     }
   }
 }

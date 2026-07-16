@@ -1,26 +1,15 @@
 import React, { type ReactNode, useEffect, useReducer } from 'react';
 import JBGridViewModel, { JBGridContext } from './JBGridViewModel.js';
-import CSS from './jb-grid.css?inline';
-import VariablesCSS from './variables.css?inline';
-import BlobCSS from './Components/blob-loading.css?inline';
 import type { AnyObject, JBGridCallbacks, JBGridI18nConfig, JBGridRenderContext, JBGridRowData } from './types.js';
 import Footer from './Footer.js';
 import Header from './Header.js';
 import Content from './Content.js';
 import { useInstance } from 'jb-core/react';
-import { injectCss } from 'jb-core';
+import 'jb-grid';
+import '../module-declaration.js';
+import { JBViewport } from '../Viewport.js';
+import { JBGridLayout } from '../GridLayout.js';
 
-export {JBPagination, type Props as PaginationProps} from './Components/Pagination.js';
-export * from './Components/PaginationInfo.js';
-export * from './Components/RefreshIcon.js';
-export * from './Components/FullscreenIcon.js';
-export * from './Components/Row.js';
-export * from './Components/TableHeader.js';
-export * from './Components/ColumnHeader.js';
-export * from './Components/Cell.js';
-export * from './Components/ExpandRow.js';
-export * from './Components/ExpandToggle.js';
-export * from './types.js';
 export type Props<T extends AnyObject> = {
   searchbarComponent?: ReactNode,
   tableHeader?: ReactNode,
@@ -51,10 +40,6 @@ export type Props<T extends AnyObject> = {
   headerEndComponents?: ReactNode[] | ReactNode,
   children?: React.ReactNode | React.ReactNode[] | ((data: JBGridRowData<T>[], context: JBGridRenderContext) => React.ReactNode | React.ReactNode[])
 }
-
-injectCss(VariablesCSS as unknown as string);
-injectCss(CSS as unknown as string);
-injectCss(BlobCSS as unknown as string);
 
 function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   const [, forceUpdate] = useReducer((version: number) => version + 1, 0);
@@ -100,28 +85,19 @@ function JBGridComponent<T extends AnyObject>(props: Props<T>) {
     };
   }, [vm, forceUpdate]);
 
-  useEffect(() => {
-    if(props.i18n){
-      vm.setI18n(props.i18n);
-    }
-  }, [props.i18n]);
-
-  useEffect(() => {
-    if (props.isFullscreen !== null && props.isFullscreen !== undefined) {
-      vm.onFullscreenChanged(props.isFullscreen);
-    }
-  }, [props.isFullscreen]);
   const renderContext: JBGridRenderContext = {
     refreshView: () => vm.notifyStateChange()
   };
   const contentChildren = typeof props.children === "function" ? props.children(props.data, renderContext) : props.children;
   return (
     <JBGridContext.Provider value={vm} key={"jb-grid-context"}>
-      <div className={`jb-grid-wrapper ${props.className ?? ""}`} ref={vm.JBGridComponentDom} style={props.style}>
-        <Header title={props.title} vm={vm} searchbarComponent={props.searchbarComponent} headerEndComponents={props.headerEndComponents}></Header>
-        <Content i18n={vm.i18n} tableHeader={props.tableHeader} isErrorOccurred={props.isErrorOccurred ?? false} isLoading={props.isLoading ?? false} refreshBtnClick={vm.refreshBtnClick} errorComponent={props.contentError}>{contentChildren}</Content>
-        <Footer isFullscreen={props.isFullscreen ?? false} vm={vm}></Footer>
-      </div>
+      <JBViewport fullscreen={props.isFullscreen === true}>
+        <JBGridLayout className={`jb-grid-wrapper ${props.className ?? ""}`} style={props.style}>
+          <Header title={props.title} vm={vm} searchbarComponent={props.searchbarComponent} headerEndComponents={props.headerEndComponents}></Header>
+          <Content i18n={props.i18n} tableHeader={props.tableHeader} isErrorOccurred={props.isErrorOccurred ?? false} isLoading={props.isLoading ?? false} refreshBtnClick={vm.refreshBtnClick} errorComponent={props.contentError}>{contentChildren}</Content>
+          <Footer i18n={props.i18n} isFullscreen={props.isFullscreen ?? false} vm={vm}></Footer>
+        </JBGridLayout>
+      </JBViewport>
     </JBGridContext.Provider>
   );
 }

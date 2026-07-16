@@ -5,7 +5,8 @@ import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBPaginationElements, PageIndexDom } from './types.js';
 import { i18n } from "jb-core/i18n";
 import {enToFaDigits} from 'jb-core';
-import { dictionary } from "../i18n";
+import { paginationDictionary } from "./i18n.js";
+export { paginationDictionary, type JBPaginationDictionary } from "./i18n.js";
 export class JBPaginationWebComponent extends HTMLElement {
   #elements!: JBPaginationElements;
   #pageIndex: number = 1;
@@ -13,7 +14,18 @@ export class JBPaginationWebComponent extends HTMLElement {
   #max = Infinity;
   //how many number in display
   #DisplayIndexCount = 3;
-  showPersianNumber = i18n.locale.numberingSystem == "arabext";
+  #showPersianNumber = i18n.locale.numberingSystem == "arabext";
+
+  get showPersianNumber() {
+    return this.#showPersianNumber;
+  }
+
+  set showPersianNumber(value: boolean | undefined) {
+    this.#showPersianNumber = value ?? i18n.locale.numberingSystem == "arabext";
+    if (this.#elements) {
+      this.#initPageIndexes();
+    }
+  }
 
   //how many number item we have in dom
   get #indexButtonCount (){
@@ -158,7 +170,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     const isEmpty = this.#min > newIndex || this.#max < newIndex;
     const elem = document.createElement('button') as PageIndexDom;
     elem.type = "button";
-    elem.setAttribute("aria-label", dictionary.get(i18n, "page")(newIndex));
+    elem.setAttribute("aria-label", paginationDictionary.get(i18n, "page")(newIndex));
     elem.classList.add('page-index', isEmpty?'empty':'not-empty');
     elem.dataset.index = `${newIndex}`;
     elem.pageIndex = newIndex;

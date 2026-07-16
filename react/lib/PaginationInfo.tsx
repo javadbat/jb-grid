@@ -12,7 +12,7 @@ type JBPaginationInfoWebComponent = HTMLElement & {
   pageItemCountTitle: string,
   fromLabel: string,
   currentAvailableItemTitle: string,
-  showPersianNumber: boolean
+  showPersianNumber: boolean | undefined
 }
 type JBPaginationInfoPageSizeChangeEvent = CustomEvent<{
   pageSize: number
@@ -51,7 +51,7 @@ export const JBPaginationInfo = React.forwardRef<JBPaginationInfoWebComponent | 
 
   useEffect(() => {
     if (element.current) {
-      element.current.showPersianNumber = showPersianNumber === true;
+      element.current.showPersianNumber = showPersianNumber;
       element.current.pageSize = pageSize;
       element.current.pageSizes = pageSizes ?? [20, 30, 50, 100];
       element.current.startItemIndex = startItemIndex;

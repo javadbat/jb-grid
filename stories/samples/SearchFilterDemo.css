@@ -1,0 +1,10 @@
+.search-filter-grid-demo {
+  width: 100%;
+  height: calc(100% - 4rem);
+  min-height: 28rem;
+}
+
+.search-filter-searchbar {
+  display: block;
+  width: 100%;
+}

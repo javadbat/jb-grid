@@ -3,9 +3,10 @@ import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBFullscreenIconState } from './types.js';
 import { i18n } from "jb-core/i18n";
-import { dictionary } from "../i18n";
+import { fullscreenIconDictionary } from "./i18n.js";
 
 export * from "./types.js";
+export { fullscreenIconDictionary, type JBFullscreenIconDictionary } from "./i18n.js";
 
 export class JBFullscreenIconWebComponent extends HTMLElement {
   #state: JBFullscreenIconState = "enter";
@@ -23,7 +24,7 @@ export class JBFullscreenIconWebComponent extends HTMLElement {
 
   set state(value: JBFullscreenIconState) {
     this.#state = value;
-    if (this.#internals) this.#internals.ariaLabel = dictionary.get(i18n, value === "exit" ? "exitFullscreen" : "enterFullscreen");
+    if (this.#internals) this.#internals.ariaLabel = fullscreenIconDictionary.get(i18n, value === "exit" ? "exitFullscreen" : "enterFullscreen");
     this.setAttribute("state", value);
   }
 
@@ -57,7 +58,7 @@ export class JBFullscreenIconWebComponent extends HTMLElement {
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     if (name === "state") {
       this.#state = this.#normalizeState(newValue);
-      if (this.#internals) this.#internals.ariaLabel = dictionary.get(i18n, this.#state === "exit" ? "exitFullscreen" : "enterFullscreen");
+      if (this.#internals) this.#internals.ariaLabel = fullscreenIconDictionary.get(i18n, this.#state === "exit" ? "exitFullscreen" : "enterFullscreen");
     }
   }
 

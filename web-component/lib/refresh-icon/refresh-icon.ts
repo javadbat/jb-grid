@@ -2,7 +2,9 @@ import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import { i18n } from "jb-core/i18n";
-import { dictionary } from "../i18n";
+import { refreshIconDictionary } from "./i18n.js";
+
+export { refreshIconDictionary, type JBRefreshIconDictionary } from "./i18n.js";
 
 export class JBRefreshIconWebComponent extends HTMLElement {
   #internals?: ElementInternals;
@@ -15,7 +17,7 @@ export class JBRefreshIconWebComponent extends HTMLElement {
     if (typeof this.attachInternals === "function") {
       this.#internals = this.attachInternals();
       this.#internals.role = "img";
-      this.#internals.ariaLabel = dictionary.get(i18n, "refreshData");
+      this.#internals.ariaLabel = refreshIconDictionary.get(i18n, "refreshData");
       this.#internals.ariaBusy = "false";
     }
     this.#init();

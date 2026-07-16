@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.content-error {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.error-image {
+  font-size: 5em;
+}
+
+.error-title,
+.error-message {
+  font-weight: 100;
+  font-size: 1.5em;
+  color: #333;
+  text-align: center;
+}
+
+.error-message {
+  padding-block: 1rem;
+}
+
+.refresh-button {
+  margin-block-start: 0.5rem;
+}

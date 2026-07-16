@@ -1,0 +1,112 @@
+:host {
+  --blob-color: var(--jb-grid-loading-color, var(--jb-primary));
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fffffff2;
+  box-sizing: border-box;
+}
+
+.loading-content {
+  width: min(18.75rem, 80%);
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.blobs {
+  filter: url(#goo);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4.375rem;
+  transform-style: preserve-3d;
+}
+
+.blob-center,
+.blob {
+  position: absolute;
+  background: var(--blob-color);
+  top: 50%;
+  left: 50%;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 50%;
+  transform: scale(0.9) translate(-50%, -50%);
+}
+
+.blob-center {
+  transform-style: preserve-3d;
+  transform-origin: left top;
+  animation: blob-grow linear 3.4s infinite;
+  box-shadow: 0 -0.625rem 2.5rem -5px var(--blob-color);
+}
+
+.blob {
+  animation: blobs ease-out 3.4s infinite;
+  transform-origin: center top;
+  opacity: 0;
+}
+
+.blob:nth-child(2) { animation-delay: 0.2s; }
+.blob:nth-child(3) { animation-delay: 0.4s; }
+.blob:nth-child(4) { animation-delay: 0.6s; }
+.blob:nth-child(5) { animation-delay: 0.8s; }
+.blob:nth-child(6) { animation-delay: 1s; }
+.blob:nth-child(7) { animation-delay: 1.2s; }
+
+.filter-definition {
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+@keyframes blobs {
+  0% {
+    opacity: 0;
+    transform: scale(0) translate(calc(-20.625rem - 50%), -50%);
+  }
+
+  1%, 99% {
+    opacity: 1;
+  }
+
+  35%, 65% {
+    opacity: 1;
+    transform: scale(0.9) translate(-50%, -50%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) translate(calc(20.625rem - 50%), -50%);
+  }
+}
+
+@keyframes blob-grow {
+  0%, 39%, 92%, 100% { transform: scale(0) translate(-50%, -50%); }
+  40%, 42%, 90%, 91% { transform: scale(1, 0.9) translate(-50%, -50%); }
+  43%, 44%, 86%, 87% { transform: scale(1.2, 1.1) translate(-50%, -50%); }
+  45%, 46%, 84%, 85% { transform: scale(1.3, 1.2) translate(-50%, -50%); }
+  47%, 48%, 82%, 83% { transform: scale(1.4, 1.3) translate(-50%, -50%); }
+  52%, 80%, 81% { transform: scale(1.5, 1.4) translate(-50%, -50%); }
+  54% { transform: scale(1.7, 1.6) translate(-50%, -50%); }
+  58% { transform: scale(1.8, 1.7) translate(-50%, -50%); }
+  68%, 70% { transform: scale(1.7, 1.5) translate(-50%, -50%); }
+  78% { transform: scale(1.6, 1.4) translate(-50%, -50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob-center,
+  .blob {
+    animation: none;
+  }
+
+  .blob-center {
+    transform: translate(-50%, -50%);
+  }
+}

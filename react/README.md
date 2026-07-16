@@ -99,12 +99,11 @@ const rowTemplate = [
 ```
 
 ### i18n
-you can pass a i18n config to set a text, number display and other localization config to jb-grid
+Grid web components use their own dictionaries and the global `jb-core/i18n` locale by default. You can still pass an i18n config to override error and pagination text for one React grid instance.
 ```tsx
 const i18nMessages:JBGridI18nMessage = {
-  EnterPageNumberMessage:"شماره صفحه ای که میخواهید وارد آن شوید را وارد کنید",
   serverErrorText:"متاسفانه در هنگام بارگذاری اطلاعات خطایی رخ داده است",
-  serverErrorTitle:"すみません",
+  serverErrorTitle:"خطا",
   serverErrorRefreshButtonTitle:"تلاش مجدد",
   currentAvailableItem:"تعداد کل ایتم های موجود",
   pageItemCount:"تعداد آیتم در هر صفحه",
