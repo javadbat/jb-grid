@@ -38,6 +38,7 @@ export const Normal: Story = {
     const tableHeader = canvasElement.querySelector<JBTableHeaderWebComponent>("jb-table-header");
 
     expect(tableHeader).toBeTruthy();
+    expect(tableHeader?.getAttribute("role")).toBe("rowgroup");
     expect(tableHeader?.headerTemplate).toEqual(headerTemplate);
 
     const headerRow = tableHeader?.shadowRoot?.querySelector(".table-header-row");

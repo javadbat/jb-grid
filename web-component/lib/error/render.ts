@@ -1,6 +1,6 @@
 export function renderHTML(): string {
   return /* html */ `
-    <div class="content-error" part="container">
+    <div class="content-error" part="container" role="alert" aria-live="assertive" aria-atomic="true">
       <slot name="icon">
         <div class="error-image" part="icon" aria-hidden="true">😬😓🤔</div>
       </slot>

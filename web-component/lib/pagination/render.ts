@@ -4,7 +4,7 @@ import { paginationDictionary } from "./i18n.js";
 export function renderHTML(): string {
   return /* html */ `
   <div class="jb-pagination-web-component">
-    <section class="page-navigator">
+    <nav class="page-navigator" aria-label="${paginationDictionary.get(i18n, "navigation")}">
       <button class="first-page arrow-btn" type="button" aria-label="${paginationDictionary.get(i18n, "firstPage")}">
         <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M7 6 v12 h2 v-12 h-2z M17.41 7.41L16 6l-6 6 6 6 1.41-1.41L12.83 12z"></path></svg>
         </button>
@@ -19,7 +19,7 @@ export function renderHTML(): string {
       <button class="last-page arrow-btn" type="button" aria-label="${paginationDictionary.get(i18n, "lastPage")}">
         <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M15 6 v12 h2 v-12 h-2z M8 6L6.59 7.41 11.17 12l-4.58 4.59L8 18l6-6z"></path></svg>
       </button>
-    </section>
+    </nav>
   </div>
       `;
 }

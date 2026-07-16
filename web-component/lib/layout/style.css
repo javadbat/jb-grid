@@ -41,7 +41,8 @@
   box-shadow: #00000014 0 0.9375rem 0.875rem -5px;
 }
 
-.body-fallback {
+.body-fallback,
+.table {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -49,6 +50,10 @@
   height: 100%;
   min-width: 0;
   min-height: 0;
+}
+
+.table {
+  flex: 1 1 auto;
 }
 
 .table-content {

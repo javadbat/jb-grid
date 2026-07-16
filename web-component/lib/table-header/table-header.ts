@@ -7,6 +7,7 @@ import { createTemplateStylesheet } from '../utils.js';
 export * from "./types.js";
 
 export class JBTableHeaderWebComponent extends HTMLElement {
+  #internals?: ElementInternals;
   #templateSheet = new CSSStyleSheet();
   #headerTemplate: TableHeaderTemplate = [];
 
@@ -23,6 +24,11 @@ export class JBTableHeaderWebComponent extends HTMLElement {
 
   constructor() {
     super();
+    this.setAttribute("role", "rowgroup");
+    if (typeof this.attachInternals === "function") {
+      this.#internals = this.attachInternals();
+      this.#internals.role = "rowgroup";
+    }
     this.#init();
   }
 

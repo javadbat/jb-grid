@@ -25,6 +25,10 @@ export class JBExpandToggleWebComponent extends HTMLElement {
   #parentRow:JBRowWebComponent|null = null;
   connectedCallback() {
     this.#parentRow = this.#findParentRow(this);
+    if (this.#parentRow) {
+      this.#button.setAttribute("aria-controls", this.#parentRow.detailsId);
+      this.#button.ariaControlsElements = [this.#parentRow.detailsElement];
+    }
     if(this.#parentRow?.isOpen){
       this.setAttribute('open','');
       this.#button.setAttribute("aria-expanded", "true");

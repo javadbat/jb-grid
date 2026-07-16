@@ -1,6 +1,7 @@
 import { JBDictionary } from "jb-core/i18n";
 
 export type JBPaginationDictionary = {
+  navigation: string;
   firstPage: string;
   previousPage: string;
   nextPage: string;
@@ -10,6 +11,7 @@ export type JBPaginationDictionary = {
 
 export const paginationDictionary = new JBDictionary<JBPaginationDictionary>({
   fa: {
+    navigation: "صفحه‌بندی",
     firstPage: "صفحه اول",
     previousPage: "صفحه قبل",
     nextPage: "صفحه بعد",
@@ -17,6 +19,7 @@ export const paginationDictionary = new JBDictionary<JBPaginationDictionary>({
     page: index => `صفحه ${index}`,
   },
   en: {
+    navigation: "Pagination",
     firstPage: "First page",
     previousPage: "Previous page",
     nextPage: "Next page",

@@ -4,7 +4,7 @@ export function renderHTML(): string {
       <section class="page-size-section">
         <select class="page-size-select"></select>
       </section>
-      <section class="items-information-section">
+      <section class="items-information-section" role="status" aria-live="polite" aria-atomic="true">
         <span class="start-item-index"></span>
         <span>-</span>
         <span class="end-item-index"></span>

@@ -46,11 +46,12 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["name"];
+    return ["name", "sort", "sortable"];
   }
 
   constructor() {
     super();
+    this.setAttribute("role", "columnheader");
     if (typeof this.attachInternals === "function") {
       this.#internals = this.attachInternals();
       this.#internals.role = "columnheader";
@@ -68,6 +69,8 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
       wrapper: shadowRoot.querySelector(".column-header")!
     };
     this.#setGridArea(this.name);
+    this.#syncSortableSemantics();
+    this.#syncSortSemantics(this.sort);
     this.#registerEventListener();
   }
 
@@ -82,10 +85,48 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
     if (name === "name") {
       this.#setGridArea(newValue || "");
     }
+    if (name === "sortable") {
+      this.#syncSortableSemantics();
+    }
+    if (name === "sort") {
+      this.#syncSortSemantics(newValue);
+    }
+  }
+
+  #syncSortSemantics(value: string | null | undefined) {
+    const ariaSort = value === "asc"
+      ? "ascending"
+      : value === "desc"
+        ? "descending"
+        : "none";
+    this.setAttribute("aria-sort", ariaSort);
+    if (this.#internals) {
+      this.#internals.ariaSort = ariaSort;
+    }
   }
 
   #registerEventListener() {
     this.#elements.wrapper.addEventListener("click", () => this.#onClick());
+    this.#elements.wrapper.addEventListener("keydown", event => {
+      if (!this.sortable || (event.key !== "Enter" && event.key !== " ")) {
+        return;
+      }
+      event.preventDefault();
+      this.#onClick();
+    });
+  }
+
+  #syncSortableSemantics() {
+    if (!this.#elements) {
+      return;
+    }
+    if (this.sortable) {
+      this.#elements.wrapper.setAttribute("role", "button");
+      this.#elements.wrapper.tabIndex = 0;
+    } else {
+      this.#elements.wrapper.removeAttribute("role");
+      this.#elements.wrapper.removeAttribute("tabindex");
+    }
   }
 
   #onClick() {

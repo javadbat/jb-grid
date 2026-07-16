@@ -4,9 +4,11 @@ import { JBFullscreenIcon } from '../FullscreenIcon.js';
 import { JBPagination } from '../Pagination.js';
 import { JBPaginationInfo } from '../PaginationInfo.js';
 import { JBRefreshIcon } from '../RefreshIcon.js';
-import type { JBPaginationWebComponent } from 'jb-grid';
+import { fullscreenIconDictionary, type JBPaginationWebComponent } from 'jb-grid';
+import { gridDictionary } from './i18n.js';
 import { JBButton } from 'jb-button/react';
 import type { JBGridI18nConfig } from './types.js';
+import { i18n } from 'jb-core/i18n';
 type FooterProps = {
     vm:JBGridViewModel,
     isFullscreen:boolean,
@@ -17,12 +19,24 @@ function Footer(props:FooterProps) {
   return (
     <>
       {isFullscreen !== null && isFullscreen !== undefined && (
-        <JBButton slot="footer-start" variant="ghost" onClick={() => vm.onFullScreenBtnClicked(isFullscreen)}>
-          <JBFullscreenIcon state={isFullscreen ? "exit" : "enter"} />
+        <JBButton
+          slot="footer-start"
+          variant="ghost"
+          aria-label={isFullscreen
+            ? props.i18n?.messages?.exitFullscreen ?? fullscreenIconDictionary.get(i18n, "exitFullscreen")
+            : props.i18n?.messages?.enterFullscreen ?? fullscreenIconDictionary.get(i18n, "enterFullscreen")}
+          onClick={() => vm.onFullScreenBtnClicked(isFullscreen)}
+        >
+          <JBFullscreenIcon aria-hidden="true" state={isFullscreen ? "exit" : "enter"} />
         </JBButton>
       )}
-      <JBButton slot="footer-start" variant="ghost" onClick={() => vm.refreshBtnClick()}>
-        <JBRefreshIcon ref={vm.elements.refreshIcon} />
+      <JBButton
+        slot="footer-start"
+        variant="ghost"
+        aria-label={props.i18n?.messages?.refresh ?? gridDictionary.get(i18n, "refresh")}
+        onClick={() => vm.refreshBtnClick()}
+      >
+        <JBRefreshIcon aria-hidden="true" ref={vm.elements.refreshIcon} />
       </JBButton>
       <JBPaginationInfo
         slot="footer-end"

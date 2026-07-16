@@ -7,7 +7,7 @@ import { createTemplateStylesheet } from './utils.js';
 
 export * from "./types.js"; 
 export class JBRowWebComponent extends HTMLElement {
-  #internals?: ElementInternals;
+  static #detailsId = 0;
   #elements!: JBRowElements;
   #templateSheet = new CSSStyleSheet();
   #RowTemplate:RowTemplate = []
@@ -17,13 +17,20 @@ export class JBRowWebComponent extends HTMLElement {
   }
   set isOpen(value:boolean){
     this.#isOpen = value;
-    if (this.#internals) this.#internals.ariaExpanded = value ? "true" : "false";
     this.#elements.expandWrapper.setAttribute("aria-hidden", value ? "false" : "true");
     if(value){
       this.#elements.expandWrapper.classList.remove('--hidden');
+      this.#elements.expandWrapper.removeAttribute('inert');
     }else{
       this.#elements.expandWrapper.classList.add('--hidden');
+      this.#elements.expandWrapper.setAttribute('inert', '');
     }
+  }
+  get detailsId() {
+    return this.#elements.expandRegion.id;
+  }
+  get detailsElement() {
+    return this.#elements.expandRegion;
   }
   get rowTemplate(){
     return this.#RowTemplate
@@ -37,10 +44,6 @@ export class JBRowWebComponent extends HTMLElement {
   }
   constructor() {
     super();
-    if (typeof this.attachInternals === "function") {
-      this.#internals = this.attachInternals();
-      this.#internals.role = "row";
-    }
     this.#init();
   }
   #init() {
@@ -49,8 +52,10 @@ export class JBRowWebComponent extends HTMLElement {
     registerDefaultVariables();
     this.#render();
     this.#elements = {
-      expandWrapper: shadowRoot.querySelector(".expand-wrapper")!
+      expandWrapper: shadowRoot.querySelector(".expand-wrapper")!,
+      expandRegion: shadowRoot.querySelector(".expand-region")!
     }
+    this.#elements.expandRegion.id = `jb-row-details-${++JBRowWebComponent.#detailsId}`;
     createTemplateStylesheet(this.#templateSheet, null, {
       selector: ".grid-row",
       autoModeVariableName: "--jb-row-grid-mode"

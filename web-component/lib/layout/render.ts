@@ -16,9 +16,11 @@ export function renderHTML(): string {
       <div class="body" part="body">
         <slot name="body">
           <div class="body-fallback" part="body-fallback">
-            <slot name="table-header"></slot>
-            <div class="table-content" part="table-content">
-              <slot name="body-content"></slot>
+            <div class="table" part="table" role="table">
+              <slot name="table-header"></slot>
+              <div class="table-content" part="table-content" role="rowgroup">
+                <slot name="body-content"></slot>
+              </div>
             </div>
             <slot name="body-error"></slot>
             <slot name="body-loading"></slot>

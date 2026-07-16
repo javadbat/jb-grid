@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import {JBCell, JBExpandToggle, JBRow} from 'jb-grid/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {faker} from '@faker-js/faker'
+import { expect, userEvent, waitFor } from 'storybook/test';
 const meta = {
   title: "Components/JBGrid/Row",
   component: JBRow,
@@ -84,6 +85,27 @@ export const WithExpand:Story = {
       {faker.lorem.paragraph(50)}
     </div>
   </Fragment>
+  },
+  play: async ({ canvasElement }) => {
+    const row = canvasElement.querySelector("jb-row");
+    const toggle = canvasElement.querySelector("jb-expand-toggle");
+    const button = toggle?.shadowRoot?.querySelector<HTMLButtonElement>("button");
+    const rowContent = row?.shadowRoot?.querySelector('[role="row"]');
+    const detailsRow = row?.shadowRoot?.querySelector<HTMLElement>(".expand-wrapper");
+    const detailsRegion = row?.shadowRoot?.querySelector<HTMLElement>(".expand-region");
+
+    expect(row?.hasAttribute("role")).toBe(false);
+    expect(rowContent).toBeTruthy();
+    expect(detailsRow?.getAttribute("role")).toBe("row");
+    expect(detailsRegion?.getAttribute("role")).toBe("region");
+    expect(button?.getAttribute("aria-controls")).toBe(detailsRegion?.id);
+
+    await userEvent.click(button!);
+    await waitFor(() => {
+      expect(button?.getAttribute("aria-expanded")).toBe("false");
+      expect(detailsRow?.hasAttribute("inert")).toBe(true);
+      expect(detailsRow?.getAttribute("aria-hidden")).toBe("true");
+    });
   }
 };
 

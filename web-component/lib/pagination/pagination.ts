@@ -45,7 +45,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     if (this.pageIndex > value) {
       this.#updatePageIndex(value,false);
     }
-    this.#elements.nav.last.disabled = this.#max == Infinity;
+    this.#syncNavigationButtons();
   }
   get min() {
     return this.#min;
@@ -55,7 +55,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     if (this.#pageIndex < value) {
       this.#updatePageIndex(value, false);
     }
-    this.#elements.nav.first.disabled = this.#min == Infinity;
+    this.#syncNavigationButtons();
   }
   constructor() {
     super();
@@ -174,7 +174,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     elem.classList.add('page-index', isEmpty?'empty':'not-empty');
     elem.dataset.index = `${newIndex}`;
     elem.pageIndex = newIndex;
-    elem.addEventListener("click", (e) => {
+    elem.addEventListener("click", () => {
       this.#onPageIndexClick(elem);
     });
     if (isEmpty) {
@@ -199,7 +199,19 @@ export class JBPaginationWebComponent extends HTMLElement {
   #updatePageIndex(newIndex: number,shouldDispatch:boolean) {
     this.#pageIndex = newIndex;
     this.#updateActiveIndex(newIndex);
+    this.#syncNavigationButtons();
     shouldDispatch && this.#dispatchChangeEvent();
+  }
+  #syncNavigationButtons() {
+    if (!this.#elements) {
+      return;
+    }
+    const isFirstPage = this.#pageIndex <= this.#min;
+    const isLastPage = this.#max !== Infinity && this.#pageIndex >= this.#max;
+    this.#elements.nav.first.disabled = isFirstPage;
+    this.#elements.nav.prev.disabled = isFirstPage;
+    this.#elements.nav.next.disabled = isLastPage;
+    this.#elements.nav.last.disabled = this.#max === Infinity || isLastPage;
   }
   #updateActiveIndex(newIndex: number) {
     const previousCurrent = this.#elements.index.wrapper.querySelector(".current");

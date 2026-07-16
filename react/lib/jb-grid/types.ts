@@ -15,6 +15,11 @@ export type JBGridPaginationMeta = {
     totalItemsCount: number
 }
 export type JBGridI18nMessage = {
+    closeFilters?: string,
+    openFilters?: string,
+    refresh?: string,
+    enterFullscreen?: string,
+    exitFullscreen?: string,
     serverErrorText?: string,
     serverErrorTitle?: string,
     serverErrorRefreshButtonTitle?: string,

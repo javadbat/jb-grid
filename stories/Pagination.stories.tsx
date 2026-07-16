@@ -1,6 +1,6 @@
-import React from 'react';
 import {JBPagination} from 'jb-grid/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 
 const meta = {
   title: "Components/JBGrid/Pagination",
@@ -19,6 +19,17 @@ export const Normal:Story = {
 export const Max:Story = {
   args:{
     max:10
+  },
+  play: async ({ canvasElement }) => {
+    const pagination = canvasElement.querySelector("jb-pagination");
+    const shadowRoot = pagination?.shadowRoot;
+    const navigation = shadowRoot?.querySelector("nav");
+
+    expect(navigation?.getAttribute("aria-label")).toBe("Pagination");
+    expect(shadowRoot?.querySelector<HTMLButtonElement>(".first-page")?.disabled).toBe(true);
+    expect(shadowRoot?.querySelector<HTMLButtonElement>(".prev-page")?.disabled).toBe(true);
+    expect(shadowRoot?.querySelector<HTMLButtonElement>(".next-page")?.disabled).toBe(false);
+    expect(shadowRoot?.querySelector<HTMLButtonElement>(".last-page")?.disabled).toBe(false);
   }
 };
 

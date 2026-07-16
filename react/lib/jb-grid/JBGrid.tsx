@@ -92,8 +92,8 @@ function JBGridComponent<T extends AnyObject>(props: Props<T>) {
   return (
     <JBGridContext.Provider value={vm} key={"jb-grid-context"}>
       <JBViewport fullscreen={props.isFullscreen === true}>
-        <JBGridLayout className={`jb-grid-wrapper ${props.className ?? ""}`} style={props.style}>
-          <Header title={props.title} vm={vm} searchbarComponent={props.searchbarComponent} headerEndComponents={props.headerEndComponents}></Header>
+        <JBGridLayout aria-busy={props.isLoading ? "true" : "false"} aria-label={props.title} className={`jb-grid-wrapper ${props.className ?? ""}`} style={props.style}>
+          <Header title={props.title} vm={vm} i18n={props.i18n} searchbarComponent={props.searchbarComponent} headerEndComponents={props.headerEndComponents}></Header>
           <Content i18n={props.i18n} tableHeader={props.tableHeader} isErrorOccurred={props.isErrorOccurred ?? false} isLoading={props.isLoading ?? false} refreshBtnClick={vm.refreshBtnClick} errorComponent={props.contentError}>{contentChildren}</Content>
           <Footer i18n={props.i18n} isFullscreen={props.isFullscreen ?? false} vm={vm}></Footer>
         </JBGridLayout>

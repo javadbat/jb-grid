@@ -1,12 +1,10 @@
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
-import type {JBCellElements} from './types.js';
 
 export * from "./types.js"; 
 export class JBCellWebComponent extends HTMLElement {
   #internals?: ElementInternals;
-  #elements!: JBCellElements;
   #templateSheet = new CSSStyleSheet();
   get name(){
     return this.getAttribute("name")||""
@@ -22,6 +20,7 @@ export class JBCellWebComponent extends HTMLElement {
   }
   constructor() {
     super();
+    this.setAttribute("role", "cell");
     if (typeof this.attachInternals === "function") {
       this.#internals = this.attachInternals();
       this.#internals.role = "cell";
@@ -33,8 +32,6 @@ export class JBCellWebComponent extends HTMLElement {
     shadowRoot.adoptedStyleSheets = [this.#templateSheet];
     registerDefaultVariables();
     this.#render();
-    this.#elements = {
-    }
     this.#registerEventListener();
   }
   #render() {
