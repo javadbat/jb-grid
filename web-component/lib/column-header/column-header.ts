@@ -7,8 +7,10 @@ export * from "./types.js";
 
 export class JBColumnHeaderWebComponent extends HTMLElement {
   #internals?: ElementInternals;
+  #isConstructed = false;
   #elements!: JBColumnHeaderElements;
   #templateSheet = new CSSStyleSheet();
+  #enableSortingRemoval: boolean = false;
 
   get name() {
     return this.getAttribute("name") || "";
@@ -48,16 +50,28 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
   static get observedAttributes() {
     return ["name", "sort", "sortable"];
   }
-
+  get enableSortingRemoval() {
+    return this.#enableSortingRemoval;
+  }
+  set enableSortingRemoval(value: boolean) {
+    this.#enableSortingRemoval = value;
+  }
   constructor() {
     super();
-    this.setAttribute("role", "columnheader");
     if (typeof this.attachInternals === "function") {
       this.#internals = this.attachInternals();
       this.#internals.role = "columnheader";
       this.#internals.ariaSort = "none";
     }
     this.#init();
+    this.#isConstructed = true;
+  }
+
+  connectedCallback() {
+    if (!this.#internals && !this.hasAttribute("role")) {
+      this.setAttribute("role", "columnheader");
+    }
+    this.#syncSortSemantics(this.sort);
   }
 
   #init() {
@@ -99,7 +113,9 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
       : value === "desc"
         ? "descending"
         : "none";
-    this.setAttribute("aria-sort", ariaSort);
+    if (this.#isConstructed) {
+      this.setAttribute("aria-sort", ariaSort);
+    }
     if (this.#internals) {
       this.#internals.ariaSort = ariaSort;
     }
@@ -133,7 +149,22 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
     if (!this.sortable) {
       return;
     }
-    const newSort: JBColumnHeaderSort = this.sort === "asc" ? "desc" : "asc";
+    let newSort: JBColumnHeaderSort | null = null;
+    if (this.#enableSortingRemoval) {
+      switch (this.sort) {
+        case 'asc':
+          newSort = 'desc';
+          break;
+        case 'desc':
+          newSort = null
+          break;
+        case null:
+          newSort = 'asc'
+          break;
+      }
+    } else {
+      newSort = this.sort === "asc" ? "desc" : "asc";
+    }
     this.sort = newSort;
     this.dispatchEvent(new CustomEvent<JBColumnHeaderSortEventDetail>("sort", {
       bubbles: true,

@@ -45,7 +45,8 @@ export class JBFullscreenIconWebComponent extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: 'open', delegatesFocus: true, clonable: true, serializable: true });
     registerDefaultVariables();
     this.#render();
-    this.state = this.#normalizeState(this.getAttribute("state"));
+    this.#state = this.#normalizeState(this.getAttribute("state"));
+    if (this.#internals) this.#internals.ariaLabel = fullscreenIconDictionary.get(i18n, this.#state === "exit" ? "exitFullscreen" : "enterFullscreen");
   }
 
   #render() {

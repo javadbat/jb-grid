@@ -44,20 +44,12 @@ export const Sortable: Story = {
   },
 };
 
-export const Ascending: Story = {
+export const enableSortingRemoval: Story = {
   args: {
     name: "name",
     sortable: true,
     sort: "asc",
-    children: "Name",
-  },
-};
-
-export const Descending: Story = {
-  args: {
-    name: "name",
-    sortable: true,
-    sort: "desc",
+    enableSortingRemoval:true,
     children: "Name",
   },
 };

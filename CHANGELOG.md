@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.0] - 2026-07-14
+
+### Added
+
+- add `enableSortingRemoval` to column header to support sort removal in multi sort tables
+
 ## [0.5.0] - 2026-07-14
 
 ### Changed

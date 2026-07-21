@@ -18,6 +18,7 @@
   overflow: hidden;
   color: inherit;
   font: inherit;
+  user-select: none;
 }
 
 :host([sortable]) .column-header {
@@ -41,10 +42,16 @@
   flex: 0 0 auto;
   height: 1rem;
   margin-inline-start: 4px;
+
+  
 }
 
 :host([sort]) .sort-icon-wrapper {
   display: inline-flex;
+  transition: opacity 0.2s 0s ease;
+      @starting-style {
+      opacity: 0;
+    }
 }
 
 .sort-icon-wrapper svg {

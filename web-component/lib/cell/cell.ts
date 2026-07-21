@@ -20,7 +20,6 @@ export class JBCellWebComponent extends HTMLElement {
   }
   constructor() {
     super();
-    this.setAttribute("role", "cell");
     if (typeof this.attachInternals === "function") {
       this.#internals = this.attachInternals();
       this.#internals.role = "cell";
@@ -41,6 +40,9 @@ export class JBCellWebComponent extends HTMLElement {
     this.shadowRoot!.appendChild(element.content.cloneNode(true));
   }
   connectedCallback() {
+    if (!this.#internals && !this.hasAttribute("role")) {
+      this.setAttribute("role", "cell");
+    }
   }
   #registerEventListener() {
     // this.#elements.nav.next.addEventListener('click', ()=>this.#goToNextPage(true));

@@ -6,5 +6,5 @@ export type JBColumnHeaderElements = {
 
 export type JBColumnHeaderSortEventDetail = {
   name: string,
-  sort: JBColumnHeaderSort
+  sort: JBColumnHeaderSort | null,
 }

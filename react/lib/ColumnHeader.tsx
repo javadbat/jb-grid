@@ -18,6 +18,7 @@ export type ColumnHeaderProps = Omit<JBColumnHeaderAttributes, "name" | "onSort"
   name: string,
   sortable?: boolean,
   sort?: JBColumnHeaderSort,
+  enableSortingRemoval?:boolean,
   onSort?: (event: JBColumnHeaderSortEvent) => void
 }
 
@@ -32,7 +33,7 @@ export const JBColumnHeader = React.forwardRef<JBColumnHeaderWebComponent | null
       element.current.sortable = sortable === true;
       element.current.sort = sort ?? null;
     }
-  }, [sortable, sort]);
+  }, [sortable, sort, element]);
 
   return (
     <jb-col-header ref={element} name={name} {...otherProps}>

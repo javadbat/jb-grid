@@ -14,7 +14,7 @@
     "web component",
     "react component"
   ],
-  "version": "0.5.0",
+  "version": "0.6.0",
   "bugs": "https://github.com/javadbat/jb-grid/issues",
   "license": "MIT",
   "files": [
@@ -44,8 +44,6 @@
   },
   "dependencies": {
     "jb-button":">=3.10.0",
-    "jb-core":">=0.30.0",
-    "jb-icon": ">=0.1.0",
-    "jb-searchbar":">=3.0.2"
+    "jb-core":">=0.30.0"
   }
 }

@@ -24,12 +24,17 @@ export class JBTableHeaderWebComponent extends HTMLElement {
 
   constructor() {
     super();
-    this.setAttribute("role", "rowgroup");
     if (typeof this.attachInternals === "function") {
       this.#internals = this.attachInternals();
       this.#internals.role = "rowgroup";
     }
     this.#init();
+  }
+
+  connectedCallback() {
+    if (!this.#internals && !this.hasAttribute("role")) {
+      this.setAttribute("role", "rowgroup");
+    }
   }
 
   #init() {
