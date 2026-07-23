@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Changed
+
+- move icons to jb-icon
+
 ## [0.6.0] - 2026-07-14
 
 ### Added

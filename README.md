@@ -250,12 +250,12 @@ paginationInfo.addEventListener('page-size-change', (event) => {
 
 ## Utility Icons
 
-The grid uses `jb-icon/refresh` for its refresh control. `jb-fullscreen-icon`
-remains a grid-owned standalone icon.
+The grid uses `jb-icons/refresh` for its refresh control and `jb-icons/expand`
+for its fullscreen control.
 
 ```html
 <jb-icon-refresh></jb-icon-refresh>
-<jb-fullscreen-icon state="enter"></jb-fullscreen-icon>
+<jb-icon-expand></jb-icon-expand>
 ```
 
 ### jb-icon-refresh API
@@ -267,11 +267,17 @@ remains a grid-owned standalone icon.
 Import it directly from the icon package when using it outside the grid:
 
 ```js
-import "jb-icon/refresh";
+import "jb-icons/refresh";
 ```
 
-### jb-fullscreen-icon API
+### jb-icon-expand API
 
 | name | type | description |
 | --- | --- | --- |
-| `state` | attribute/property | Icon state. Accepts `enter` or `exit`. |
+| `isExpanded` | property | Animates to the collapse state when `true` and back to the expand state when `false`. |
+
+Import it directly from the icon package when using it outside the grid:
+
+```js
+import "jb-icons/expand";
+```

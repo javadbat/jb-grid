@@ -1,5 +1,5 @@
 import React from 'react';
-import 'jb-icon/refresh';
+import 'jb-icons/refresh';
 import type { JBRefreshIconAttributes, JBRefreshIconWebComponent } from './module-declaration.js';
 
 export type RefreshIconProps = Omit<JBRefreshIconAttributes, "ref">

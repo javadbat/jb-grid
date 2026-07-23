@@ -1,6 +1,5 @@
 export * from "./pagination/pagination.js";
 export * from "./pagination-info/pagination-info.js";
-export * from "./fullscreen-icon/fullscreen-icon.js";
 export * from "./row/row.js";
 export * from "./table-header/table-header.js";
 export * from "./column-header/column-header.js";
