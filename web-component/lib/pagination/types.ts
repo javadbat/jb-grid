@@ -1,10 +1,12 @@
+import type { JBButtonWebComponent } from "jb-button";
+
 export type JBPaginationElements = {
   nav:{
     wrapper:HTMLDivElement,
-    first:HTMLButtonElement,
-    prev:HTMLButtonElement,
-    next:HTMLButtonElement,
-    last:HTMLButtonElement,
+    first:JBButtonWebComponent,
+    prev:JBButtonWebComponent,
+    next:JBButtonWebComponent,
+    last:JBButtonWebComponent,
   },
    index:{
     wrapper:HTMLDivElement,

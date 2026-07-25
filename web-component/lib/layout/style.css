@@ -239,7 +239,8 @@ slot[name="footer-start"]::slotted(jb-button) {
   min-width: 2.5rem;
   height: 2.5rem;
   --jb-button-height: 2.5rem;
-  --jb-button-padding: 0.5rem;
+  --jb-button-inline-padding: 0.5rem;
+  --jb-button-block-padding: 0.5rem;
   --jb-button-margin: 0 0.25rem;
 }
 

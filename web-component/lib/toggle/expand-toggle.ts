@@ -2,9 +2,12 @@ import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import { JBRowWebComponent } from '../row/row.js';
+import "jb-icons/triangle";
+import type { JBIconTriangleWebComponent } from "jb-icons/triangle";
 export { expandToggleDictionary, type JBExpandToggleDictionary } from "./i18n.js";
 export class JBExpandToggleWebComponent extends HTMLElement {
   #button!: HTMLButtonElement;
+  #triangle!: JBIconTriangleWebComponent;
   constructor() {
     super();
     this.#init();
@@ -14,6 +17,7 @@ export class JBExpandToggleWebComponent extends HTMLElement {
     registerDefaultVariables();
     this.#render();
     this.#button = shadowRoot.querySelector(".toggle-button")!;
+    this.#triangle = shadowRoot.querySelector("jb-icon-triangle")!;
     this.#registerEventListener();
   }
   #render() {
@@ -32,6 +36,7 @@ export class JBExpandToggleWebComponent extends HTMLElement {
     if(this.#parentRow?.isOpen){
       this.setAttribute('open','');
       this.#button.setAttribute("aria-expanded", "true");
+      this.#spinIcon(true);
     }
   }
   #findParentRow(element:Element|null):JBRowWebComponent|null{
@@ -53,7 +58,12 @@ export class JBExpandToggleWebComponent extends HTMLElement {
       this.#parentRow.isOpen = value
       value?this.setAttribute('open',''):this.removeAttribute('open');
       this.#button.setAttribute("aria-expanded", value ? "true" : "false");
+      this.#spinIcon(value);
     }
+  }
+  #spinIcon(open: boolean) {
+    const openSpin = getComputedStyle(this).direction === "rtl" ? -90 : 90;
+    this.#triangle.spin = open ? openSpin : -openSpin;
   }
 }
 const myElementNotExists = !customElements.get('jb-expand-toggle');

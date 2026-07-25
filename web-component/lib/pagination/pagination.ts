@@ -6,6 +6,9 @@ import type { JBPaginationElements, PageIndexDom } from './types.js';
 import { i18n } from "jb-core/i18n";
 import {enToFaDigits} from 'jb-core';
 import { paginationDictionary } from "./i18n.js";
+import "jb-button";
+import "jb-icons/arrow";
+import type { JBButtonWebComponent } from "jb-button";
 export { paginationDictionary, type JBPaginationDictionary } from "./i18n.js";
 export class JBPaginationWebComponent extends HTMLElement {
   #elements!: JBPaginationElements;
@@ -68,10 +71,10 @@ export class JBPaginationWebComponent extends HTMLElement {
     this.#elements = {
       nav: {
         wrapper: shadowRoot.querySelector('.page-navigator') as HTMLDivElement,
-        first: shadowRoot.querySelector('.first-page') as HTMLButtonElement,
-        last: shadowRoot.querySelector('.last-page') as HTMLButtonElement,
-        next: shadowRoot.querySelector('.next-page') as HTMLButtonElement,
-        prev: shadowRoot.querySelector('.prev-page') as HTMLButtonElement,
+        first: shadowRoot.querySelector('.first-page') as JBButtonWebComponent,
+        last: shadowRoot.querySelector('.last-page') as JBButtonWebComponent,
+        next: shadowRoot.querySelector('.next-page') as JBButtonWebComponent,
+        prev: shadowRoot.querySelector('.prev-page') as JBButtonWebComponent,
       },
       index: {
         wrapper: shadowRoot.querySelector('.page-index-wrapper') as HTMLDivElement,

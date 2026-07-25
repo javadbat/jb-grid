@@ -4,6 +4,8 @@ import type { JBPaginationDirectAttributeProps } from "./types";
 import type { JBCellWebComponent, JBRowWebComponent, JBExpandToggleWebComponent } from "jb-grid";
 import type { JBIconRefreshWebComponent } from "jb-icons/refresh";
 import type { JBIconExpandWebComponent } from "jb-icons/expand";
+import type { JBIconCloseWebComponent } from "jb-icons/close";
+import type { JBIconFilterWebComponent } from "jb-icons/filter";
 export type JBGridLayoutWebComponent = HTMLElement;
 type JBGridLoadingWebComponent = HTMLElement;
 type JBGridErrorWebComponent = HTMLElement;
@@ -34,6 +36,8 @@ type JBPaginationInfoWebComponent = HTMLElement & {
 export type JBRefreshIconWebComponent = JBIconRefreshWebComponent;
 type JBFullscreenIconState = "enter" | "exit";
 type JBFullscreenIconWebComponent = JBIconExpandWebComponent;
+type JBCloseIconAttributes = DetailedHTMLProps<HTMLAttributes<JBIconCloseWebComponent>, JBIconCloseWebComponent>;
+type JBFilterIconAttributes = DetailedHTMLProps<HTMLAttributes<JBIconFilterWebComponent>, JBIconFilterWebComponent>;
 type JBPaginationAttributes = DetailedHTMLProps<HTMLAttributes<JBPaginationWebComponent>, JBPaginationWebComponent> & JBPaginationDirectAttributeProps;
 export type JBPaginationInfoAttributes = DetailedHTMLProps<HTMLAttributes<JBPaginationInfoWebComponent>, JBPaginationInfoWebComponent>;
 export type JBRefreshIconAttributes = DetailedHTMLProps<HTMLAttributes<JBRefreshIconWebComponent>, JBRefreshIconWebComponent>;
@@ -73,6 +77,8 @@ declare module "react" {
       "jb-pagination-info": JBPaginationInfoAttributes;
       "jb-icon-refresh": JBRefreshIconAttributes;
       "jb-icon-expand": JBFullscreenIconAttributes;
+      "jb-icon-close": JBCloseIconAttributes;
+      "jb-icon-filter": JBFilterIconAttributes;
       "jb-row": JBRowAttributes;
       "jb-table-header": JBTableHeaderAttributes;
       "jb-col-header": JBColumnHeaderAttributes;

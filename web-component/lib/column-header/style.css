@@ -54,19 +54,9 @@
     }
 }
 
-.sort-icon-wrapper svg {
-  fill: #1e201d;
+.sort-icon-wrapper jb-icon-arrow-tailed {
+  --jb-icon-color: #1e201d;
   height: 1rem;
   width: 1rem;
   margin-top: 1px;
-}
-
-:host([sort="asc"]) .sort-icon-wrapper svg {
-  transition: all 0.2s ease-out;
-  transform: rotate(0deg);
-}
-
-:host([sort="desc"]) .sort-icon-wrapper svg {
-  transition: all 0.2s ease-out;
-  transform: rotate(180deg);
 }

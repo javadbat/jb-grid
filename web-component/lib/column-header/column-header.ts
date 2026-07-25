@@ -2,6 +2,7 @@ import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBColumnHeaderElements, JBColumnHeaderSort, JBColumnHeaderSortEventDetail } from './types.js';
+import "jb-icons/arrow-tailed";
 
 export * from "./types.js";
 
@@ -9,6 +10,7 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
   #internals?: ElementInternals;
   #isConstructed = false;
   #elements!: JBColumnHeaderElements;
+  #sortIconRotation = 0;
   #templateSheet = new CSSStyleSheet();
   #enableSortingRemoval: boolean = false;
 
@@ -80,11 +82,13 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
     registerDefaultVariables();
     this.#render();
     this.#elements = {
-      wrapper: shadowRoot.querySelector(".column-header")!
+      wrapper: shadowRoot.querySelector(".column-header")!,
+      sortIcon: shadowRoot.querySelector("jb-icon-arrow-tailed")!,
     };
     this.#setGridArea(this.name);
     this.#syncSortableSemantics();
     this.#syncSortSemantics(this.sort);
+    this.#syncSortIcon(this.sort);
     this.#registerEventListener();
   }
 
@@ -104,6 +108,16 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
     }
     if (name === "sort") {
       this.#syncSortSemantics(newValue);
+      this.#syncSortIcon(newValue);
+    }
+  }
+
+  #syncSortIcon(value: string | null | undefined) {
+    const nextRotation = value === "desc" ? 180 : 0;
+    const spin = nextRotation - this.#sortIconRotation;
+    this.#sortIconRotation = nextRotation;
+    if (spin !== 0) {
+      this.#elements.sortIcon.spin = spin;
     }
   }
 

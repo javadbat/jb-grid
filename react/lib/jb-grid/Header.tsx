@@ -4,6 +4,8 @@ import { JBButton } from 'jb-button/react';
 import { gridDictionary } from './i18n.js';
 import { i18n } from 'jb-core/i18n';
 import type { JBGridI18nConfig } from './types.js';
+import 'jb-icons/close';
+import 'jb-icons/filter';
 
 type HeaderProps = {
   vm: JBGridViewModel,
@@ -16,21 +18,16 @@ function Header(props: HeaderProps) {
   const { vm } = props;
   if (vm.headerSection == "SEARCH") {
     return (
-      <>
+      <div slot="header" style={{display:"flex", alignItems:"center"}}>
         <JBButton
-          slot="header-start"
           variant="ghost"
           aria-label={props.i18n?.messages?.closeFilters ?? gridDictionary.get(i18n, "closeFilters")}
           onClick={() => { vm.openMainHeaderSection(); }}
         >
-          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 224.512 224.512" fill="currentColor">
-            <g>
-              <polygon points="224.507,6.997 217.521,0 112.256,105.258 6.998,0 0.005,6.997 105.263,112.254 0.005,217.512 6.998,224.512 112.256,119.24 217.521,224.512 224.507,217.512 119.249,112.254" />
-            </g>
-          </svg>
+          <jb-icon-close></jb-icon-close>
         </JBButton>
-        <div slot="header-end">{props.searchbarComponent}</div>
-      </>
+        {props.searchbarComponent}
+      </div>
     );
   }
   return (
@@ -49,9 +46,7 @@ function Header(props: HeaderProps) {
           aria-label={props.i18n?.messages?.openFilters ?? gridDictionary.get(i18n, "openFilters")}
           onClick={() => { vm.openSearchHeaderSection(); }}
         >
-          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M4.00001 3C3.62123 3 3.27497 3.214 3.10558 3.55279C2.93619 3.89157 2.97274 4.29698 3.20001 4.6L8.80001 12.0667C8.92983 12.2398 9.00001 12.4503 9.00001 12.6667V20C9.00001 20.3466 9.17946 20.6684 9.47427 20.8507C9.76909 21.0329 10.1372 21.0494 10.4472 20.8944L14.4472 18.8944C14.786 18.725 15 18.3788 15 18V12.6667C15 12.4503 15.0702 12.2398 15.2 12.0667L20.8 4.6C21.0273 4.29698 21.0638 3.89157 20.8944 3.55279C20.725 3.214 20.3788 3 20 3H4.00001Z" />
-          </svg>
+          <jb-icon-filter></jb-icon-filter>
         </JBButton>
       )}
     </>
