@@ -43,8 +43,8 @@
 		"url": "git@github.com:javadbat/jb-grid.git"
   },
   "dependencies": {
-    "jb-button":">=3.10.0",
-    "jb-core":">=0.30.0",
-    "jb-icon": ">=2.0.0"
+    "jb-button":"^3.10.0",
+    "jb-core":"^0.30.0",
+    "jb-icons": "^2.0.0"
   }
 }
