@@ -4,7 +4,8 @@
 
 ### Changed
 
-- move icons to jb-icon
+- Moved internal icons to `jb-icons`.
+- Updated the column-header sort indicator to use the long `jb-icon-arrow-tailed` variant.
 
 ## [0.6.0] - 2026-07-14
 
