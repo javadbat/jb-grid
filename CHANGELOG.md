@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.7.2] - 2026-07-31
+
+### Fixed
+
+- fix toggle button spin problem base on new icon.
+
 ## [0.7.1] - 2026-07-31
 
 ### Fixed
