@@ -1,11 +1,10 @@
 .jb-pagination-web-component {
   display: flex;
-  gap: 1rem;
+  gap: var(--pagination-sections-gap);
   direction:ltr;
   .page-navigator {
     display: grid;
-    grid-template-columns: 4rem 4rem max-content 4rem 4rem;
-    grid-template-rows: 3rem;
+    grid-template-columns: repeat(5, max-content);
     justify-items: center;
     align-items: center;
 

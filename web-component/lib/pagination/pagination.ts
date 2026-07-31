@@ -4,7 +4,7 @@ import VariablesCSS from './variables.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBPaginationElements, PageIndexDom } from './types.js';
 import { i18n } from "jb-core/i18n";
-import {enToFaDigits} from 'jb-core';
+import { enToFaDigits } from 'jb-core';
 import { paginationDictionary } from "./i18n.js";
 import "jb-button";
 import "jb-icons/arrow";
@@ -31,14 +31,14 @@ export class JBPaginationWebComponent extends HTMLElement {
   }
 
   //how many number item we have in dom
-  get #indexButtonCount (){
+  get #indexButtonCount() {
     return this.#DisplayIndexCount + 2; /* for 2 hidden button in start and end of the list */
   }
-  get pageIndex(){
+  get pageIndex() {
     return this.#pageIndex;
   }
-  set pageIndex(value:number){
-    this.#goToPage(value,false);
+  set pageIndex(value: number) {
+    this.#goToPage(value, false);
   }
   get max() {
     return this.#max;
@@ -46,7 +46,7 @@ export class JBPaginationWebComponent extends HTMLElement {
   set max(value: number) {
     this.#max = value;
     if (this.pageIndex > value) {
-      this.#updatePageIndex(value,false);
+      this.#updatePageIndex(value, false);
     }
     this.#syncNavigationButtons();
   }
@@ -62,10 +62,14 @@ export class JBPaginationWebComponent extends HTMLElement {
   }
   constructor() {
     super();
+    this.attachShadow({ mode: 'open', delegatesFocus: true, clonable: true, serializable: true });
+  }
+  connectedCallback() {
     this.#init();
+    this.#initProperties();
   }
   #init() {
-    const shadowRoot = this.attachShadow({ mode: 'open', delegatesFocus: true, clonable:true, serializable:true });
+    const shadowRoot = this.shadowRoot!;
     registerDefaultVariables();
     this.#render();
     this.#elements = {
@@ -82,11 +86,7 @@ export class JBPaginationWebComponent extends HTMLElement {
       }
     }
     this.#registerEventListener();
-    //TODO: do it after pageSize determined
-    this.#initPageIndexes();
-    // To retrigger setter effects
-    this.max = Infinity;
-    this.min = 1;
+
   }
   #render() {
     const html = `<style>${VariablesCSS} ${CSS}</style>\n${renderHTML()}`;
@@ -94,16 +94,22 @@ export class JBPaginationWebComponent extends HTMLElement {
     element.innerHTML = html;
     this.shadowRoot!.appendChild(element.content.cloneNode(true));
   }
-  connectedCallback() {
-  }
-  #registerEventListener() {
-    this.#elements.nav.next.addEventListener('click', ()=>this.#goToNextPage(true));
-    this.#elements.nav.prev.addEventListener('click', ()=>this.#goToPrevPage(true));
-    this.#elements.nav.last.addEventListener('click', ()=>{this.#goToPage(this.#max,true)});
-    this.#elements.nav.first.addEventListener('click', ()=>{this.#goToPage(this.#min,true)});
+
+  #initProperties() {
+    this.#initPageIndexes();
+    // To retrigger setter effects
+    this.max = this.max;
+    this.min = this.min;
   }
 
-  #goToNextPage(shouldDispatch:boolean) {
+  #registerEventListener() {
+    this.#elements.nav.next.addEventListener('click', () => this.#goToNextPage(true));
+    this.#elements.nav.prev.addEventListener('click', () => this.#goToPrevPage(true));
+    this.#elements.nav.last.addEventListener('click', () => { this.#goToPage(this.#max, true) });
+    this.#elements.nav.first.addEventListener('click', () => { this.#goToPage(this.#min, true) });
+  }
+
+  #goToNextPage(shouldDispatch: boolean) {
     if (this.#pageIndex > this.#max - 1) {
       return;
     }
@@ -114,7 +120,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     this.#elements.index.list.push(indexDom);
     this.#updatePageIndex(newIndex, shouldDispatch)
   }
-  #goToPrevPage(shouldDispatch:boolean) {
+  #goToPrevPage(shouldDispatch: boolean) {
     if (this.#pageIndex < this.#min + 1) {
       return;
     }
@@ -123,31 +129,31 @@ export class JBPaginationWebComponent extends HTMLElement {
     this.#elements.index.list.pop()?.remove();
     this.#elements.index.list.unshift(indexDom);
     this.#elements.index.wrapper.prepend(indexDom);
-    this.#updatePageIndex(newIndex,shouldDispatch)
+    this.#updatePageIndex(newIndex, shouldDispatch)
   }
-  #goToPage(newPageIndex: number,shouldDispatch:boolean) {
-    if(this.#pageIndex == newPageIndex){
+  #goToPage(newPageIndex: number, shouldDispatch: boolean) {
+    if (this.#pageIndex == newPageIndex) {
       return;
     }
     const diff = newPageIndex - this.#pageIndex;
-    if(Math.abs(diff)>1){
-      this.#updatePageIndex(newPageIndex,shouldDispatch);
+    if (Math.abs(diff) > 1) {
+      this.#updatePageIndex(newPageIndex, shouldDispatch);
       this.#initPageIndexes();
-    }else{
+    } else {
       //play with animation
-      diff>0?this.#goToNextPage(shouldDispatch):this.#goToPrevPage(shouldDispatch);
+      diff > 0 ? this.#goToNextPage(shouldDispatch) : this.#goToPrevPage(shouldDispatch);
     }
   }
   /**
    * place pageIndex element in position in data and dom structure
    */
   #putPageIndexElement(element: PageIndexDom) {
-    if(this.#elements.index.list.find(x=>x.pageIndex == element.pageIndex)){
+    if (this.#elements.index.list.find(x => x.pageIndex == element.pageIndex)) {
       //already exist
       return;
     }
-    let removePosition:'end'|'start' = 'end';
-    if (this.#elements.index.list.length == 0  || this.#elements.index.list[this.#elements.index.list.length - 1]?.pageIndex < element.pageIndex) {
+    let removePosition: 'end' | 'start' = 'end';
+    if (this.#elements.index.list.length == 0 || this.#elements.index.list[this.#elements.index.list.length - 1]?.pageIndex < element.pageIndex) {
       //put in last
       this.#elements.index.list.push(element);
       this.#elements.index.wrapper.append(element);
@@ -163,9 +169,9 @@ export class JBPaginationWebComponent extends HTMLElement {
       this.#elements.index.wrapper.insertBefore(element, this.#elements.index.list[index]);
       this.#elements.index.list.splice(index, 0, element);
     }
-    if(this.#elements.index.list.length>this.#indexButtonCount){
+    if (this.#elements.index.list.length > this.#indexButtonCount) {
       //remove redundant elements 
-      removePosition == 'end'?this.#elements.index.list.pop()?.remove():this.#elements.index.list.shift()?.remove();
+      removePosition == 'end' ? this.#elements.index.list.pop()?.remove() : this.#elements.index.list.shift()?.remove();
     }
   }
   #createPageIndexElement(newIndex: number): PageIndexDom {
@@ -174,7 +180,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     const elem = document.createElement('button') as PageIndexDom;
     elem.type = "button";
     elem.setAttribute("aria-label", paginationDictionary.get(i18n, "page")(newIndex));
-    elem.classList.add('page-index', isEmpty?'empty':'not-empty');
+    elem.classList.add('page-index', isEmpty ? 'empty' : 'not-empty');
     elem.dataset.index = `${newIndex}`;
     elem.pageIndex = newIndex;
     elem.addEventListener("click", () => {
@@ -186,7 +192,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     } else {
       elem.isEmpty = false;
       elem.disabled = false;
-      elem.innerHTML = `${this.showPersianNumber?enToFaDigits(newIndex):newIndex}`;
+      elem.innerHTML = `${this.showPersianNumber ? enToFaDigits(newIndex) : newIndex}`;
     }
     return elem;
   }
@@ -194,12 +200,12 @@ export class JBPaginationWebComponent extends HTMLElement {
     if (item.isEmpty) {
       return;
     }
-    this.#goToPage(item.pageIndex,true);
+    this.#goToPage(item.pageIndex, true);
   }
   /**
    * this event must call when we update pageindex inside of component by user interaction and not programmer
    */
-  #updatePageIndex(newIndex: number,shouldDispatch:boolean) {
+  #updatePageIndex(newIndex: number, shouldDispatch: boolean) {
     this.#pageIndex = newIndex;
     this.#updateActiveIndex(newIndex);
     this.#syncNavigationButtons();
@@ -211,6 +217,7 @@ export class JBPaginationWebComponent extends HTMLElement {
     }
     const isFirstPage = this.#pageIndex <= this.#min;
     const isLastPage = this.#max !== Infinity && this.#pageIndex >= this.#max;
+
     this.#elements.nav.first.disabled = isFirstPage;
     this.#elements.nav.prev.disabled = isFirstPage;
     this.#elements.nav.next.disabled = isLastPage;

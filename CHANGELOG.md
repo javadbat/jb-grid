@@ -1,11 +1,13 @@
 # Changelog
 
-## unreleased
+## [0.6.0] - 2026-07-31
 
 ### Changed
 
 - Moved internal icons to `jb-icons`.
 - Updated the column-header sort indicator to use the long `jb-icon-arrow-tailed` variant.
+- use jb-button instead of normal button
+- add `--jb-pagination-sections-gap` css variable.
 
 ## [0.6.0] - 2026-07-14
 

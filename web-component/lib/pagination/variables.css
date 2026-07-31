@@ -7,4 +7,5 @@
 
   /* Size */
   --index-width: var(--jb-pagination-index-width, 3rem);
+  --pagination-sections-gap: var(--jb-pagination-sections-gap, 0.5rem);
 }

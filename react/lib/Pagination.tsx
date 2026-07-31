@@ -1,4 +1,4 @@
-import React, { type FormEventHandler, type HTMLAttributes } from 'react';
+import React from 'react';
 import  'jb-grid'
 import type {JBPaginationWebComponent} from 'jb-grid'
 import type { JBElementStandardProps } from 'jb-core/react';
