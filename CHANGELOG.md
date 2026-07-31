@@ -1,6 +1,12 @@
 # Changelog
 
-## [0.6.0] - 2026-07-31
+## [0.7.1] - 2026-07-31
+
+### Fixed
+
+- fix icons types reference
+
+## [0.7.0] - 2026-07-31
 
 ### Changed
 

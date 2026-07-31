@@ -11,7 +11,6 @@ export { JBRefreshIcon } from "./RefreshIcon.js";
 export type { RefreshIconProps } from "./RefreshIcon.js";
 
 export { JBFullscreenIcon } from "./FullscreenIcon.js";
-export type { FullscreenIconProps } from "./FullscreenIcon.js";
 
 export { JBRow } from "./Row.js";
 export type { RowProps } from "./Row.js";
