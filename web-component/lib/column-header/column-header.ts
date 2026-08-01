@@ -3,6 +3,7 @@ import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBColumnHeaderElements, JBColumnHeaderSort, JBColumnHeaderSortEventDetail } from './types.js';
 import "jb-icons/arrow-tailed";
+import { parseBooleanAttribute } from "jb-core";
 
 export * from "./types.js";
 
@@ -24,7 +25,7 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
   }
 
   get sortable() {
-    return this.hasAttribute("sortable");
+    return parseBooleanAttribute(this.getAttribute("sortable"));
   }
 
   set sortable(value: boolean) {

@@ -1,9 +1,10 @@
 import CSS from "./style.css";
 import { renderHTML } from "./render.js";
+import { parseBooleanAttribute } from "jb-core";
 
 export class JBViewportWebComponent extends HTMLElement {
   get fullscreen() {
-    return this.hasAttribute("fullscreen");
+    return parseBooleanAttribute(this.getAttribute("fullscreen"));
   }
 
   set fullscreen(value: boolean) {
