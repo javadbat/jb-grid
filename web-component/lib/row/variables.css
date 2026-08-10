@@ -1,7 +1,7 @@
 :host {
   /* Theme/Color */
-  --bg-color: var(--jb-row-bg-color, var(--jb-white));
-  --bg-color-even: var(--jb-row-bg-color-even, var(--jb-neutral-10));
+  --bg-color: var(--jb-row-bg-color, var(--jb-surface-primary));
+  --bg-color-even: var(--jb-row-bg-color-even, var(--jb-surface-secondary));
   --bg-color-even-tablet: var(--jb-row-bg-color-even-tablet, var(--bg-color));
   --expand-border-color: var(--jb-row-expand-border-color, #ebebeb);
   --shadow-color: var(--jb-row-shadow-color, #d8d8d8);

@@ -1,7 +1,7 @@
 :host {
   /* Theme/Color */
   --arrow-button-fill-color: var(--jb-pagination-arrow-button-fill-color, var(--jb-neutral-2));
-  --arrow-button-fill-color-disabled: var(--jb-pagination-arrow-button-fill-color-disabled, var(--jb-neutral-7));
+  --arrow-button-fill-color-disabled: var(--jb-pagination-arrow-button-fill-color-disabled, var(--jb-content-secondary));
   --page-index-color: var(--jb-pagination-page-index-color, var(--jb-neutral-6));
   --page-index-color-current: var(--jb-pagination-page-index-color-current, var(--jb-primary));
 
