@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { JBInput } from "jb-input/react";
-import { JBOption, JBSelect } from "jb-select/react";
+import { JBSelect } from "jb-select/react";
+import { JBOption } from "jb-select/option/react";
 import { JBSearchbar } from "jb-searchbar/react";
 import type { JBSearchbarEventType, JBSearchbarValue } from "jb-searchbar";
 import { JBCell, JBColumnHeader, JBGrid, JBRow, JBTableHeader } from "../../react/lib/index.ts";
