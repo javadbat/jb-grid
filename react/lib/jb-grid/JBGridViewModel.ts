@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import type { JBGridCallbacks, JBGridPaginationMeta } from './types.js';
-import type { JBRefreshIconWebComponent } from '../module-declaration.js';
+import type { JBIconRefreshWebComponent } from "jb-icons/refresh";
 
 type StateChangeCallback = (() => void) | undefined;
 type HeaderSection = "MAIN" | "SEARCH";
@@ -16,7 +16,7 @@ class JBGridViewModel {
   #onStateChange: StateChangeCallback;
   headerSection: HeaderSection = "MAIN";
   elements = {
-    refreshIcon: React.createRef<JBRefreshIconWebComponent>()
+    refreshIcon: React.createRef<JBIconRefreshWebComponent>()
   }
   callBacks: JBGridCallbacks = {}
   page = {
