@@ -18,13 +18,20 @@ export class JBPaginationWebComponent extends HTMLElement {
   //how many number in display
   #DisplayIndexCount = 3;
   #showPersianNumber = i18n.locale.numberingSystem == "arabext";
+  #hasShowPersianNumberOverride = false;
+  #unsubscribeLocaleChange: VoidFunction | null = null;
 
   get showPersianNumber() {
     return this.#showPersianNumber;
   }
 
   set showPersianNumber(value: boolean | undefined) {
-    this.#showPersianNumber = value ?? i18n.locale.numberingSystem == "arabext";
+    this.#hasShowPersianNumberOverride = value !== undefined;
+    this.#setShowPersianNumber(value ?? i18n.locale.numberingSystem === "arabext");
+  }
+
+  #setShowPersianNumber(value: boolean) {
+    this.#showPersianNumber = value;
     if (this.#elements) {
       this.#initPageIndexes();
     }
@@ -67,6 +74,15 @@ export class JBPaginationWebComponent extends HTMLElement {
   connectedCallback() {
     this.#init();
     this.#initProperties();
+    this.#unsubscribeLocaleChange?.();
+    if (!this.#hasShowPersianNumberOverride) this.#setShowPersianNumber(i18n.locale.numberingSystem === "arabext");
+    this.#unsubscribeLocaleChange = i18n.subscribe(() => {
+      if (!this.#hasShowPersianNumberOverride) this.#setShowPersianNumber(i18n.locale.numberingSystem === "arabext");
+    });
+  }
+  disconnectedCallback() {
+    this.#unsubscribeLocaleChange?.();
+    this.#unsubscribeLocaleChange = null;
   }
   #init() {
     const shadowRoot = this.shadowRoot!;

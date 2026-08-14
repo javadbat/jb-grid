@@ -20,6 +20,8 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
   #fromLabel: string | null = null;
   #currentAvailableItemTitle: string | null = null;
   #showPersianNumber = i18n.locale.numberingSystem == "arabext";
+  #hasShowPersianNumberOverride = false;
+  #unsubscribeLocaleChange: VoidFunction | null = null;
 
   get pageSize() {
     return this.#pageSize;
@@ -98,7 +100,12 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
   }
 
   set showPersianNumber(value: boolean | undefined) {
-    this.#showPersianNumber = value ?? i18n.locale.numberingSystem == "arabext";
+    this.#hasShowPersianNumberOverride = value !== undefined;
+    this.#setShowPersianNumber(value ?? i18n.locale.numberingSystem === "arabext");
+  }
+
+  #setShowPersianNumber(value: boolean) {
+    this.#showPersianNumber = value;
     this.#renderPageSizeOptions();
     this.#renderMetaData();
   }
@@ -106,6 +113,20 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
   constructor() {
     super();
     this.#init();
+  }
+
+  connectedCallback() {
+    this.#unsubscribeLocaleChange?.();
+    if (!this.#hasShowPersianNumberOverride) this.#setShowPersianNumber(i18n.locale.numberingSystem === "arabext");
+    this.#unsubscribeLocaleChange = i18n.subscribe(() => {
+      if (!this.#hasShowPersianNumberOverride) this.#setShowPersianNumber(i18n.locale.numberingSystem === "arabext");
+      this.#renderLabels();
+    });
+  }
+
+  disconnectedCallback() {
+    this.#unsubscribeLocaleChange?.();
+    this.#unsubscribeLocaleChange = null;
   }
 
   #init() {
