@@ -281,3 +281,4 @@ Import it directly from the icon package when using it outside the grid:
 ```js
 import "jb-icons/expand";
 ```
+
