@@ -58,3 +58,9 @@ export class JBGridErrorWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent("jb-grid-error", JBGridErrorWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-grid-error": JBGridErrorWebComponent;
+  }
+}

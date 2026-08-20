@@ -76,3 +76,9 @@ export class JBRowWebComponent extends JBBaseComponent {
   }
 }
 defineWebComponent('jb-row', JBRowWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-row": JBRowWebComponent;
+  }
+}

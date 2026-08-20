@@ -266,3 +266,9 @@ export class JBPaginationWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent('jb-pagination', JBPaginationWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-pagination": JBPaginationWebComponent;
+  }
+}

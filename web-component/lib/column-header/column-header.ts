@@ -199,3 +199,9 @@ export class JBColumnHeaderWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent('jb-col-header', JBColumnHeaderWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-col-header": JBColumnHeaderWebComponent;
+  }
+}

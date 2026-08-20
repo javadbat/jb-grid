@@ -50,3 +50,9 @@ export class JBCellWebComponent extends JBBaseComponent {
   }
 }
 defineWebComponent('jb-cell', JBCellWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-cell": JBCellWebComponent;
+  }
+}

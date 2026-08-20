@@ -21,3 +21,9 @@ export class JBViewportWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent("jb-viewport", JBViewportWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-viewport": JBViewportWebComponent;
+  }
+}

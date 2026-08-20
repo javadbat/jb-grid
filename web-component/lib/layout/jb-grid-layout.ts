@@ -49,3 +49,9 @@ export class JBGridLayoutWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent("jb-grid-layout", JBGridLayoutWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-grid-layout": JBGridLayoutWebComponent;
+  }
+}

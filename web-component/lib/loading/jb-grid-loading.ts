@@ -15,3 +15,9 @@ export class JBGridLoadingWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent("jb-grid-loading", JBGridLoadingWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-grid-loading": JBGridLoadingWebComponent;
+  }
+}

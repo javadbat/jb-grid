@@ -57,3 +57,9 @@ export class JBTableHeaderWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent('jb-table-header', JBTableHeaderWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-table-header": JBTableHeaderWebComponent;
+  }
+}

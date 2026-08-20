@@ -77,3 +77,9 @@ export class JBExpandToggleWebComponent extends JBBaseComponent {
   }
 }
 defineWebComponent('jb-expand-toggle', JBExpandToggleWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-expand-toggle": JBExpandToggleWebComponent;
+  }
+}
