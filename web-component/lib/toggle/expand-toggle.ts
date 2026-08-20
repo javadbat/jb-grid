@@ -1,10 +1,11 @@
+import { defineWebComponent, JBBaseComponent } from "jb-core";
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import { JBRowWebComponent } from '../row/row.js';
 import type { JBIconTriangleWebComponent } from "jb-icons/triangle";
 export { expandToggleDictionary, type JBExpandToggleDictionary } from "./i18n.js";
-export class JBExpandToggleWebComponent extends HTMLElement {
+export class JBExpandToggleWebComponent extends JBBaseComponent {
   #button!: HTMLButtonElement;
   #triangle!: JBIconTriangleWebComponent;
   constructor() {
@@ -75,7 +76,4 @@ export class JBExpandToggleWebComponent extends HTMLElement {
     this.#triangle.spin = open ? openSpin : 0;
   }
 }
-const myElementNotExists = !customElements.get('jb-expand-toggle');
-if (myElementNotExists) {
-  window.customElements.define('jb-expand-toggle', JBExpandToggleWebComponent);
-}
+defineWebComponent('jb-expand-toggle', JBExpandToggleWebComponent);

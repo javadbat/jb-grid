@@ -1,9 +1,10 @@
+import { defineWebComponent, JBBaseComponent } from "jb-core";
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 
 export * from "./types.js"; 
-export class JBCellWebComponent extends HTMLElement {
+export class JBCellWebComponent extends JBBaseComponent {
   #internals?: ElementInternals;
   #templateSheet = new CSSStyleSheet();
   get name(){
@@ -48,7 +49,4 @@ export class JBCellWebComponent extends HTMLElement {
     // this.#elements.nav.next.addEventListener('click', ()=>this.#goToNextPage(true));
   }
 }
-const myElementNotExists = !customElements.get('jb-cell');
-if (myElementNotExists) {
-  window.customElements.define('jb-cell', JBCellWebComponent);
-}
+defineWebComponent('jb-cell', JBCellWebComponent);

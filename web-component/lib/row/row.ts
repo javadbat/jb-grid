@@ -1,3 +1,4 @@
+import { defineWebComponent, JBBaseComponent } from "jb-core";
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import VariablesCSS from './variables.css';
@@ -6,7 +7,7 @@ import type { JBRowElements, RowTemplate} from './types.js';
 import { createTemplateStylesheet } from './utils.js';
 
 export * from "./types.js"; 
-export class JBRowWebComponent extends HTMLElement {
+export class JBRowWebComponent extends JBBaseComponent {
   static #detailsId = 0;
   #elements!: JBRowElements;
   #templateSheet = new CSSStyleSheet();
@@ -74,7 +75,4 @@ export class JBRowWebComponent extends HTMLElement {
     // this.#elements.nav.next.addEventListener('click', ()=>this.#goToNextPage(true));
   }
 }
-const myElementNotExists = !customElements.get('jb-row');
-if (myElementNotExists) {
-  window.customElements.define('jb-row', JBRowWebComponent);
-}
+defineWebComponent('jb-row', JBRowWebComponent);

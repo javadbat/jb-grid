@@ -1,13 +1,13 @@
+import { defineWebComponent, JBBaseComponent, parseBooleanAttribute } from "jb-core";
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBColumnHeaderElements, JBColumnHeaderSort, JBColumnHeaderSortEventDetail } from './types.js';
 import "jb-icons/arrow-tailed";
-import { parseBooleanAttribute } from "jb-core";
 
 export * from "./types.js";
 
-export class JBColumnHeaderWebComponent extends HTMLElement {
+export class JBColumnHeaderWebComponent extends JBBaseComponent {
   #internals?: ElementInternals;
   #isConstructed = false;
   #elements!: JBColumnHeaderElements;
@@ -198,7 +198,4 @@ export class JBColumnHeaderWebComponent extends HTMLElement {
   }
 }
 
-const myElementNotExists = !customElements.get('jb-col-header');
-if (myElementNotExists) {
-  window.customElements.define('jb-col-header', JBColumnHeaderWebComponent);
-}
+defineWebComponent('jb-col-header', JBColumnHeaderWebComponent);

@@ -1,8 +1,8 @@
+import { defineWebComponent, JBBaseComponent, parseBooleanAttribute } from "jb-core";
 import CSS from "./style.css";
 import { renderHTML } from "./render.js";
-import { parseBooleanAttribute } from "jb-core";
 
-export class JBViewportWebComponent extends HTMLElement {
+export class JBViewportWebComponent extends JBBaseComponent {
   get fullscreen() {
     return parseBooleanAttribute(this.getAttribute("fullscreen"));
   }
@@ -20,6 +20,4 @@ export class JBViewportWebComponent extends HTMLElement {
   }
 }
 
-if (!customElements.get("jb-viewport")) {
-  window.customElements.define("jb-viewport", JBViewportWebComponent);
-}
+defineWebComponent("jb-viewport", JBViewportWebComponent);

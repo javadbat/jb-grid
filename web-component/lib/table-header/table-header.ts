@@ -1,3 +1,4 @@
+import { defineWebComponent, JBBaseComponent } from "jb-core";
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
@@ -6,7 +7,7 @@ import { createTemplateStylesheet } from '../utils.js';
 
 export * from "./types.js";
 
-export class JBTableHeaderWebComponent extends HTMLElement {
+export class JBTableHeaderWebComponent extends JBBaseComponent {
   #internals?: ElementInternals;
   #templateSheet = new CSSStyleSheet();
   #headerTemplate: TableHeaderTemplate = [];
@@ -55,7 +56,4 @@ export class JBTableHeaderWebComponent extends HTMLElement {
   }
 }
 
-const myElementNotExists = !customElements.get('jb-table-header');
-if (myElementNotExists) {
-  window.customElements.define('jb-table-header', JBTableHeaderWebComponent);
-}
+defineWebComponent('jb-table-header', JBTableHeaderWebComponent);

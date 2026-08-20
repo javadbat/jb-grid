@@ -1,3 +1,4 @@
+import { defineWebComponent, JBBaseComponent } from "jb-core";
 import "jb-button";
 import CSS from "./style.css";
 import { renderHTML } from "./render.js";
@@ -13,7 +14,7 @@ type JBGridErrorElements = {
   refreshButtonTitle: HTMLElement;
 };
 
-export class JBGridErrorWebComponent extends HTMLElement {
+export class JBGridErrorWebComponent extends JBBaseComponent {
   #elements!: JBGridErrorElements;
 
   static get observedAttributes() {
@@ -56,6 +57,4 @@ export class JBGridErrorWebComponent extends HTMLElement {
   }
 }
 
-if (!customElements.get("jb-grid-error")) {
-  window.customElements.define("jb-grid-error", JBGridErrorWebComponent);
-}
+defineWebComponent("jb-grid-error", JBGridErrorWebComponent);

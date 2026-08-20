@@ -1,16 +1,16 @@
+import { defineWebComponent, JBBaseComponent, enToFaDigits } from "jb-core";
 import { renderHTML } from './render';
 import CSS from './style.css';
 import VariablesCSS from './variables.css';
 import { registerDefaultVariables } from 'jb-core/theme';
 import type { JBPaginationElements, PageIndexDom } from './types.js';
 import { i18n } from "jb-core/i18n";
-import { enToFaDigits } from 'jb-core';
 import { paginationDictionary } from "./i18n.js";
 import "jb-button";
 import "jb-icons/arrow";
 import type { JBButtonWebComponent } from "jb-button";
 export { paginationDictionary, type JBPaginationDictionary } from "./i18n.js";
-export class JBPaginationWebComponent extends HTMLElement {
+export class JBPaginationWebComponent extends JBBaseComponent {
   #elements!: JBPaginationElements;
   #pageIndex: number = 1;
   #min = 1;
@@ -265,7 +265,4 @@ export class JBPaginationWebComponent extends HTMLElement {
   }
 }
 
-const myElementNotExists = !customElements.get('jb-pagination');
-if (myElementNotExists) {
-  window.customElements.define('jb-pagination', JBPaginationWebComponent);
-}
+defineWebComponent('jb-pagination', JBPaginationWebComponent);

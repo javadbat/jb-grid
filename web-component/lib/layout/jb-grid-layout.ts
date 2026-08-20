@@ -1,7 +1,8 @@
+import { defineWebComponent, JBBaseComponent } from "jb-core";
 import CSS from "./style.css";
 import { renderHTML } from "./render.js";
 
-export class JBGridLayoutWebComponent extends HTMLElement {
+export class JBGridLayoutWebComponent extends JBBaseComponent {
   #table!: HTMLElement;
 
   static get observedAttributes() {
@@ -47,7 +48,4 @@ export class JBGridLayoutWebComponent extends HTMLElement {
   }
 }
 
-const elementNotExists = !customElements.get("jb-grid-layout");
-if (elementNotExists) {
-  window.customElements.define("jb-grid-layout", JBGridLayoutWebComponent);
-}
+defineWebComponent("jb-grid-layout", JBGridLayoutWebComponent);

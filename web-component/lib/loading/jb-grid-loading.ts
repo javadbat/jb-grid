@@ -1,9 +1,10 @@
+import { defineWebComponent, JBBaseComponent } from "jb-core";
 import CSS from "./style.css";
 import { renderHTML } from "./render.js";
 
 export { gridLoadingDictionary, type JBGridLoadingDictionary } from "./i18n.js";
 
-export class JBGridLoadingWebComponent extends HTMLElement {
+export class JBGridLoadingWebComponent extends JBBaseComponent {
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open", clonable: true, serializable: true });
@@ -13,6 +14,4 @@ export class JBGridLoadingWebComponent extends HTMLElement {
   }
 }
 
-if (!customElements.get("jb-grid-loading")) {
-  window.customElements.define("jb-grid-loading", JBGridLoadingWebComponent);
-}
+defineWebComponent("jb-grid-loading", JBGridLoadingWebComponent);

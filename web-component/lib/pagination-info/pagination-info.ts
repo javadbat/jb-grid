@@ -1,7 +1,7 @@
+import { defineWebComponent, JBBaseComponent, enToFaDigits } from "jb-core";
 import { renderHTML } from './render.js';
 import CSS from './style.css';
 import { registerDefaultVariables } from 'jb-core/theme';
-import { enToFaDigits } from 'jb-core';
 import type { JBPaginationInfoElements, JBPaginationInfoPageSizeChangeEventDetail } from './types.js';
 import { i18n } from "jb-core/i18n";
 import { paginationInfoDictionary } from "./i18n.js";
@@ -9,7 +9,7 @@ import { paginationInfoDictionary } from "./i18n.js";
 export * from "./types.js";
 export { paginationInfoDictionary, type JBPaginationInfoDictionary } from "./i18n.js";
 
-export class JBPaginationInfoWebComponent extends HTMLElement {
+export class JBPaginationInfoWebComponent extends JBBaseComponent {
   #elements!: JBPaginationInfoElements;
   #pageSize = 20;
   #pageSizes = [20, 30, 50, 100];
@@ -210,7 +210,4 @@ export class JBPaginationInfoWebComponent extends HTMLElement {
   }
 }
 
-const myElementNotExists = !customElements.get('jb-pagination-info');
-if (myElementNotExists) {
-  window.customElements.define('jb-pagination-info', JBPaginationInfoWebComponent);
-}
+defineWebComponent('jb-pagination-info', JBPaginationInfoWebComponent);
