@@ -40,7 +40,7 @@
   },
   "repository": {
 		"type": "git",
-		"url": "git@github.com:javadbat/jb-grid.git"
+		"url": "https://github.com/javadbat/jb-grid.git"
   },
   "dependencies": {
     "jb-button":"^4.0.0",

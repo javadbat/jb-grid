@@ -31,7 +31,7 @@
   "module": "index.js",
   "repository": {
 		"type": "git",
-		"url": "git@github.com:javadbat/jb-grid.git"
+		"url": "https://github.com/javadbat/jb-grid.git"
   },
   "dependencies": {
     "jb-button": "^3.8.0",
