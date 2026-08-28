@@ -10,6 +10,7 @@
 ### Fixed
 
 - preserve scroll space for content and header
+- fix sort direction
 
 ## [0.7.2] - 2026-07-31
 
