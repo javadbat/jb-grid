@@ -24,7 +24,8 @@
 .jb-table-header-web-component {
   width: 100%;
   height: 100%;
-
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
   .table-header-row {
     width: 100%;
     height: 100%;

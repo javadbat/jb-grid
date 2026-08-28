@@ -11,7 +11,6 @@ export class JBColumnHeaderWebComponent extends JBBaseComponent {
   #internals?: ElementInternals;
   #isConstructed = false;
   #elements!: JBColumnHeaderElements;
-  #sortIconRotation = 0;
   #templateSheet = new CSSStyleSheet();
   #enableSortingRemoval: boolean = false;
 
@@ -115,10 +114,8 @@ export class JBColumnHeaderWebComponent extends JBBaseComponent {
 
   #syncSortIcon(value: string | null | undefined) {
     const nextRotation = value === "desc" ? 180 : 0;
-    const spin = nextRotation - this.#sortIconRotation;
-    this.#sortIconRotation = nextRotation;
-    if (spin !== 0) {
-      this.#elements.sortIcon.spin = spin;
+    if(this.#elements.sortIcon.spin !== undefined){
+      this.#elements.sortIcon.spin = nextRotation;
     }
   }
 

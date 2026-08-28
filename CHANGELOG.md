@@ -1,11 +1,15 @@
 # Changelog
 
-## Unreleased
+## [0.7.3] - 2026-08-28
 
 ### Changed
 
 - Made custom-element module evaluation SSR-safe by extending `JBBaseComponent` where needed and registering elements through the shared `defineWebComponent()` helper; raised the minimum `jb-core` version to `0.35.0`.
 - Updated component color defaults to use the shared semantic content and surface tokens.
+
+### Fixed
+
+- preserve scroll space for content and header
 
 ## [0.7.2] - 2026-07-31
 

@@ -64,6 +64,8 @@
   overflow-y: scroll;
   scrollbar-color: #c3c3c3 transparent;
   scrollbar-width: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
 }
 
 .table-content::-webkit-scrollbar {
