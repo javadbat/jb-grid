@@ -87,7 +87,7 @@ slot[name="body-content"] {
   min-height: 100%;
 }
 
-slot[name="body-content"]::slotted(.table-content-wrapper) {
+slot[name="body-content"]::slotted(.table-content) {
   display: block;
   width: 100%;
   min-height: 100%;
@@ -127,7 +127,7 @@ slot[name="body-loading"]::slotted([show]) {
     width: 0;
   }
 
-  slot[name="body-content"]::slotted(.table-content-wrapper) {
+  slot[name="body-content"]::slotted(.table-content) {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 0.5rem;

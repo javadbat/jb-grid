@@ -59,7 +59,7 @@ hides it again without removing the element from the DOM.
 ```html
 <jb-grid-layout>
   <jb-table-header slot="table-header"></jb-table-header>
-  <div slot="body-content" class="table-content-wrapper">
+  <div slot="body-content" class="table-content">
     <!-- grid rows -->
   </div>
 

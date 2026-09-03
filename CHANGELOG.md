@@ -1,5 +1,11 @@
 # Changelog
 
+
+## [1.0.0] - 2026-09-03
+
+### Changed
+
+- Breaking: updated grid content styling to use the shared semantic content naming.
 ## [0.7.3] - 2026-08-28
 
 ### Changed
