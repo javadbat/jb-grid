@@ -1,7 +1,7 @@
 export function renderHTML(): string {
   return /* html */ `
-    <div class="column-header" part="button">
-      <span class="caption-wrapper" part="caption">
+    <div class="column-header">
+      <span class="caption-wrapper" part="title">
         <slot name="title"></slot>
       </span>
       <span class="sort-icon-wrapper" part="sort-icon" aria-hidden="true">

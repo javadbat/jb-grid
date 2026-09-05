@@ -1,11 +1,13 @@
 # Changelog
 
 
-## [1.0.0] - 2026-09-03
+## [0.8.0] - 2026-09-03
 
 ### Changed
 
 - Breaking: updated grid content styling to use the shared semantic content naming.
+- update column header styles and remove `button` part and move style upward
+
 ## [0.7.3] - 2026-08-28
 
 ### Changed
